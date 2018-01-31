@@ -224,6 +224,7 @@ $(window).on('load', function () {
                 var user = JSON.parse(data);
                 var tremorRow1 = user.sheet_tremorSpectrum_1;
                 var i, j;
+                console.log(tremorRow1);
                 //tremor1 data table
 
                 $('.container-fluid .tremor1').append("<th>row</th>");
@@ -760,6 +761,4 @@ $(window).on('load', function () {
 
     });
 
-
-    $('.pretable2').DataTable();
 });

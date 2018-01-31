@@ -1,9 +1,9 @@
 <?php
-/*
-Template Name: Table template page
-*/
+
 ?>
 <?php get_header(); ?>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 
     <button class="btn btn-primary tab tab1" data-attr="pretable1" data-table="table1" data-load="no">Data_1</button>
@@ -104,7 +104,7 @@ Template Name: Table template page
                     <td>_</td>
                 </tr>
             </table>
-            <table class="table pretable2 table-bordered">
+            <table class="table pretable2 table-bordered" style="display: none">
                 <th>_</th>
                 <th>time</th>
                 <th>iPad</th>
@@ -176,7 +176,7 @@ Template Name: Table template page
                     <td>_</td>
                 </tr>
             </table>
-            <table class="table pretable3 table-bordered">
+            <table class="table pretable3 table-bordered" style="display: none">
                 <th>_</th>
                 <th>time</th>
                 <th>iPad</th>
@@ -500,5 +500,11 @@ Template Name: Table template page
 
     </div>
 
+    <script
+            src="http://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="<?php echo get_template_directory_uri() ?>/js/main.js"></script>
 
 <?php get_footer(); ?>
