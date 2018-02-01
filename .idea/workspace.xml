@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59d8e160-333b-4341-bcfb-b510aa7f1c17" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/wp-content/themes/tables/js/main2.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/tables/js/main.js" afterPath="$PROJECT_DIR$/wp-content/themes/tables/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/tables/page-tables.php" afterPath="$PROJECT_DIR$/wp-content/themes/tables/page-tables.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="714">
-              <caret line="497" column="16" lean-forward="true" selection-start-line="468" selection-start-column="8" selection-end-line="497" selection-end-column="16" />
+              <caret line="497" column="16" lean-forward="false" selection-start-line="468" selection-start-column="8" selection-end-line="497" selection-end-column="16" />
               <folding>
                 <element signature="e#1621#1646#0#HTML" expanded="true" />
                 <element signature="e#1711#4620#0#HTML" expanded="false" />
@@ -39,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="page-tables.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="page-tables.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/page-tables.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+            <state relative-caret-position="810">
+              <caret line="264" column="66" lean-forward="false" selection-start-line="264" selection-start-column="66" selection-end-line="264" selection-end-column="66" />
               <folding>
                 <element signature="e#6#46#0#PHP" expanded="true" />
                 <element signature="e#1236#1257#0#HTML" expanded="true" />
@@ -61,21 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="839">
-              <caret line="748" column="15" lean-forward="true" selection-start-line="698" selection-start-column="12" selection-end-line="748" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main2.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/js/main2.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="66" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="281" selection-end-column="4" />
+            <state relative-caret-position="15">
+              <caret line="7" column="56" lean-forward="true" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -101,12 +94,12 @@
       <find>.container-fluid .tremor3</find>
       <find>tremorRow3</find>
       <find>'.pretremor1</find>
-      <find>headers_sheet_tremorSpectrum</find>
       <find>.length</find>
-      <find>pretremor1</find>
       <find>'.container-fluid</find>
       <find>snippet</find>
       <find>.title</find>
+      <find>headers_sheet_tremorSpectrum</find>
+      <find>pretremor1</find>
     </findStrings>
     <replaceStrings>
       <replace>pretable</replace>
@@ -115,10 +108,10 @@
       <replace>sheet_data</replace>
       <replace>body #tab' + tab + ' .table2</replace>
       <replace>sheet_tremor</replace>
-      <replace>body #tab' + tab + ' .table1</replace>
       <replace>'body #tab' + tab + ' .table1</replace>
-      <replace>#tab'</replace>
       <replace>'body #tab' + tab + '</replace>
+      <replace>body #tab' + tab + ' .table1</replace>
+      <replace>#tab'</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -130,12 +123,12 @@
         <option value="$PROJECT_DIR$/wp-config.php" />
         <option value="$PROJECT_DIR$/wp-content/themes/tables/functions.php" />
         <option value="$PROJECT_DIR$/wp-content/themes/tables/style.css" />
-        <option value="$PROJECT_DIR$/wp-content/themes/tables/js/main.js" />
         <option value="$PROJECT_DIR$/wp-content/themes/tables/header.php" />
         <option value="$PROJECT_DIR$/wp-content/themes/tables/footer.php" />
         <option value="$PROJECT_DIR$/wp-content/themes/tables/index.php" />
         <option value="$PROJECT_DIR$/wp-content/themes/tables/js/main2.js" />
         <option value="$PROJECT_DIR$/wp-content/themes/tables/page-tables.php" />
+        <option value="$PROJECT_DIR$/wp-content/themes/tables/js/main.js" />
       </list>
     </option>
   </component>
@@ -243,17 +236,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1517391875817</updated>
-      <workItem from="1517391877465" duration="23294000" />
+      <workItem from="1517391877465" duration="26092000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23294000" />
+    <option name="totallyTimeSpent" value="26092000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="-4" width="1865" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24958768" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24958768" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -284,14 +278,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/wp-config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="707">
-          <caret line="80" column="27" lean-forward="false" selection-start-line="80" selection-start-column="27" selection-end-line="80" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -324,10 +310,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/js/main.js">
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/js/main2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="839">
-          <caret line="748" column="15" lean-forward="true" selection-start-line="698" selection-start-column="12" selection-end-line="748" selection-end-column="15" />
+        <state relative-caret-position="510">
+          <caret line="66" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="281" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wp-config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="715">
+          <caret line="80" column="30" lean-forward="true" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -335,7 +329,7 @@
     <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
-          <caret line="497" column="16" lean-forward="true" selection-start-line="468" selection-start-column="8" selection-end-line="497" selection-end-column="16" />
+          <caret line="497" column="16" lean-forward="false" selection-start-line="468" selection-start-column="8" selection-end-line="497" selection-end-column="16" />
           <folding>
             <element signature="e#1621#1646#0#HTML" expanded="true" />
             <element signature="e#1711#4620#0#HTML" expanded="false" />
@@ -356,18 +350,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/js/main2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="66" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="281" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/page-tables.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        <state relative-caret-position="810">
+          <caret line="264" column="66" lean-forward="false" selection-start-line="264" selection-start-column="66" selection-end-line="264" selection-end-column="66" />
           <folding>
             <element signature="e#6#46#0#PHP" expanded="true" />
             <element signature="e#1236#1257#0#HTML" expanded="true" />
@@ -381,6 +367,14 @@
             <element signature="e#1750#5325#0#HTML" expanded="false" />
             <element signature="e#5334#7502#0#HTML" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="7" column="56" lean-forward="true" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>

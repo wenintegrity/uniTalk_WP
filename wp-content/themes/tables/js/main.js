@@ -1,764 +1,284 @@
-$(window).on('load', function () {
+$(document).ready(function() {
 
-    /*$('button.tab').on('click', function (){
-       var showUpTable = $(this).attr('data-attr');
-       var showDownTable = $(this).attr('data-table');
-       $('.table').hide();
-       $('.'+showUpTable).show();
-       $('.'+showDownTable).show();
-       console.log(showUpTable+showDownTable);
-    });*/
+    $('.tab1[data-toggle="tab"], .tab2[data-toggle="tab"], .tab3[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
-    $('.tabtable').on('click', function () {
-        var showPowerTable = $(this).attr('data-table');
-        var hidePretremor = $(this).attr('data-attr');
-        // $('.tabtable').hide();
-        $('.' + hidePretremor).toggle();
-        $('.' + showPowerTable).toggle();
-        $('.pretable1').toggle();
-        $('.pretable2').toggle();
-        $('.pretable3').toggle();
-    });
+        var tab = $(e.target).data('tab');
 
+        $('.tab-pane').html('').css('display', 'none');
+        $('#tab' + tab).html($('.data-snippet').html());
 
-    $('.tab1').on('click', function () {
-        $(this).attr('disable', 'disabled');
-        var load = $(this).attr('data-load');
-        if (load != 'loaded') {
-            //$('.tab1').attr('data-load', 'loaded');
-            //$.post("http://switchmymind.chdev.com.ua/result.json", function (data) {
-            $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
-                //var table = JSON.stringify(data);
-                // var user = JSON.parse(table);
-                var user = JSON.parse(data);
-                var tableRow1 = user.sheet_data_1;
-                /* var tableRow2 = user.sheet_data_2;
-                 var tableRow3 = user.sheet_data_3;
-                 var tremorRow1 = user.sheet_tremorSpectrum_1;
-                 var tremorRow2 = user.sheet_tremorSpectrum_2;
-                 var tremorRow3 = user.sheet_tremorSpectrum_3;*/
-                var i, j;
+        $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
 
-                //first data table
-                for (i = 0, j = 1; i < tableRow1.arrElements.length; i++, j++) {
-                    $('.container-fluid .table1').append("<tr><td>" + j + "</td><td>" + tableRow1.arrElements[i].time + "</td><td>" + tableRow1.arrElements[i].iPad + "</td><td>" + tableRow1.arrElements[i].outMic0ed + "</td><td>" + tableRow1.arrElements[i].outMicFiltered + "</td><td>" + tableRow1.arrElements[i].outMicNrmalz + "</td><td>" + tableRow1.arrElements[i].outMicM50 + "</td></tr>");
-                }
+            var user = JSON.parse(data);
+            var sheet_data;
 
-                /*  $.each(tableRow1, function(key, value){
-                     console.log('key='+key+',value='+value);
-                  });*/
+            if(tab === 1) {
+                sheet_data = user.sheet_data_1;
+            } else if(tab === 2) {
+                sheet_data = user.sheet_data_2;
+            } else {
+                sheet_data = user.sheet_data_3;
+            }
 
+            var i, j;
 
-                $('.pretable1 .count.forIPad').append(tableRow1.quartileForIPad.num);
-                $('.pretable1 .median.forIPad').append(tableRow1.quartileForIPad.median);
-                $('.pretable1 .threequartile.forIPad').append(tableRow1.quartileForIPad.q3);
-                $('.pretable1 .onequartile.forIPad').append(tableRow1.quartileForIPad.q1);
-                $('.pretable1 .average.forIPad').append(tableRow1.quartileForIPad.avg);
-                $('.pretable1 .maximum.forIPad').append(tableRow1.quartileForIPad.max);
-                $('.pretable1 .minimum.forIPad').append(tableRow1.quartileForIPad.min);
+            for (i = 0, j = 1; i < sheet_data.arrElements.length; i++, j++) {
+                $('body #tab' + tab + ' .table2').append("<tr><td>" + j + "</td><td>" + sheet_data.arrElements[i].time + "</td><td>" + sheet_data.arrElements[i].iPad + "</td><td>" + sheet_data.arrElements[i].outMic0ed + "</td><td>" + sheet_data.arrElements[i].outMicFiltered + "</td><td>" + sheet_data.arrElements[i].outMicNrmalz + "</td><td>" + sheet_data.arrElements[i].outMicM50 + "</td></tr>");
+            }
 
-                $('.pretable1 .count.forMic0ed').append(tableRow1.quartileForOutMic0ed.num);
-                $('.pretable1 .median.forMic0ed').append(tableRow1.quartileForOutMic0ed.median);
-                $('.pretable1 .threequartile.forMic0ed').append(tableRow1.quartileForOutMic0ed.q3);
-                $('.pretable1 .onequartile.forMic0ed').append(tableRow1.quartileForOutMic0ed.q1);
-                $('.pretable1 .average.forMic0ed').append(tableRow1.quartileForOutMic0ed.avg);
-                $('.pretable1 .maximum.forMic0ed').append(tableRow1.quartileForOutMic0ed.max);
-                $('.pretable1 .minimum.forMic0ed').append(tableRow1.quartileForOutMic0ed.min);
+            $('body #tab' + tab + ' .table1 .count.forIPad').append(sheet_data.quartileForIPad.num);
+            $('body #tab' + tab + ' .table1 .median.forIPad').append(sheet_data.quartileForIPad.median);
+            $('body #tab' + tab + ' .table1 .threequartile.forIPad').append(sheet_data.quartileForIPad.q3);
+            $('body #tab' + tab + ' .table1 .onequartile.forIPad').append(sheet_data.quartileForIPad.q1);
+            $('body #tab' + tab + ' .table1 .average.forIPad').append(sheet_data.quartileForIPad.avg);
+            $('body #tab' + tab + ' .table1 .maximum.forIPad').append(sheet_data.quartileForIPad.max);
+            $('body #tab' + tab + ' .table1 .minimum.forIPad').append(sheet_data.quartileForIPad.min);
 
-                $('.pretable1 .count.forMicFilt').append(tableRow1.quartileForOutMicFilt.num);
-                $('.pretable1 .median.forMicFilt').append(tableRow1.quartileForOutMicFilt.median);
-                $('.pretable1 .threequartile.forMicFilt').append(tableRow1.quartileForOutMicFilt.q3);
-                $('.pretable1 .onequartile.forMicFilt').append(tableRow1.quartileForOutMicFilt.q1);
-                $('.pretable1 .average.forMicFilt').append(tableRow1.quartileForOutMicFilt.avg);
-                $('.pretable1 .maximum.forMicFilt').append(tableRow1.quartileForOutMicFilt.max);
-                $('.pretable1 .minimum.forMicFilt').append(tableRow1.quartileForOutMicFilt.min);
+            $('body #tab' + tab + ' .table1 .count.forMic0ed').append(sheet_data.quartileForOutMic0ed.num);
+            $('body #tab' + tab + ' .table1 .median.forMic0ed').append(sheet_data.quartileForOutMic0ed.median);
+            $('body #tab' + tab + ' .table1 .threequartile.forMic0ed').append(sheet_data.quartileForOutMic0ed.q3);
+            $('body #tab' + tab + ' .table1 .onequartile.forMic0ed').append(sheet_data.quartileForOutMic0ed.q1);
+            $('body #tab' + tab + ' .table1 .average.forMic0ed').append(sheet_data.quartileForOutMic0ed.avg);
+            $('body #tab' + tab + ' .table1 .maximum.forMic0ed').append(sheet_data.quartileForOutMic0ed.max);
+            $('body #tab' + tab + ' .table1 .minimum.forMic0ed').append(sheet_data.quartileForOutMic0ed.min);
 
-                $('.pretable1 .count.forMicNrmalz').append(tableRow1.quartileForOutMicNrmalz.num);
-                $('.pretable1 .median.forMicNrmalz').append(tableRow1.quartileForOutMicNrmalz.median);
-                $('.pretable1 .threequartile.forMicNrmalz').append(tableRow1.quartileForOutMicNrmalz.q3);
-                $('.pretable1 .onequartile.forMicNrmalz').append(tableRow1.quartileForOutMicNrmalz.q1);
-                $('.pretable1 .average.forMicNrmalz').append(tableRow1.quartileForOutMicNrmalz.avg);
-                $('.pretable1 .maximum.forMicNrmalz').append(tableRow1.quartileForOutMicNrmalz.max);
-                $('.pretable1 .minimum.forMicNrmalz').append(tableRow1.quartileForOutMicNrmalz.min);
+            $('body #tab' + tab + ' .table1 .count.forMicFilt').append(sheet_data.quartileForOutMicFilt.num);
+            $('body #tab' + tab + ' .table1 .median.forMicFilt').append(sheet_data.quartileForOutMicFilt.median);
+            $('body #tab' + tab + ' .table1 .threequartile.forMicFilt').append(sheet_data.quartileForOutMicFilt.q3);
+            $('body #tab' + tab + ' .table1 .onequartile.forMicFilt').append(sheet_data.quartileForOutMicFilt.q1);
+            $('body #tab' + tab + ' .table1 .average.forMicFilt').append(sheet_data.quartileForOutMicFilt.avg);
+            $('body #tab' + tab + ' .table1 .maximum.forMicFilt').append(sheet_data.quartileForOutMicFilt.max);
+            $('body #tab' + tab + ' .table1 .minimum.forMicFilt').append(sheet_data.quartileForOutMicFilt.min);
 
-                $('.tab1').attr('data-load', 'loaded');
-                $('.table').hide();
-                $('.table1').show();
-                $('.pretable1').show();
+            $('body #tab' + tab + ' .table1 .count.forMicNrmalz').append(sheet_data.quartileForOutMicNrmalz.num);
+            $('body #tab' + tab + ' .table1 .median.forMicNrmalz').append(sheet_data.quartileForOutMicNrmalz.median);
+            $('body #tab' + tab + ' .table1 .threequartile.forMicNrmalz').append(sheet_data.quartileForOutMicNrmalz.q3);
+            $('body #tab' + tab + ' .table1 .onequartile.forMicNrmalz').append(sheet_data.quartileForOutMicNrmalz.q1);
+            $('body #tab' + tab + ' .table1 .average.forMicNrmalz').append(sheet_data.quartileForOutMicNrmalz.avg);
+            $('body #tab' + tab + ' .table1 .maximum.forMicNrmalz').append(sheet_data.quartileForOutMicNrmalz.max);
+            $('body #tab' + tab + ' .table1 .minimum.forMicNrmalz').append(sheet_data.quartileForOutMicNrmalz.min);
+
+            $('body #tab' + tab + '').show();
+            $('body #tab' + tab + ' .table2 caption').text('DATA ' + tab);
+            $('body #tab' + tab + ' .table1, #tab' + tab + ' .table2').DataTable({
+                fixedHeader: true,
+                "searching": false,
+                pageLength: 50
             });
-        } else {
-            $('.table').hide();
-            $('.table1').show();
-            $('.pretable1').show();
-        }
+
+        });
     });
 
-    $('.tab2').on('click', function () {
-        $(this).attr('disable', 'disabled');
-        var load = $(this).attr('data-load');
-        if (load != 'loaded') {
-            $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
-                //var table = JSON.stringify(data);
-                // var user = JSON.parse(table);
-                var user = JSON.parse(data);
-                var tableRow2 = user.sheet_data_2;
-                var i, j;
-                //Second data table
-                for (i = 0, j = 1; i < tableRow2.arrElements.length; i++, j++) {
-                    $('.container-fluid .table2').append("<tr><td>" + j + "</td><td>" + tableRow2.arrElements[i].time + "</td><td>" + tableRow2.arrElements[i].iPad + "</td><td>" + tableRow2.arrElements[i].outMic0ed + "</td><td>" + tableRow2.arrElements[i].outMicFiltered + "</td><td>" + tableRow2.arrElements[i].outMicNrmalz + "</td><td>" + tableRow2.arrElements[i].outMicM50 + "</td></tr>");
+    $('.tab4[data-toggle="tab"], .tab5[data-toggle="tab"], .tab6[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+        var tab = $(e.target).data('tab');
+
+        $('.tab-pane').html('').css('display', 'none');
+        $('#tab' + tab).html($('.tremor-snippet').html());
+
+        $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
+
+            var user = JSON.parse(data);
+            var sheet_tremor;
+
+            if(tab === 4) {
+                sheet_tremor = user.sheet_tremorSpectrum_1;
+            } else if(tab === 5) {
+                sheet_tremor = user.sheet_tremorSpectrum_2;
+            } else {
+                sheet_tremor = user.sheet_tremorSpectrum_3;
+            }
+
+            var i, j;
+
+            for (i = 0, j = 1; i < user.headers_sheet_tremorSpectrum.length; i++, j++) {
+                $('body #tab' + tab + ' .table2 thead tr').append("<th>" + user.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
+            }
+
+            var tremor_rows_count = sheet_tremor.arrFftFreq.length;
+
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody').append("<tr data-count=" + i + "><td>" + j + "</td><td>" + sheet_tremor.arrFftFreq[i] + "</td></tr>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftMag[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftComplex[i][0] + "</br>" + sheet_tremor.arrFftComplex[i][1] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstABS[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMag[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstABS_NO[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMag_NO[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstAbsNormal[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstAbsNormal_NO[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagNormal[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagNormal_NO[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiff[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiff_NO[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiffNormal[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiffNormal_NO[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftMagNormalized[i] + "</td>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                if(sheet_tremor.lowerAndHigherFreq_1[i] !== undefined) {
+                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>freq=" + sheet_tremor.lowerAndHigherFreq_1[i].freq + "</br>power=" + sheet_tremor.lowerAndHigherFreq_1[i].power + "</td>");
+                } else {
+                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
                 }
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumRaw.arr[i] + "</td></tr>");
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                if(sheet_tremor.lowerAndHigherFreq_2[i] !== undefined) {
+                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>freq=" + sheet_tremor.lowerAndHigherFreq_2[i].freq + "</br>power=" + sheet_tremor.lowerAndHigherFreq_2[i].mag + "</td>");
+                } else {
+                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
+                }
+            }
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumNormalized.arr[i] + "</td>");
+            }
+            $('body #tab' + tab + ' .table2 tbody tr[data-count=' + tremor_rows_count + ']').append("<td>" + sheet_tremor.colSumNormalized.avgNotesMusic + "</td>");
+            $('body #tab' + tab + ' .table2 tbody tr[data-count=' + +tremor_rows_count + 1 + ']').append("<td>" + sheet_tremor.colSumNormalized.stDevNotesMusic + "</td>");
 
-                $('.pretable2 .count.forIPad').append(tableRow2.quartileForIPad.num);
-                $('.pretable2 .median.forIPad').append(tableRow2.quartileForIPad.median);
-                $('.pretable2 .threequartile.forIPad').append(tableRow2.quartileForIPad.q3);
-                $('.pretable2 .onequartile.forIPad').append(tableRow2.quartileForIPad.q1);
-                $('.pretable2 .average.forIPad').append(tableRow2.quartileForIPad.avg);
-                $('.pretable2 .maximum.forIPad').append(tableRow2.quartileForIPad.max);
-                $('.pretable2 .minimum.forIPad').append(tableRow2.quartileForIPad.min);
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftMagRawSmoothed[i] + "</td>");
+            }
 
-                $('.pretable2 .count.forMic0ed').append(tableRow2.quartileForOutMic0ed.num);
-                $('.pretable2 .median.forMic0ed').append(tableRow2.quartileForOutMic0ed.median);
-                $('.pretable2 .threequartile.forMic0ed').append(tableRow2.quartileForOutMic0ed.q3);
-                $('.pretable2 .onequartile.forMic0ed').append(tableRow2.quartileForOutMic0ed.q1);
-                $('.pretable2 .average.forMic0ed').append(tableRow2.quartileForOutMic0ed.avg);
-                $('.pretable2 .maximum.forMic0ed').append(tableRow2.quartileForOutMic0ed.max);
-                $('.pretable2 .minimum.forMic0ed').append(tableRow2.quartileForOutMic0ed.min);
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftMagNormalizedSmoothed[i] + "</td>");
+            }
+            $('body #tab' + tab + ' .table2 tbody tr[data-count=' + tremor_rows_count + ']').append("<td>" + sheet_tremor.colSumRaw.avgNotesMusic + "</td>");
+            $('body #tab' + tab + ' .table2 tbody tr[data-count=' + +tremor_rows_count + 1 + ']').append("<td>" + sheet_tremor.colSumRaw.stDevNotesMusic + "</td>");
 
-                $('.pretable2 .count.forMicFilt').append(tableRow2.quartileForOutMicFilt.num);
-                $('.pretable2 .median.forMicFilt').append(tableRow2.quartileForOutMicFilt.median);
-                $('.pretable2 .threequartile.forMicFilt').append(tableRow2.quartileForOutMicFilt.q3);
-                $('.pretable2 .onequartile.forMicFilt').append(tableRow2.quartileForOutMicFilt.q1);
-                $('.pretable2 .average.forMicFilt').append(tableRow2.quartileForOutMicFilt.avg);
-                $('.pretable2 .maximum.forMicFilt').append(tableRow2.quartileForOutMicFilt.max);
-                $('.pretable2 .minimum.forMicFilt').append(tableRow2.quartileForOutMicFilt.min);
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumSmoothed.arr[i] + "</td>");
+            }
+            $('body #tab' + tab + ' .table2 tbody tr[data-count=' + tremor_rows_count + ']').append("<td>" + sheet_tremor.colSumSmoothed.avgNotesMusic + "</td>");
+            $('body #tab' + tab + ' .table2 tbody tr[data-count=' + +tremor_rows_count + 1 + ']').append("<td>" + sheet_tremor.colSumSmoothed.stDevNotesMusic + "</td>");
 
-                $('.pretable2 .count.forMicNrmalz').append(tableRow2.quartileForOutMicNrmalz.num);
-                $('.pretable2 .median.forMicNrmalz').append(tableRow2.quartileForOutMicNrmalz.median);
-                $('.pretable2 .threequartile.forMicNrmalz').append(tableRow2.quartileForOutMicNrmalz.q3);
-                $('.pretable2 .onequartile.forMicNrmalz').append(tableRow2.quartileForOutMicNrmalz.q1);
-                $('.pretable2 .average.forMicNrmalz').append(tableRow2.quartileForOutMicNrmalz.avg);
-                $('.pretable2 .maximum.forMicNrmalz').append(tableRow2.quartileForOutMicNrmalz.max);
-                $('.pretable2 .minimum.forMicNrmalz').append(tableRow2.quartileForOutMicNrmalz.min);
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumSmthNormed.arr[i] + "</td>");
+            }
 
-                $('.tab2').attr('data-load', 'loaded');
-                $('.table').hide();
-                $('.table2').show();
-                $('.pretable2').show();
+            $('body #tab' + tab + ' .table2 tbody tr[data-count=' + tremor_rows_count + ']').append("<td>" + sheet_tremor.colSumSmthNormed.avgNotesMusic + "</td>");
+            $('body #tab' + tab + ' .table2 tbody tr[data-count=' + +tremor_rows_count + 1 + ']').append("<td>" + sheet_tremor.colSumSmthNormed.stDevNotesMusic + "</td>");
+
+            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrSumSmthNorm_1.arrResult[i] + "</td>");
+            }
+
+            $('body #tab' + tab + ' .table2 tbody tr[data-count=' + tremor_rows_count + ']').append("<td>" + sheet_tremor.arrSumSmthNorm_1.avgNotesMusic + "</td>");
+            $('body #tab' + tab + ' .table2 tbody tr[data-count=' + +tremor_rows_count + 1 + ']').append("<td>" + sheet_tremor.arrSumSmthNorm_1.stDevNotesMusic + "</td>");
+
+            $('body #tab' + tab + ' .table1 tr.tremData').append('<td>' + sheet_tremor.maxConstAbs + '</td><td>' + sheet_tremor.maxConstAbs_NO + '</td><td>' + sheet_tremor.maxFreqMag + '</td><td>' + sheet_tremor.maxFreqMag_NO + '</td><td>' + sheet_tremor.averageConstAbs + '</td><td>' + sheet_tremor.averageConstAbs_NO + '</td><td>' + sheet_tremor.averageFreqMag + '</td><td>' + sheet_tremor.averageFreqMag_NO + '</td><td>' + sheet_tremor.averageD23_635 + '</td><td>' + sheet_tremor.stanDotClone + '</td>');
+
+            $('body #tab' + tab + ' .table1 tr.tremDataNext').append("<td>" + sheet_tremor.divisionaverageValuesFftMag_23_404_405_635 + "</td><td>" + sheet_tremor.divisionaverageValuesFftMag_23_329_329_635 + "</td><td>q3=" + sheet_tremor.quartileFftMag_23_635.q3 + "</br>max=" + sheet_tremor.quartileFftMag_23_635.max + "</td><td>" + sheet_tremor.divisionQuartOnMaxFftMag + "</td><td>" + sheet_tremor.division_q3_average + "</td>");
+
+            $('body #tab' + tab + ' .table1 tr.tremDataNext').append('<td>' + sheet_tremor.maxFreqMagDiff + '</td><td>' + sheet_tremor.maxFreqMagDiff_NO + '</td>');
+
+            $('body #tab' + tab + ' .table1 tr.tremDataNextNew').append('<td>' + sheet_tremor.objSolfg.sideralDay + '</td><td>' + sheet_tremor.objSolfg.liberating + '</td><td>' + sheet_tremor.objSolfg.breakemo + '</td><td>' + sheet_tremor.objSolfg.reprLove + '</td><td>' + sheet_tremor.objSolfg.connect + '</td><td>' + sheet_tremor.objSolfg.intuition + '</td><td>' + sheet_tremor.objSolfg.spirorder + '</td><td>' + sheet_tremor.objSolfg.mixSolft + '</td>');
+
+            $('body #tab' + tab + ' .table1 tr.tremDataNextNewNext').append('<td>' + sheet_tremor.powerOctaves + '</td><td>' + sheet_tremor.avgPowerOctaves + '</td><td>' + sheet_tremor.maxFftMagNormalized + '</td>');
+
+            $('body #tab' + tab + ' .table1 tr.tremDataNextNewNext').append('<td>' + sheet_tremor.totalMusicRaw + '</td><td>' + sheet_tremor.totalMusicRawStDev + '</td><td>' + sheet_tremor.totalMusicSmth + '</td><td>' + sheet_tremor.totalMusicSmthStDev + '</td><td>' + sheet_tremor.totalMusicRaw_Smth + '</td>');
+
+            $('body #tab' + tab + ' .table1 tr.tremNextRow').append('<td>' + sheet_tremor.sumSmoothedStDev + '</td><td>' + sheet_tremor.sumNormalizedAvg + '</td><td>' + sheet_tremor.sumSmthNormedAvg + '</td>');
+
+            $('body #tab' + tab + ' .table1 tr.tremNextRow').append('<td>' + sheet_tremor.colSumSmthNorm_1Avg + '</td>');
+
+
+            $('body #tab' + tab + '').show();
+            $('body #tab' + tab + ' .table2 caption').text('Tremor ' + (tab - 3));
+            $('body #tab' + tab + ' .table2').DataTable({
+                fixedHeader: true,
+                "searching": false,
+                "scrollX": true,
+                pageLength: 50
             });
-        } else {
-            $('.table').hide();
-            $('.table2').show();
-            $('.pretable2').show();
-        }
+        });
     });
 
-    $('.tab3').on('click', function () {
-        $(this).attr('disable', 'disabled');
-        var load = $(this).attr('data-load');
-        if (load != 'loaded') {
-            $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
-                //var table = JSON.stringify(data);
-                // var user = JSON.parse(table);
-                var user = JSON.parse(data);
-                var tableRow3 = user.sheet_data_3;
-                var i, j;
-                //Third data table
-                for (i = 0, j = 1; i < tableRow3.arrElements.length; i++, j++) {
-                    $('.container-fluid .table3').append("<tr><td>" + j + "</td><td>" + tableRow3.arrElements[i].time + "</td><td>" + tableRow3.arrElements[i].iPad + "</td><td>" + tableRow3.arrElements[i].outMic0ed + "</td><td>" + tableRow3.arrElements[i].outMicFiltered + "</td><td>" + tableRow3.arrElements[i].outMicNrmalz + "</td><td>" + tableRow3.arrElements[i].outMicM50 + "</td></tr>");
-                }
+    $('.tab7[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
-                $('.pretable3 .count.forIPad').append(tableRow3.quartileForIPad.num);
-                $('.pretable3 .median.forIPad').append(tableRow3.quartileForIPad.median);
-                $('.pretable3 .threequartile.forIPad').append(tableRow3.quartileForIPad.q3);
-                $('.pretable3 .onequartile.forIPad').append(tableRow3.quartileForIPad.q1);
-                $('.pretable3 .average.forIPad').append(tableRow3.quartileForIPad.avg);
-                $('.pretable3 .maximum.forIPad').append(tableRow3.quartileForIPad.max);
-                $('.pretable3 .minimum.forIPad').append(tableRow3.quartileForIPad.min);
+        var tab = $(e.target).data('tab');
 
-                $('.pretable3 .count.forMic0ed').append(tableRow3.quartileForOutMic0ed.num);
-                $('.pretable3 .median.forMic0ed').append(tableRow3.quartileForOutMic0ed.median);
-                $('.pretable3 .threequartile.forMic0ed').append(tableRow3.quartileForOutMic0ed.q3);
-                $('.pretable3 .onequartile.forMic0ed').append(tableRow3.quartileForOutMic0ed.q1);
-                $('.pretable3 .average.forMic0ed').append(tableRow3.quartileForOutMic0ed.avg);
-                $('.pretable3 .maximum.forMic0ed').append(tableRow3.quartileForOutMic0ed.max);
-                $('.pretable3 .minimum.forMic0ed').append(tableRow3.quartileForOutMic0ed.min);
+        $('.tab-pane').html('').css('display', 'none');
+        $('#tab' + tab).html($('.negentropic-snippet').html());
 
-                $('.pretable3 .count.forMicFilt').append(tableRow3.quartileForOutMicFilt.num);
-                $('.pretable3 .median.forMicFilt').append(tableRow3.quartileForOutMicFilt.median);
-                $('.pretable3 .threequartile.forMicFilt').append(tableRow3.quartileForOutMicFilt.q3);
-                $('.pretable3 .onequartile.forMicFilt').append(tableRow3.quartileForOutMicFilt.q1);
-                $('.pretable3 .average.forMicFilt').append(tableRow3.quartileForOutMicFilt.avg);
-                $('.pretable3 .maximum.forMicFilt').append(tableRow3.quartileForOutMicFilt.max);
-                $('.pretable3 .minimum.forMicFilt').append(tableRow3.quartileForOutMicFilt.min);
+        $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
 
-                $('.pretable3 .count.forMicNrmalz').append(tableRow3.quartileForOutMicNrmalz.num);
-                $('.pretable3 .median.forMicNrmalz').append(tableRow3.quartileForOutMicNrmalz.median);
-                $('.pretable3 .threequartile.forMicNrmalz').append(tableRow3.quartileForOutMicNrmalz.q3);
-                $('.pretable3 .onequartile.forMicNrmalz').append(tableRow3.quartileForOutMicNrmalz.q1);
-                $('.pretable3 .average.forMicNrmalz').append(tableRow3.quartileForOutMicNrmalz.avg);
-                $('.pretable3 .maximum.forMicNrmalz').append(tableRow3.quartileForOutMicNrmalz.max);
-                $('.pretable3 .minimum.forMicNrmalz').append(tableRow3.quartileForOutMicNrmalz.min);
+            var user = JSON.parse(data);
+            var tremorNegen = user.sheet_tremorNegentropicAlgorithm;
+            var i, j, k;
 
-                $('.tab3').attr('data-load', 'loaded');
-                $('.table').hide();
-                $('.table3').show();
-                $('.pretable3').show();
-            });
-        } else {
-            $('.table').hide();
-            $('.table3').show();
-            $('.pretable3').show();
-        }
-    });
 
-    $('.tab4').on('click', function () {
-        $(this).attr('disable', 'disabled');
-        var load = $(this).attr('data-load');
-        if (load != 'loaded') {
-            //$.post("http://switchmymind.chdev.com.ua/result.json", function (data) {
-            //$.get("http://switchmymind.chdev.com.ua:3002/calculation", function (data) {
+            for (k = 0; k < 6; k++) {
 
-            $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
-                //var table = JSON.stringify(data);
-                // var user = JSON.parse(table);
-                var user = JSON.parse(data);
-                var tremorRow1 = user.sheet_tremorSpectrum_1;
-                var i, j;
-                console.log(tremorRow1);
-                //tremor1 data table
-
-                $('.container-fluid .tremor1').append("<th>row</th>");
-
-                for (i = 0, j = 1; i < user.headers_sheet_tremorSpectrum.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr.headrow').append("<th>" + user.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFftFreq.length; i++, j++) {
-                    $('.container-fluid .tremor1').append("<tr data-count=" + i + "><td>" + j + "</td><td>" + tremorRow1.arrFftFreq[i] + "</td></tr>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFftMag.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFftMag[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFftComplex.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFftComplex[i][0] + "</br>" + tremorRow1.arrFftComplex[i][1] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrConstABS.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrConstABS[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFreqMag.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFreqMag[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrConstABS_NO.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrConstABS_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFreqMag_NO.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFreqMag_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrConstAbsNormal.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrConstAbsNormal[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrConstAbsNormal_NO.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrConstAbsNormal_NO[i] + "</td>");
-                }
-                /*  for (i = 0, j = 1; i < tremorRow1.arrConstABS_NO.length; i++, j++) {
-                      $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrConstABS_NO[i] + "</td>");
-                  }*/
-
-
-                for (i = 0, j = 1; i < tremorRow1.arrFreqMagNormal.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFreqMagNormal[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFreqMagNormal_NO.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFreqMagNormal_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFreqMagDiff.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFreqMagDiff[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFreqMagDiff_NO.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFreqMagDiff_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFreqMagDiffNormal.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFreqMagDiffNormal[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFreqMagDiffNormal_NO.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFreqMagDiffNormal_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.arrFftMagNormalized.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFftMagNormalized[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.lowerAndHigherFreq_1.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>freq=" + tremorRow1.lowerAndHigherFreq_1[i].freq + "</br>power=" + tremorRow1.lowerAndHigherFreq_1[i].power + "</td>");
-                }
-                /*for (i = 0, j = 1; i < tremorRow1.lowerAndHigherFreq_1.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.lowerAndHigherFreq_1[i].mag + "</td>");
-                }*/
-                for (i = 0, j = 1; i < tremorRow1.colSumRaw.arr.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.colSumRaw.arr[i] + "</td></tr>");
-                }
-                for (i = 0, j = 1; i < tremorRow1.colSumNormalized.arr.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.colSumNormalized.arr[i] + "</td>");
-                }
-                $('.container-fluid .tremor1 tr[data-count=' + tremorRow1.colSumNormalized.arr.length + ']').append("<td>" + tremorRow1.colSumNormalized.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor1 tr[data-count=' + +tremorRow1.colSumNormalized.arr.length + 1 + ']').append("<td>" + tremorRow1.colSumNormalized.stDevNotesMusic + "</td>");
-
-                for (i = 0, j = 1; i < tremorRow1.arrFftMagRawSmoothed.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFftMagRawSmoothed[i] + "</td>");
-                }
-
-
-                for (i = 0, j = 1; i < tremorRow1.arrFftMagNormalizedSmoothed.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrFftMagNormalizedSmoothed[i] + "</td>");
-                }
-                $('.container-fluid .tremor1 tr[data-count=' + tremorRow1.arrFftMagNormalizedSmoothed.length + ']').append("<td>" + tremorRow1.colSumRaw.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor1 tr[data-count=' + +tremorRow1.arrFftMagNormalizedSmoothed.length + 1 + ']').append("<td>" + tremorRow1.colSumRaw.stDevNotesMusic + "</td>");
-
-
-                for (i = 0, j = 1; i < tremorRow1.lowerAndHigherFreq_2.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>freq=" + tremorRow1.lowerAndHigherFreq_2[i].freq + "</br>power=" + tremorRow1.lowerAndHigherFreq_2[i].power + "</td>");
-                }
-                /* for (i = 0, j = 1; i < tremorRow1.lowerAndHigherFreq_2.length; i++, j++) {
-                     $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.lowerAndHigherFreq_2[i].mag + "</td>");
-                 }*/
-
-                for (i = 0, j = 1; i < tremorRow1.colSumSmoothed.arr.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.colSumSmoothed.arr[i] + "</td>");
-                }
-                $('.container-fluid .tremor1 tr[data-count=' + tremorRow1.colSumSmoothed.arr.length + ']').append("<td>" + tremorRow1.colSumSmoothed.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor1 tr[data-count=' + +tremorRow1.colSumSmoothed.arr.length + 1 + ']').append("<td>" + tremorRow1.colSumSmoothed.stDevNotesMusic + "</td>");
-
-
-                for (i = 0, j = 1; i < tremorRow1.colSumSmthNormed.arr.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.colSumSmthNormed.arr[i] + "</td>");
-                }
-
-                $('.container-fluid .tremor1 tr[data-count=' + tremorRow1.colSumSmthNormed.arr.length + ']').append("<td>" + tremorRow1.colSumSmthNormed.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor1 tr[data-count=' + +tremorRow1.colSumSmthNormed.arr.length + 1 + ']').append("<td>" + tremorRow1.colSumSmthNormed.stDevNotesMusic + "</td>");
-
-
-                for (i = 0, j = 1; i < tremorRow1.arrSumSmthNorm_1.arrResult.length; i++, j++) {
-                    $('.container-fluid .tremor1 tr[data-count=' + i + ']').append("<td>" + tremorRow1.arrSumSmthNorm_1.arrResult[i] + "</td>");
-                }
-
-
-                $('.container-fluid .tremor1 tr[data-count=' + tremorRow1.arrSumSmthNorm_1.arrResult.length + ']').append("<td>" + tremorRow1.arrSumSmthNorm_1.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor1 tr[data-count=' + +tremorRow1.arrSumSmthNorm_1.arrResult.length + 1 + ']').append("<td>" + tremorRow1.arrSumSmthNorm_1.stDevNotesMusic + "</td>");
-
-
-                $('.pretremor1 tr.tremData').append('<td>' + tremorRow1.maxConstAbs + '</td><td>' + tremorRow1.maxConstAbs_NO + '</td><td>' + tremorRow1.maxFreqMag + '</td><td>' + tremorRow1.maxFreqMag_NO + '</td><td>' + tremorRow1.averageConstAbs + '</td><td>' + tremorRow1.averageConstAbs_NO + '</td><td>' + tremorRow1.averageFreqMag + '</td><td>' + tremorRow1.averageFreqMag_NO + '</td><td>' + tremorRow1.averageD23_635 + '</td><td>' + tremorRow1.stanDotClone + '</td>');
-
-                $('.pretremor1 tr.tremDataNext').append("<td>" + tremorRow1.divisionaverageValuesFftMag_23_404_405_635 + "</td><td>" + tremorRow1.divisionaverageValuesFftMag_23_329_329_635 + "</td><td>q3=" + tremorRow1.quartileFftMag_23_635.q3 + "</br>max=" + tremorRow1.quartileFftMag_23_635.max + "</td><td>" + tremorRow1.divisionQuartOnMaxFftMag + "</td><td>" + tremorRow1.division_q3_average + "</td>");
-
-                $('.pretremor1 tr.tremDataNext').append('<td>' + tremorRow1.maxFreqMagDiff + '</td><td>' + tremorRow1.maxFreqMagDiff_NO + '</td>');
-
-                $('.pretremor1 tr.tremDataNextNew').append('<td>' + tremorRow1.objSolfg.sideralDay + '</td><td>' + tremorRow1.objSolfg.liberating + '</td><td>' + tremorRow1.objSolfg.breakemo + '</td><td>' + tremorRow1.objSolfg.reprLove + '</td><td>' + tremorRow1.objSolfg.connect + '</td><td>' + tremorRow1.objSolfg.intuition + '</td><td>' + tremorRow1.objSolfg.spirorder + '</td><td>' + tremorRow1.objSolfg.mixSolft + '</td>');
-
-                $('.pretremor1 tr.tremDataNextNewNext').append('<td>' + tremorRow1.powerOctaves + '</td><td>' + tremorRow1.avgPowerOctaves + '</td><td>' + tremorRow1.maxFftMagNormalized + '</td>');
-
-                $('.pretremor1 tr.tremDataNextNewNext').append('<td>' + tremorRow1.totalMusicRaw + '</td><td>' + tremorRow1.totalMusicRawStDev + '</td><td>' + tremorRow1.totalMusicSmth + '</td><td>' + tremorRow1.totalMusicSmthStDev + '</td><td>' + tremorRow1.totalMusicRaw_Smth + '</td>');
-
-                $('.pretremor1 tr.tremNextRow').append('<td>' + tremorRow1.sumSmoothedStDev + '</td><td>' + tremorRow1.sumNormalizedAvg + '</td><td>' + tremorRow1.sumSmthNormedAvg + '</td>');
-                // $('.pretremor1').append('<tr><td>' + tremorRow1.sumSmoothedStDev + '</td><td>' + tremorRow1.sumNormalizedAvg + '</td><td>' + tremorRow1.sumSmthNormedAvg + '</td></tr>');
-
-                $('.pretremor1 tr.tremNextRow').append('<td>' + tremorRow1.colSumSmthNorm_1Avg + '</td>');
-                // $('.pretremor1').append('<td>' + tremorRow1.colSumSmthNorm_1Avg + '</td>');
-
-
-                $('.tab4').attr('data-load', 'loaded');
-                $('.table').hide();
-                $('.tremor1').show();
-                $('.pretremor1').show();
-            });
-        } else {
-            $('.table').hide();
-            $('.tremor1').show();
-            $('.pretremor1').show();
-        }
-    });
-
-
-    $('.tab5').on('click', function () {
-        $(this).attr('disable', 'disabled');
-        var load = $(this).attr('data-load');
-        if (load != 'loaded') {
-            $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
-                //var table = JSON.stringify(data);
-                // var user = JSON.parse(table);
-                var user = JSON.parse(data);
-                var tremorRow2 = user.sheet_tremorSpectrum_2;
-                var i, j;
-                //tremor2 data table
-                $('.container-fluid .tremor2').append("<th>row</th>");
-
-                for (i = 0, j = 1; i < user.headers_sheet_tremorSpectrum.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr.headrow').append("<th>" + user.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFftFreq.length; i++, j++) {
-                    $('.container-fluid .tremor2').append("<tr data-count=" + i + "><td>" + j + "</td><td>" + tremorRow2.arrFftFreq[i] + "</td></tr>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFftMag.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFftMag[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFftComplex.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFftComplex[i][0] + "</br>" + tremorRow2.arrFftComplex[i][1] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrConstABS.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrConstABS[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFreqMag.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFreqMag[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrConstABS_NO.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrConstABS_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFreqMag_NO.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFreqMag_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrConstAbsNormal.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrConstAbsNormal[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrConstAbsNormal_NO.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrConstAbsNormal_NO[i] + "</td>");
-                }
-                /*  for (i = 0, j = 1; i < tremorRow2.arrConstABS_NO.length; i++, j++) {
-                      $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrConstABS_NO[i] + "</td>");
-                  }*/
-
-
-                for (i = 0, j = 1; i < tremorRow2.arrFreqMagNormal.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFreqMagNormal[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFreqMagNormal_NO.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFreqMagNormal_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFreqMagDiff.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFreqMagDiff[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFreqMagDiff_NO.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFreqMagDiff_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFreqMagDiffNormal.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFreqMagDiffNormal[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFreqMagDiffNormal_NO.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFreqMagDiffNormal_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.arrFftMagNormalized.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFftMagNormalized[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.lowerAndHigherFreq_1.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>freq=" + tremorRow2.lowerAndHigherFreq_1[i].freq + "</br>power=" + tremorRow2.lowerAndHigherFreq_1[i].power + "</td>");
-                }
-                /*for (i = 0, j = 1; i < tremorRow2.lowerAndHigherFreq_1.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.lowerAndHigherFreq_1[i].mag + "</td>");
-                }*/
-                for (i = 0, j = 1; i < tremorRow2.colSumRaw.arr.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.colSumRaw.arr[i] + "</td></tr>");
-                }
-                for (i = 0, j = 1; i < tremorRow2.colSumNormalized.arr.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.colSumNormalized.arr[i] + "</td>");
-                }
-                $('.container-fluid .tremor2 tr[data-count=' + tremorRow2.colSumNormalized.arr.length + ']').append("<td>" + tremorRow2.colSumNormalized.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor2 tr[data-count=' + +tremorRow2.colSumNormalized.arr.length + 1 + ']').append("<td>" + tremorRow2.colSumNormalized.stDevNotesMusic + "</td>");
-
-                for (i = 0, j = 1; i < tremorRow2.arrFftMagRawSmoothed.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFftMagRawSmoothed[i] + "</td>");
-                }
-
-
-                for (i = 0, j = 1; i < tremorRow2.arrFftMagNormalizedSmoothed.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrFftMagNormalizedSmoothed[i] + "</td>");
-                }
-                $('.container-fluid .tremor2 tr[data-count=' + tremorRow2.arrFftMagNormalizedSmoothed.length + ']').append("<td>" + tremorRow2.colSumRaw.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor2 tr[data-count=' + +tremorRow2.arrFftMagNormalizedSmoothed.length + 1 + ']').append("<td>" + tremorRow2.colSumRaw.stDevNotesMusic + "</td>");
-
-
-                for (i = 0, j = 1; i < tremorRow2.lowerAndHigherFreq_2.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>freq=" + tremorRow2.lowerAndHigherFreq_2[i].freq + "</br>power=" + tremorRow2.lowerAndHigherFreq_2[i].power + "</td>");
-                }
-                /* for (i = 0, j = 1; i < tremorRow2.lowerAndHigherFreq_2.length; i++, j++) {
-                     $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.lowerAndHigherFreq_2[i].mag + "</td>");
-                 }*/
-
-                for (i = 0, j = 1; i < tremorRow2.colSumSmoothed.arr.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.colSumSmoothed.arr[i] + "</td>");
-                }
-                $('.container-fluid .tremor2 tr[data-count=' + tremorRow2.colSumSmoothed.arr.length + ']').append("<td>" + tremorRow2.colSumSmoothed.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor2 tr[data-count=' + +tremorRow2.colSumSmoothed.arr.length + 1 + ']').append("<td>" + tremorRow2.colSumSmoothed.stDevNotesMusic + "</td>");
-
-
-                for (i = 0, j = 1; i < tremorRow2.colSumSmthNormed.arr.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.colSumSmthNormed.arr[i] + "</td>");
-                }
-
-                $('.container-fluid .tremor2 tr[data-count=' + tremorRow2.colSumSmthNormed.arr.length + ']').append("<td>" + tremorRow2.colSumSmthNormed.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor2 tr[data-count=' + +tremorRow2.colSumSmthNormed.arr.length + 1 + ']').append("<td>" + tremorRow2.colSumSmthNormed.stDevNotesMusic + "</td>");
-
-
-                for (i = 0, j = 1; i < tremorRow2.arrSumSmthNorm_1.arrResult.length; i++, j++) {
-                    $('.container-fluid .tremor2 tr[data-count=' + i + ']').append("<td>" + tremorRow2.arrSumSmthNorm_1.arrResult[i] + "</td>");
-                }
-
-
-                $('.container-fluid .tremor2 tr[data-count=' + tremorRow2.arrSumSmthNorm_1.arrResult.length + ']').append("<td>" + tremorRow2.arrSumSmthNorm_1.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor2 tr[data-count=' + +tremorRow2.arrSumSmthNorm_1.arrResult.length + 1 + ']').append("<td>" + tremorRow2.arrSumSmthNorm_1.stDevNotesMusic + "</td>");
-
-
-                $('.pretremor2 tr.tremData').append('<td>' + tremorRow2.maxConstAbs + '</td><td>' + tremorRow2.maxConstAbs_NO + '</td><td>' + tremorRow2.maxFreqMag + '</td><td>' + tremorRow2.maxFreqMag_NO + '</td><td>' + tremorRow2.averageConstAbs + '</td><td>' + tremorRow2.averageConstAbs_NO + '</td><td>' + tremorRow2.averageFreqMag + '</td><td>' + tremorRow2.averageFreqMag_NO + '</td><td>' + tremorRow2.averageD23_635 + '</td><td>' + tremorRow2.stanDotClone + '</td>');
-
-                $('.pretremor2 tr.tremDataNext').append("<td>" + tremorRow2.divisionaverageValuesFftMag_23_404_405_635 + "</td><td>" + tremorRow2.divisionaverageValuesFftMag_23_329_329_635 + "</td><td>q3=" + tremorRow2.quartileFftMag_23_635.q3 + "</br>max=" + tremorRow2.quartileFftMag_23_635.max + "</td><td>" + tremorRow2.divisionQuartOnMaxFftMag + "</td><td>" + tremorRow2.division_q3_average + "</td>");
-
-                $('.pretremor2 tr.tremDataNext').append('<td>' + tremorRow2.maxFreqMagDiff + '</td><td>' + tremorRow2.maxFreqMagDiff_NO + '</td>');
-
-                $('.pretremor2 tr.tremDataNextNew').append('<td>' + tremorRow2.objSolfg.sideralDay + '</td><td>' + tremorRow2.objSolfg.liberating + '</td><td>' + tremorRow2.objSolfg.breakemo + '</td><td>' + tremorRow2.objSolfg.reprLove + '</td><td>' + tremorRow2.objSolfg.connect + '</td><td>' + tremorRow2.objSolfg.intuition + '</td><td>' + tremorRow2.objSolfg.spirorder + '</td><td>' + tremorRow2.objSolfg.mixSolft + '</td>');
-
-                $('.pretremor2 tr.tremDataNextNewNext').append('<td>' + tremorRow2.powerOctaves + '</td><td>' + tremorRow2.avgPowerOctaves + '</td><td>' + tremorRow2.maxFftMagNormalized + '</td>');
-
-                $('.pretremor2 tr.tremDataNextNewNext').append('<td>' + tremorRow2.totalMusicRaw + '</td><td>' + tremorRow2.totalMusicRawStDev + '</td><td>' + tremorRow2.totalMusicSmth + '</td><td>' + tremorRow2.totalMusicSmthStDev + '</td><td>' + tremorRow2.totalMusicRaw_Smth + '</td>');
-
-                $('.pretremor2 tr.tremNextRow').append('<td>' + tremorRow2.sumSmoothedStDev + '</td><td>' + tremorRow2.sumNormalizedAvg + '</td><td>' + tremorRow2.sumSmthNormedAvg + '</td>');
-                // $('.pretremor2').append('<tr><td>' + tremorRow2.sumSmoothedStDev + '</td><td>' + tremorRow2.sumNormalizedAvg + '</td><td>' + tremorRow2.sumSmthNormedAvg + '</td></tr>');
-
-                $('.pretremor2 tr.tremNextRow').append('<td>' + tremorRow2.colSumSmthNorm_1Avg + '</td>');
-                // $('.pretremor2').append('<td>' + tremorRow2.colSumSmthNorm_1Avg + '</td>');
-
-
-                $('.tab5').attr('data-load', 'loaded');
-                $('.table').hide();
-                $('.tremor2').show();
-                $('.pretremor2').show();
-            });
-        } else {
-            $('.table').hide();
-            $('.tremor2').show();
-            $('.pretremor2').show();
-        }
-    });
-
-    $('.tab6').on('click', function () {
-        $(this).attr('disable', 'disabled');
-        var load = $(this).attr('data-load');
-        if (load != 'loaded') {
-            $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
-                //var table = JSON.stringify(data);
-                // var user = JSON.parse(table);
-                var user = JSON.parse(data);
-                var tremorRow3 = user.sheet_tremorSpectrum_3;
-                var i, j;
-                //tremor3 data table
-                $('.container-fluid .tremor3').append("<th>row</th>");
-
-                for (i = 0, j = 1; i < user.headers_sheet_tremorSpectrum.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr.headrow').append("<th>" + user.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFftFreq.length; i++, j++) {
-                    $('.container-fluid .tremor3').append("<tr data-count=" + i + "><td>" + j + "</td><td>" + tremorRow3.arrFftFreq[i] + "</td></tr>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFftMag.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFftMag[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFftComplex.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFftComplex[i][0] + "</br>" + tremorRow3.arrFftComplex[i][1] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrConstABS.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrConstABS[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFreqMag.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFreqMag[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrConstABS_NO.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrConstABS_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFreqMag_NO.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFreqMag_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrConstAbsNormal.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrConstAbsNormal[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrConstAbsNormal_NO.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrConstAbsNormal_NO[i] + "</td>");
-                }
-                /*  for (i = 0, j = 1; i < tremorRow3.arrConstABS_NO.length; i++, j++) {
-                      $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrConstABS_NO[i] + "</td>");
-                  }*/
-
-
-                for (i = 0, j = 1; i < tremorRow3.arrFreqMagNormal.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFreqMagNormal[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFreqMagNormal_NO.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFreqMagNormal_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFreqMagDiff.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFreqMagDiff[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFreqMagDiff_NO.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFreqMagDiff_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFreqMagDiffNormal.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFreqMagDiffNormal[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFreqMagDiffNormal_NO.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFreqMagDiffNormal_NO[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.arrFftMagNormalized.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFftMagNormalized[i] + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.lowerAndHigherFreq_1.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>freq=" + tremorRow3.lowerAndHigherFreq_1[i].freq + "</br>power=" + tremorRow3.lowerAndHigherFreq_1[i].power + "</td>");
-                }
-                /*for (i = 0, j = 1; i < tremorRow3.lowerAndHigherFreq_1.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.lowerAndHigherFreq_1[i].mag + "</td>");
-                }*/
-                for (i = 0, j = 1; i < tremorRow3.colSumRaw.arr.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.colSumRaw.arr[i] + "</td></tr>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.lowerAndHigherFreq_2.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>freq=" + tremorRow3.lowerAndHigherFreq_2[i].freq + "</br>power=" + tremorRow3.lowerAndHigherFreq_2[i].mag + "</td>");
-                }
-                for (i = 0, j = 1; i < tremorRow3.colSumNormalized.arr.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.colSumNormalized.arr[i] + "</td>");
-                }
-                $('.container-fluid .tremor3 tr[data-count=' + tremorRow3.colSumNormalized.arr.length + ']').append("<td>" + tremorRow3.colSumNormalized.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor3 tr[data-count=' + +tremorRow3.colSumNormalized.arr.length + 1 + ']').append("<td>" + tremorRow3.colSumNormalized.stDevNotesMusic + "</td>");
-
-                for (i = 0, j = 1; i < tremorRow3.arrFftMagRawSmoothed.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFftMagRawSmoothed[i] + "</td>");
-                }
-
-
-                for (i = 0, j = 1; i < tremorRow3.arrFftMagNormalizedSmoothed.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrFftMagNormalizedSmoothed[i] + "</td>");
-                }
-                $('.container-fluid .tremor3 tr[data-count=' + tremorRow3.arrFftMagNormalizedSmoothed.length + ']').append("<td>" + tremorRow3.colSumRaw.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor3 tr[data-count=' + +tremorRow3.arrFftMagNormalizedSmoothed.length + 1 + ']').append("<td>" + tremorRow3.colSumRaw.stDevNotesMusic + "</td>");
-
-
-                /*for (i = 0, j = 1; i < tremorRow3.lowerAndHigherFreq_2.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>freq=" + tremorRow3.lowerAndHigherFreq_2[i].freq + "</br>power="+ tremorRow3.lowerAndHigherFreq_2[i].mag + "</td>");
-                }*/
-                /* for (i = 0, j = 1; i < tremorRow3.lowerAndHigherFreq_2.length; i++, j++) {
-                     $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.lowerAndHigherFreq_2[i].mag + "</td>");
-                 }*/
-
-                for (i = 0, j = 1; i < tremorRow3.colSumSmoothed.arr.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.colSumSmoothed.arr[i] + "</td>");
-                }
-                $('.container-fluid .tremor3 tr[data-count=' + tremorRow3.colSumSmoothed.arr.length + ']').append("<td>" + tremorRow3.colSumSmoothed.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor3 tr[data-count=' + +tremorRow3.colSumSmoothed.arr.length + 1 + ']').append("<td>" + tremorRow3.colSumSmoothed.stDevNotesMusic + "</td>");
-
-
-                for (i = 0, j = 1; i < tremorRow3.colSumSmthNormed.arr.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.colSumSmthNormed.arr[i] + "</td>");
-                }
-
-                $('.container-fluid .tremor3 tr[data-count=' + tremorRow3.colSumSmthNormed.arr.length + ']').append("<td>" + tremorRow3.colSumSmthNormed.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor3 tr[data-count=' + +tremorRow3.colSumSmthNormed.arr.length + 1 + ']').append("<td>" + tremorRow3.colSumSmthNormed.stDevNotesMusic + "</td>");
-
-
-                for (i = 0, j = 1; i < tremorRow3.arrSumSmthNorm_1.arrResult.length; i++, j++) {
-                    $('.container-fluid .tremor3 tr[data-count=' + i + ']').append("<td>" + tremorRow3.arrSumSmthNorm_1.arrResult[i] + "</td>");
-                }
-
-
-                $('.container-fluid .tremor3 tr[data-count=' + tremorRow3.arrSumSmthNorm_1.arrResult.length + ']').append("<td>" + tremorRow3.arrSumSmthNorm_1.avgNotesMusic + "</td>");
-                $('.container-fluid .tremor3 tr[data-count=' + +tremorRow3.arrSumSmthNorm_1.arrResult.length + 1 + ']').append("<td>" + tremorRow3.arrSumSmthNorm_1.stDevNotesMusic + "</td>");
-
-
-                $('.pretremor3 tr.tremData').append('<td>' + tremorRow3.maxConstAbs + '</td><td>' + tremorRow3.maxConstAbs_NO + '</td><td>' + tremorRow3.maxFreqMag + '</td><td>' + tremorRow3.maxFreqMag_NO + '</td><td>' + tremorRow3.averageConstAbs + '</td><td>' + tremorRow3.averageConstAbs_NO + '</td><td>' + tremorRow3.averageFreqMag + '</td><td>' + tremorRow3.averageFreqMag_NO + '</td><td>' + tremorRow3.averageD23_635 + '</td><td>' + tremorRow3.stanDotClone + '</td>');
-
-                $('.pretremor3 tr.tremDataNext').append("<td>" + tremorRow3.divisionaverageValuesFftMag_23_404_405_635 + "</td><td>" + tremorRow3.divisionaverageValuesFftMag_23_329_329_635 + "</td><td>q3=" + tremorRow3.quartileFftMag_23_635.q3 + "</br>max=" + tremorRow3.quartileFftMag_23_635.max + "</td><td>" + tremorRow3.divisionQuartOnMaxFftMag + "</td><td>" + tremorRow3.division_q3_average + "</td>");
-
-                $('.pretremor3 tr.tremDataNext').append('<td>' + tremorRow3.maxFreqMagDiff + '</td><td>' + tremorRow3.maxFreqMagDiff_NO + '</td>');
-
-                $('.pretremor3 tr.tremDataNextNew').append('<td>' + tremorRow3.objSolfg.sideralDay + '</td><td>' + tremorRow3.objSolfg.liberating + '</td><td>' + tremorRow3.objSolfg.breakemo + '</td><td>' + tremorRow3.objSolfg.reprLove + '</td><td>' + tremorRow3.objSolfg.connect + '</td><td>' + tremorRow3.objSolfg.intuition + '</td><td>' + tremorRow3.objSolfg.spirorder + '</td><td>' + tremorRow3.objSolfg.mixSolft + '</td>');
-
-                $('.pretremor3 tr.tremDataNextNewNext').append('<td>' + tremorRow3.powerOctaves + '</td><td>' + tremorRow3.avgPowerOctaves + '</td><td>' + tremorRow3.maxFftMagNormalized + '</td>');
-
-                $('.pretremor3 tr.tremDataNextNewNext').append('<td>' + tremorRow3.totalMusicRaw + '</td><td>' + tremorRow3.totalMusicRawStDev + '</td><td>' + tremorRow3.totalMusicSmth + '</td><td>' + tremorRow3.totalMusicSmthStDev + '</td><td>' + tremorRow3.totalMusicRaw_Smth + '</td>');
-
-                $('.pretremor3 tr.tremNextRow').append('<td>' + tremorRow3.sumSmoothedStDev + '</td><td>' + tremorRow3.sumNormalizedAvg + '</td><td>' + tremorRow3.sumSmthNormedAvg + '</td>');
-                // $('.pretremor3').append('<tr><td>' + tremorRow3.sumSmoothedStDev + '</td><td>' + tremorRow3.sumNormalizedAvg + '</td><td>' + tremorRow3.sumSmthNormedAvg + '</td></tr>');
-
-                $('.pretremor3 tr.tremNextRow').append('<td>' + tremorRow3.colSumSmthNorm_1Avg + '</td>');
-                // $('.pretremor3').append('<td>' + tremorRow3.colSumSmthNorm_1Avg + '</td>');
-                $('.tab6').attr('data-load', 'loaded');
-                $('.table').hide();
-                $('.tremor3').show();
-                $('.pretremor3').show();
-            });
-        } else {
-            $('.table').hide();
-            $('.tremor3').show();
-            $('.pretremor3').show();
-        }
-    });
-
-    $('.tab7').on('click', function () {
-        $(this).attr('disable', 'disabled');
-        var load = $(this).attr('data-load');
-        if (load != 'loaded') {
-            $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
-                //var table = JSON.stringify(data);
-                // var user = JSON.parse(table);
-                var user = JSON.parse(data);
-                var tremorNegen = user.sheet_tremorNegentropicAlgorithm;
-                var i, j, k;
-
-
-                for (k = 0; k < 6; k++) {
-
-                    $('.container-fluid .negentropic' + k).append("<caption>Table_" + tremorNegen[k].tableName + "</caption>");
-                    for (j = 0; j < tremorNegen[k].cells.length; j++) {
-                        for (i = 0; i < tremorNegen[k].cells[j].length; i++) {
-                            //$('.container-fluid .negentropic').append("<caption>"+tremorNegen[0].tableName+"</caption><th>"+tremorNegen[0].cells[0][0].title+"</th><tr><td>"+tremorNegen[0].cells[0][0].line9.address+"</td><td>"+tremorNegen[0].cells[0][0].line10.address+"</td></tr><tr><td>"+tremorNegen[0].cells[0][0].line9.value+"</td><td>"+tremorNegen[0].cells[0][0].line10.value+"</td></tr>");
-                            $('.container-fluid .negentropic' + k).append("<tr><td>" + tremorNegen[k].cells[j][i].title + "</td></tr><tr><td>" + tremorNegen[k].cells[j][i].line9.address + "</td><td>" + tremorNegen[k].cells[j][i].line9.value + "</td></tr><tr><td>" + tremorNegen[k].cells[j][i].line10.address + "</td><td>" + tremorNegen[k].cells[j][i].line10.value + "</td></tr>");
-                        }
-                    }
-
-                }
-
-
-                $('.container-fluid .negentropic5').append("<caption>Table_" + tremorNegen[5].tableName + "</caption>");
-                for (j = 0; j < tremorNegen[5].cells.length; j++) {
-                    for (i = 0; i < tremorNegen[5].cells[j].length; i++) {
-                        //$('.container-fluid .negentropic').append("<caption>"+tremorNegen[0].tableName+"</caption><th>"+tremorNegen[0].cells[0][0].title+"</th><tr><td>"+tremorNegen[0].cells[0][0].line9.address+"</td><td>"+tremorNegen[0].cells[0][0].line10.address+"</td></tr><tr><td>"+tremorNegen[0].cells[0][0].line9.value+"</td><td>"+tremorNegen[0].cells[0][0].line10.value+"</td></tr>");
-                        $('.container-fluid .negentropic6').append("<tr><td>" + tremorNegen[5].cells[j][i].title + "</td></tr><tr><td>" + tremorNegen[5].cells[j][i].line9.address + "</td><td>" + tremorNegen[5].cells[j][i].line9.value + "</td></tr><tr><td>" + tremorNegen[5].cells[j][i].line10.address + "</td><td>" + tremorNegen[5].cells[j][i].line10.value + "</td></tr>");
-
+                $('body #tab' + tab + ' .negentropic' + k).append("<caption>Table_" + tremorNegen[k].tableName + "</caption>");
+                for (j = 0; j < tremorNegen[k].cells.length; j++) {
+                    for (i = 0; i < tremorNegen[k].cells[j].length; i++) {
+                        $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>" + tremorNegen[k].cells[j][i].title + "</td><td></td></tr><tr><td>" + tremorNegen[k].cells[j][i].line9.address + "</td><td>" + tremorNegen[k].cells[j][i].line9.value + "</td></tr><tr><td>" + tremorNegen[k].cells[j][i].line10.address + "</td><td>" + tremorNegen[k].cells[j][i].line10.value + "</td></tr>");
                     }
                 }
 
+            }
 
-                $('.container-fluid .negentropic6').append("<caption>Table_" + tremorNegen[6].tableName + "</caption>");
-                for (j = 0; j < tremorNegen[6].cells.length; j++) {
-                    for (i = 0; i < tremorNegen[6].cells[j].length; i++) {
-                        //$('.container-fluid .negentropic').append("<caption>"+tremorNegen[0].tableName+"</caption><th>"+tremorNegen[0].cells[0][0].title+"</th><tr><td>"+tremorNegen[0].cells[0][0].line9.address+"</td><td>"+tremorNegen[0].cells[0][0].line10.address+"</td></tr><tr><td>"+tremorNegen[0].cells[0][0].line9.value+"</td><td>"+tremorNegen[0].cells[0][0].line10.value+"</td></tr>");
-                        $('.container-fluid .negentropic6').append("<tr><td>" + tremorNegen[6].cells[j][i].title + "</td></tr><tr><td>" + tremorNegen[6].cells[j][i].line9.address + "</td><td>" + tremorNegen[6].cells[j][i].line9.value + "</td></tr><tr><td>" + tremorNegen[6].cells[j][i].line10.address + "</td><td>" + tremorNegen[6].cells[j][i].line10.value + "</td></tr>");
 
-                    }
+            $('body #tab' + tab + ' .negentropic5').append("<caption>Table_" + tremorNegen[5].tableName + "</caption>");
+            for (j = 0; j < tremorNegen[5].cells.length; j++) {
+                for (i = 0; i < tremorNegen[5].cells[j].length; i++) {
+                    $('body #tab' + tab + ' .negentropic6').append("<tr><td>" + tremorNegen[5].cells[j][i].title + "</td><td></td></tr><tr><td>" + tremorNegen[5].cells[j][i].line9.address + "</td><td>" + tremorNegen[5].cells[j][i].line9.value + "</td></tr><tr><td>" + tremorNegen[5].cells[j][i].line10.address + "</td><td>" + tremorNegen[5].cells[j][i].line10.value + "</td></tr>");
+
                 }
+            }
 
-                $('.tab7').attr('data-load', 'loaded');
-                $('.table').hide();
-                $('.negentropic0').show();
-                $('.negentropic1').show();
-                $('.negentropic2').show();
-                $('.negentropic3').show();
-                $('.negentropic4').show();
-                $('.negentropic5').show();
-                $('.negentropic6').show();
-                //$('.pretremor4').show();
+
+            $('body #tab' + tab + ' .negentropic6').append("<caption>Table_" + tremorNegen[6].tableName + "</caption>");
+            for (j = 0; j < tremorNegen[6].cells.length; j++) {
+                for (i = 0; i < tremorNegen[6].cells[j].length; i++) {
+                    $('body #tab' + tab + ' .negentropic6').append("<tr><td>" + tremorNegen[6].cells[j][i].title + "</td><td></td></tr><tr><td>" + tremorNegen[6].cells[j][i].line9.address + "</td><td>" + tremorNegen[6].cells[j][i].line9.value + "</td></tr><tr><td>" + tremorNegen[6].cells[j][i].line10.address + "</td><td>" + tremorNegen[6].cells[j][i].line10.value + "</td></tr>");
+
+                }
+            }
+
+            $('body #tab' + tab + '').show();
+            $('body #tab' + tab + ' .table').DataTable({
+                fixedHeader: true,
+                "searching": false,
+                pageLength: 10
             });
-        } else {
-            $('.table').hide();
-            $('.negentropic0').show();
-            $('.negentropic1').show();
-            $('.negentropic2').show();
-            $('.negentropic3').show();
-            $('.negentropic4').show();
-            $('.negentropic5').show();
-            $('.negentropic6').show();
-            //$('.pretremor4').show();
-        }
+        });
 
     });
 
-});
+
+
+} );
