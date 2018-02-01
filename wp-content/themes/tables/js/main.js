@@ -1,11 +1,17 @@
 $(document).ready(function() {
 
+    var datatable;
+
     $('.tab1[data-toggle="tab"], .tab2[data-toggle="tab"], .tab3[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
         var tab = $(e.target).data('tab');
 
         $('.tab-pane').html('').css('display', 'none');
         $('#tab' + tab).html($('.data-snippet').html());
+
+        if(datatable !== undefined) {
+            datatable.fixedHeader.disable();
+        }
 
         $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
 
@@ -60,7 +66,7 @@ $(document).ready(function() {
 
             $('body #tab' + tab + '').show();
             $('body #tab' + tab + ' .table2 caption').text('DATA ' + tab);
-            $('body #tab' + tab + ' .table1, #tab' + tab + ' .table2').DataTable({
+            datatable = $('body #tab' + tab + ' .table1, #tab' + tab + ' .table2').DataTable({
                 fixedHeader: true,
                 "searching": false,
                 pageLength: 50
@@ -75,6 +81,10 @@ $(document).ready(function() {
 
         $('.tab-pane').html('').css('display', 'none');
         $('#tab' + tab).html($('.tremor-snippet').html());
+
+        if(datatable !== undefined) {
+            datatable.fixedHeader.disable();
+        }
 
         $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
 
@@ -217,7 +227,7 @@ $(document).ready(function() {
 
             $('body #tab' + tab + '').show();
             $('body #tab' + tab + ' .table2 caption').text('Tremor ' + (tab - 3));
-            $('body #tab' + tab + ' .table2').DataTable({
+            datatable = $('body #tab' + tab + ' .table2').DataTable({
                 fixedHeader: true,
                 "searching": false,
                 "scrollX": true,
@@ -232,6 +242,10 @@ $(document).ready(function() {
 
         $('.tab-pane').html('').css('display', 'none');
         $('#tab' + tab).html($('.negentropic-snippet').html());
+
+        if(datatable !== undefined) {
+            datatable.fixedHeader.disable();
+        }
 
         $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
 
@@ -270,7 +284,7 @@ $(document).ready(function() {
             }
 
             $('body #tab' + tab + '').show();
-            $('body #tab' + tab + ' .table').DataTable({
+            datatable = $('body #tab' + tab + ' .table').DataTable({
                 fixedHeader: true,
                 "searching": false,
                 pageLength: 10
