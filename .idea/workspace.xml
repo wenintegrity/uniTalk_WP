@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59d8e160-333b-4341-bcfb-b510aa7f1c17" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wp-content/themes/tables/js/main2.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wp-content/themes/tables/page-tables.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/tables/footer.php" afterPath="$PROJECT_DIR$/wp-content/themes/tables/footer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/tables/header.php" afterPath="$PROJECT_DIR$/wp-content/themes/tables/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/tables/index.php" afterPath="$PROJECT_DIR$/wp-content/themes/tables/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/tables/js/main.js" afterPath="$PROJECT_DIR$/wp-content/themes/tables/js/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wp-content/themes/tables/page-tables.php" afterPath="$PROJECT_DIR$/wp-content/themes/tables/page-tables.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,23 +39,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="page-tables.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="page-tables.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/page-tables.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="270" column="25" lean-forward="false" selection-start-line="267" selection-start-column="24" selection-end-line="270" selection-end-column="25" />
+            <state relative-caret-position="255">
+              <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
               <folding>
                 <element signature="e#6#46#0#PHP" expanded="true" />
-                <element signature="e#2154#2175#0#HTML" expanded="true" />
-                <element signature="e#2223#2244#0#HTML" expanded="true" />
-                <element signature="e#2292#2313#0#HTML" expanded="true" />
-                <element signature="e#2362#2383#0#HTML" expanded="true" />
-                <element signature="e#2431#2452#0#HTML" expanded="true" />
-                <element signature="e#2500#2521#0#HTML" expanded="true" />
-                <element signature="e#2570#2591#0#HTML" expanded="true" />
-                <element signature="e#2637#2658#0#HTML" expanded="true" />
-                <element signature="e#2668#6243#0#HTML" expanded="false" />
-                <element signature="e#6252#8420#0#HTML" expanded="false" />
+                <element signature="e#1236#1257#0#HTML" expanded="true" />
+                <element signature="e#1305#1326#0#HTML" expanded="true" />
+                <element signature="e#1374#1395#0#HTML" expanded="true" />
+                <element signature="e#1444#1465#0#HTML" expanded="true" />
+                <element signature="e#1513#1534#0#HTML" expanded="true" />
+                <element signature="e#1582#1603#0#HTML" expanded="true" />
+                <element signature="e#1652#1673#0#HTML" expanded="true" />
+                <element signature="e#1719#1740#0#HTML" expanded="true" />
+                <element signature="e#1750#5325#0#HTML" expanded="false" />
+                <element signature="e#5334#7502#0#HTML" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -77,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main2.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main2.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/js/main2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="63" column="35" lean-forward="true" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
+            <state relative-caret-position="510">
+              <caret line="66" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="281" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -112,6 +106,7 @@
       <find>pretremor1</find>
       <find>'.container-fluid</find>
       <find>snippet</find>
+      <find>.title</find>
     </findStrings>
     <replaceStrings>
       <replace>pretable</replace>
@@ -139,8 +134,8 @@
         <option value="$PROJECT_DIR$/wp-content/themes/tables/header.php" />
         <option value="$PROJECT_DIR$/wp-content/themes/tables/footer.php" />
         <option value="$PROJECT_DIR$/wp-content/themes/tables/index.php" />
-        <option value="$PROJECT_DIR$/wp-content/themes/tables/page-tables.php" />
         <option value="$PROJECT_DIR$/wp-content/themes/tables/js/main2.js" />
+        <option value="$PROJECT_DIR$/wp-content/themes/tables/page-tables.php" />
       </list>
     </option>
   </component>
@@ -248,18 +243,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1517391875817</updated>
-      <workItem from="1517391877465" duration="21944000" />
+      <workItem from="1517391877465" duration="23294000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21944000" />
+    <option name="totallyTimeSpent" value="23294000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="-4" width="1865" height="1084" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24958768" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24958768" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -362,31 +356,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/page-tables.php">
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/js/main2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="270" column="25" lean-forward="false" selection-start-line="267" selection-start-column="24" selection-end-line="270" selection-end-column="25" />
-          <folding>
-            <element signature="e#6#46#0#PHP" expanded="true" />
-            <element signature="e#2154#2175#0#HTML" expanded="true" />
-            <element signature="e#2223#2244#0#HTML" expanded="true" />
-            <element signature="e#2292#2313#0#HTML" expanded="true" />
-            <element signature="e#2362#2383#0#HTML" expanded="true" />
-            <element signature="e#2431#2452#0#HTML" expanded="true" />
-            <element signature="e#2500#2521#0#HTML" expanded="true" />
-            <element signature="e#2570#2591#0#HTML" expanded="true" />
-            <element signature="e#2637#2658#0#HTML" expanded="true" />
-            <element signature="e#2668#6243#0#HTML" expanded="false" />
-            <element signature="e#6252#8420#0#HTML" expanded="false" />
-          </folding>
+        <state relative-caret-position="510">
+          <caret line="66" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="281" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/js/main2.js">
+    <entry file="file://$PROJECT_DIR$/wp-content/themes/tables/page-tables.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="63" column="35" lean-forward="true" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="255">
+          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+          <folding>
+            <element signature="e#6#46#0#PHP" expanded="true" />
+            <element signature="e#1236#1257#0#HTML" expanded="true" />
+            <element signature="e#1305#1326#0#HTML" expanded="true" />
+            <element signature="e#1374#1395#0#HTML" expanded="true" />
+            <element signature="e#1444#1465#0#HTML" expanded="true" />
+            <element signature="e#1513#1534#0#HTML" expanded="true" />
+            <element signature="e#1582#1603#0#HTML" expanded="true" />
+            <element signature="e#1652#1673#0#HTML" expanded="true" />
+            <element signature="e#1719#1740#0#HTML" expanded="true" />
+            <element signature="e#1750#5325#0#HTML" expanded="false" />
+            <element signature="e#5334#7502#0#HTML" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
