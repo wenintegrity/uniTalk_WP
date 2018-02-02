@@ -254,7 +254,7 @@ $(document).ready(function() {
             var i, j, k;
 
 
-            for (k = 0; k < 6; k++) {
+            for (k = 0; k < 5; k++) {
 
                 $('body #tab' + tab + ' .negentropic' + k).append("<caption>Table_" + tremorNegen[k].tableName + "</caption>");
                 for (j = 0; j < tremorNegen[k].cells.length; j++) {
@@ -269,7 +269,7 @@ $(document).ready(function() {
             $('body #tab' + tab + ' .negentropic5').append("<caption>Table_" + tremorNegen[5].tableName + "</caption>");
             for (j = 0; j < tremorNegen[5].cells.length; j++) {
                 for (i = 0; i < tremorNegen[5].cells[j].length; i++) {
-                    $('body #tab' + tab + ' .negentropic6').append("<tr><td>" + tremorNegen[5].cells[j][i].title + "</td><td></td></tr><tr><td>" + tremorNegen[5].cells[j][i].line9.address + "</td><td>" + tremorNegen[5].cells[j][i].line9.value + "</td></tr><tr><td>" + tremorNegen[5].cells[j][i].line10.address + "</td><td>" + tremorNegen[5].cells[j][i].line10.value + "</td></tr>");
+                    $('body #tab' + tab + ' .negentropic5').append("<tr><td>" + tremorNegen[5].cells[j][i].title + "</td><td></td></tr><tr><td>" + tremorNegen[5].cells[j][i].line9.address + "</td><td>" + tremorNegen[5].cells[j][i].line9.value + "</td></tr><tr><td>" + tremorNegen[5].cells[j][i].line10.address + "</td><td>" + tremorNegen[5].cells[j][i].line10.value + "</td></tr>");
 
                 }
             }
