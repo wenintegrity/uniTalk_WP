@@ -26,6 +26,13 @@ $(document).ready(function() {
                 sheet_data = user.calcData.sheet_data_3;
             }
 
+            function makeTextFile(text) {
+                var data = new Blob([text], {type: 'text/plain'});
+                return window.URL.createObjectURL(data);
+            }
+
+            $('body #tab' + tab + ' .download-data-btn').attr('href', makeTextFile(JSON.stringify(user.reqBody.data)));
+
             var i, j;
 
             for (i = 0, j = 1; i < sheet_data.arrElements.length; i++, j++) {

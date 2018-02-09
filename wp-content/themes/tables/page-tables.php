@@ -48,6 +48,9 @@ Template Name: Table template page
 
     <div class="snippets" style="display: none">
         <div class="data-snippet">
+
+            <a href="#" download="data.txt" class="btn btn-default download-data-btn">Download</a>
+
             <table class="table table1">
                 <thead>
                 <tr>
