@@ -19,11 +19,11 @@ $(document).ready(function() {
             var sheet_data;
 
             if(tab === 1) {
-                sheet_data = user.sheet_data_1;
+                sheet_data = user.calcData.sheet_data_1;
             } else if(tab === 2) {
-                sheet_data = user.sheet_data_2;
+                sheet_data = user.calcData.sheet_data_2;
             } else {
-                sheet_data = user.sheet_data_3;
+                sheet_data = user.calcData.sheet_data_3;
             }
 
             var i, j;
@@ -69,11 +69,11 @@ $(document).ready(function() {
             datatable = $('body #tab' + tab + ' .table1, #tab' + tab + ' .table2').DataTable({
                 fixedHeader: true,
                 "searching": true,
-                pageLength: 50,
+                pageLength: 50/*,
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                ]*/
             });
 
         });
@@ -96,17 +96,17 @@ $(document).ready(function() {
             var sheet_tremor;
 
             if(tab === 4) {
-                sheet_tremor = user.sheet_tremorSpectrum_1;
+                sheet_tremor = user.calcData.sheet_tremorSpectrum_1;
             } else if(tab === 5) {
-                sheet_tremor = user.sheet_tremorSpectrum_2;
+                sheet_tremor = user.calcData.sheet_tremorSpectrum_2;
             } else {
-                sheet_tremor = user.sheet_tremorSpectrum_3;
+                sheet_tremor = user.calcData.sheet_tremorSpectrum_3;
             }
 
             var i, j;
 
-            for (i = 0, j = 1; i < user.headers_sheet_tremorSpectrum.length; i++, j++) {
-                $('body #tab' + tab + ' .table2 thead tr').append("<th>" + user.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
+            for (i = 0, j = 1; i < user.calcData.headers_sheet_tremorSpectrum.length; i++, j++) {
+                $('body #tab' + tab + ' .table2 thead tr').append("<th>" + user.calcData.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
             }
 
             var tremor_rows_count = sheet_tremor.arrFftFreq.length;
@@ -254,7 +254,7 @@ $(document).ready(function() {
         $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
 
             var user = JSON.parse(data);
-            var tremorNegen = user.sheet_tremorNegentropicAlgorithm;
+            var tremorNegen = user.calcData.sheet_tremorNegentropicAlgorithm;
             var i, j, k;
 
 
