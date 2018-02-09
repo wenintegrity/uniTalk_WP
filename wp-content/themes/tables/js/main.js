@@ -68,8 +68,12 @@ $(document).ready(function() {
             $('body #tab' + tab + ' .table2 caption').text('DATA ' + tab);
             datatable = $('body #tab' + tab + ' .table1, #tab' + tab + ' .table2').DataTable({
                 fixedHeader: true,
-                "searching": false,
-                pageLength: 50
+                "searching": true,
+                pageLength: 50,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
             });
 
         });
