@@ -190,9 +190,10 @@ Template Name: Table template page
                 <th>totalMusicRaw_Smth</th>
 
                 <tr class="tremDataNextNewNext"></tr>
-                <th>sumSmoothedStDev</th>
-                <th>sumNormalizedAvg</th>
-                <th>sumSmthNormedAvg</th>
+<!--                <th>sumSmoothedStDev</th>-->
+<!--                <th>sumNormalizedAvg</th>-->
+<!--                <th>sumSmthNormedAvg</th>-->
+<!--                <th>avgNotesMusic</th>-->
                 <tr class="tremNextRow"></tr>
 
             </table>
@@ -210,8 +211,9 @@ Template Name: Table template page
             <table class="table negentropic0 table-bordered">
                 <thead>
                     <tr>
-                        <th>adress</th>
-                        <th>value</th>
+                        <th>title</th>
+                        <th>line9</th>
+                        <th>line10</th>
                     </tr>
                 </thead>
             </table>
@@ -219,24 +221,27 @@ Template Name: Table template page
             <table class="table negentropic1 table-bordered">
                 <thead>
                     <tr>
-                        <th>adress</th>
-                        <th>value</th>
+                        <th>title</th>
+                        <th>line9</th>
+                        <th>line10</th>
                     </tr>
                 </thead>
             </table>
             <table class="table negentropic2 table-bordered">
                 <thead>
                     <tr>
-                        <th>adress</th>
-                        <th>value</th>
+                        <th>title</th>
+                        <th>line9</th>
+                        <th>line10</th>
                     </tr>
                 </thead>
             </table>
             <table class="table negentropic3 table-bordered">
                 <thead>
                     <tr>
-                        <th>adress</th>
-                        <th>value</th>
+                        <th>title</th>
+                        <th>line9</th>
+                        <th>line10</th>
                     </tr>
                 </thead>
             </table>
@@ -244,24 +249,27 @@ Template Name: Table template page
             <table class="table negentropic4 table-bordered">
                 <thead>
                     <tr>
-                        <th>adress</th>
-                        <th>value</th>
+                        <th>title</th>
+                        <th>line9</th>
+                        <th>line10</th>
                     </tr>
                 </thead>
             </table>
             <table class="table negentropic5 table-bordered">
                 <thead>
                     <tr>
-                        <th>adress</th>
-                        <th>value</th>
+                        <th>title</th>
+                        <th>line9</th>
+                        <th>line10</th>
                     </tr>
                 </thead>
             </table>
             <table class="table negentropic6 table-bordered">
                 <thead>
                     <tr>
-                        <th>adress</th>
-                        <th>value</th>
+                        <th>title</th>
+                        <th>line9</th>
+                        <th>line10</th>
                     </tr>
                 </thead>
             </table>
