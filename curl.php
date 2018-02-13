@@ -15,7 +15,7 @@ if(isset($_POST)){
         CURLOPT_TIMEOUT        => 120,      // timeout on response
         CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
     );
-$url = "http://switchmymind.chdev.com.ua:3002/calculations";
+$url = API_URL . "/calculations";
     $ch      = curl_init( $url );
     curl_setopt_array( $ch, $options );
     $content = curl_exec( $ch );
