@@ -291,7 +291,7 @@ $(document).ready(function() {
 
             var user = JSON.parse(data);
             var tremorNegen = user.sheet_tremorNegentropicAlgorithm;
-            var i, j, k;
+            var i, j, k, m;
 
             for (k = 0; k < tremorNegen.length; k++) {
 
@@ -301,6 +301,14 @@ $(document).ready(function() {
                         $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>" + tremorNegen[k].cells[j][i].title + "</td>" +
                             "<td>address=" + tremorNegen[k].cells[j][i].line9.address + "<br>value=" + tremorNegen[k].cells[j][i].line9.value + "</td>" +
                             "<td>address=" + tremorNegen[k].cells[j][i].line10.address + "<br>value=" + tremorNegen[k].cells[j][i].line10.value + "</td></tr>");
+                    }
+                }
+
+                if(tremorNegen[k].result !== undefined) {
+                    for (m = 0; m < tremorNegen[k].result.length; m++) {
+                        $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
+                            "<td>address=" + tremorNegen[k].result[m].address + "</td>" +
+                            "<td>value=" + tremorNegen[k].result[m].value + "</td></tr>");
                     }
                 }
 
