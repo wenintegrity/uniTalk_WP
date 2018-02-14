@@ -292,6 +292,7 @@ Template Name: Table template page
     <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.3/js/dataTables.fixedHeader.min.js"></script>
 
 
+    <script src="<?php echo get_template_directory_uri() ?>/js/config.js"></script>
     <script src="<?php echo get_template_directory_uri() ?>/js/main.js"></script>
 
 <?php get_footer(); ?>

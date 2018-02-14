@@ -2,8 +2,8 @@
 
 header('Access-Control-Allow-Origin: *');
 if(isset($_POST)){
-    $options = array(
 
+    $options = array(
         CURLOPT_CUSTOMREQUEST  =>"GET",        //set request type post or get
         CURLOPT_POST           =>false,        //set to GET
         CURLOPT_RETURNTRANSFER => true,     // return web page
@@ -15,7 +15,9 @@ if(isset($_POST)){
         CURLOPT_TIMEOUT        => 120,      // timeout on response
         CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
     );
-$url = "http://switchmymind.chdev.com.ua:3002/calculations";
+
+    $url = "http://ec2-18-194-150-117.eu-central-1.compute.amazonaws.com:3002/calculations";
+
     $ch      = curl_init( $url );
     curl_setopt_array( $ch, $options );
     $content = curl_exec( $ch );
@@ -24,14 +26,6 @@ $url = "http://switchmymind.chdev.com.ua:3002/calculations";
     $header  = curl_getinfo( $ch );
     curl_close( $ch );
 
-   /* $header['errno']   = $err;
-    $header['errmsg']  = $errmsg;
-    $header['content'] = $content;
-    preprint_r ($header);*/
-   print_r($content);
+    print_r($content);
 
 }
-
-
-
-?>

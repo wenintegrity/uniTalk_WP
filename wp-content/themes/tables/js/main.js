@@ -13,7 +13,7 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
+        $.post(curlUrl, function (data) {
 
             var user = JSON.parse(data);
             var sheet_data;
@@ -97,7 +97,7 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
+        $.post(curlUrl, function (data) {
 
             var user = JSON.parse(data);
             var sheet_tremor;
@@ -287,7 +287,7 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.post("http://switchmymind.chdev.com.ua/curl.php", function (data) {
+        $.post(curlUrl, function (data) {
 
             var user = JSON.parse(data);
             var tremorNegen = user.sheet_tremorNegentropicAlgorithm;
