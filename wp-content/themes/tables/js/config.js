@@ -1,1 +1,0 @@
-var curlUrl = "http://wptables.loc/curl.php";
