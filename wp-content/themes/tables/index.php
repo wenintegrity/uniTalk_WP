@@ -22,17 +22,44 @@ Template Name: Table template page
         }
     </style>
 
-    <ul class="nav nav-tabs">
-        <li class=""><a href="#tab1" class="tab1" data-tab="1" data-toggle="tab">Data_1</a></li>
-        <li class=""><a href="#tab2" class="tab2" data-tab="2" data-toggle="tab">Data_2</a></li>
-        <li class=""><a href="#tab3" class="tab3" data-tab="3" data-toggle="tab">Data_3</a></li>
+<div class="row">
 
-        <li class=""><a href="#tab4" class="tab4" data-tab="4" data-toggle="tab">Tremor_1</a></li>
-        <li class=""><a href="#tab5" class="tab5" data-tab="5" data-toggle="tab">Tremor_2</a></li>
-        <li class=""><a href="#tab6" class="tab6" data-tab="6" data-toggle="tab">Tremor_3</a></li>
+    <div class="col-md-6">
+        <ul class="nav nav-tabs">
+            <li class=""><a href="#tab1" class="tab1" data-tab="1" data-toggle="tab">Data_1</a></li>
+            <li class=""><a href="#tab2" class="tab2" data-tab="2" data-toggle="tab">Data_2</a></li>
+            <li class=""><a href="#tab3" class="tab3" data-tab="3" data-toggle="tab">Data_3</a></li>
 
-        <li class=""><a href="#tab7" class="tab7" data-tab="7" data-toggle="tab">Tremor_Negentropic</a></li>
-    </ul>
+            <li class=""><a href="#tab4" class="tab4" data-tab="4" data-toggle="tab">Tremor_1</a></li>
+            <li class=""><a href="#tab5" class="tab5" data-tab="5" data-toggle="tab">Tremor_2</a></li>
+            <li class=""><a href="#tab6" class="tab6" data-tab="6" data-toggle="tab">Tremor_3</a></li>
+
+            <li class=""><a href="#tab7" class="tab7" data-tab="7" data-toggle="tab">Tremor_Negentropic</a></li>
+        </ul>
+    </div>
+
+    <div class="col-md-6">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">Phone ID <span class="caret"></span></button>
+            <ul class="dropdown-menu phone_id_dropdown">
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">Location <span class="caret"></span></button>
+            <ul class="dropdown-menu location_dropdown">
+            </ul>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">Time <span class="caret"></span></button>
+            <ul class="dropdown-menu time_dropdown">
+            </ul>
+        </div>
+    </div>
+
+</div>
 
     <div class="tab-content ">
         <div class="tab-pane" id="tab1" style="display: none"></div>
@@ -49,7 +76,7 @@ Template Name: Table template page
     <div class="snippets" style="display: none">
         <div class="data-snippet">
 
-<!--            <a href="#" download="data.txt" class="btn btn-default download-data-btn">Download</a>-->
+            <a href="#" download="data.txt" class="btn btn-default download-data-btn">Download</a>
 
             <table class="table table1">
                 <thead>

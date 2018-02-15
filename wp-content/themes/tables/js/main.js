@@ -13,17 +13,15 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.post(curlUrl, function (data) {
-
-            var user = JSON.parse(data);
+        $.get(apiUrl + '/calculations/last', function (data) {
             var sheet_data;
 
             if(tab === 1) {
-                sheet_data = user.sheet_data_1;
+                sheet_data = data.calcData.sheet_data_1;
             } else if(tab === 2) {
-                sheet_data = user.sheet_data_2;
+                sheet_data = data.calcData.sheet_data_2;
             } else {
-                sheet_data = user.sheet_data_3;
+                sheet_data = data.calcData.sheet_data_3;
             }
 
             function makeTextFile(text) {
@@ -31,11 +29,7 @@ $(document).ready(function() {
                 return window.URL.createObjectURL(data);
             }
 
-            $('body #tab' + tab + ' .download-data-btn').attr('href', makeTextFile(JSON.stringify({
-                "data_1" : user.sheet_data_1,
-                "data_2" : user.sheet_data_2,
-                "data_3" : user.sheet_data_3
-            })));
+            $('body #tab' + tab + ' .download-data-btn').attr('href', makeTextFile(JSON.stringify(data.reqBody.data)));
 
             var i, j;
 
@@ -97,23 +91,22 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.post(curlUrl, function (data) {
+        $.get(apiUrl + '/calculations/last', function (data) {
 
-            var user = JSON.parse(data);
             var sheet_tremor;
 
             if(tab === 4) {
-                sheet_tremor = user.sheet_tremorSpectrum_1;
+                sheet_tremor = data.calcData.sheet_tremorSpectrum_1;
             } else if(tab === 5) {
-                sheet_tremor = user.sheet_tremorSpectrum_2;
+                sheet_tremor = data.calcData.sheet_tremorSpectrum_2;
             } else {
-                sheet_tremor = user.sheet_tremorSpectrum_3;
+                sheet_tremor = data.calcData.sheet_tremorSpectrum_3;
             }
 
             var i, j;
 
-            for (i = 0, j = 1; i < user.headers_sheet_tremorSpectrum.length; i++, j++) {
-                $('body #tab' + tab + ' .table2 thead tr').append("<th>" + user.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
+            for (i = 0, j = 1; i < data.calcData.headers_sheet_tremorSpectrum.length; i++, j++) {
+                $('body #tab' + tab + ' .table2 thead tr').append("<th>" + data.calcData.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
             }
 
             var tremor_rows_count = sheet_tremor.arrFftFreq.length;
@@ -287,10 +280,9 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.post(curlUrl, function (data) {
+        $.get(apiUrl + '/calculations/last', function (data) {
 
-            var user = JSON.parse(data);
-            var tremorNegen = user.sheet_tremorNegentropicAlgorithm;
+            var tremorNegen = data.calcData.sheet_tremorNegentropicAlgorithm;
             var i, j, k, m;
 
             for (k = 0; k < tremorNegen.length; k++) {
@@ -324,6 +316,35 @@ $(document).ready(function() {
 
     });
 
+    $.get(apiUrl + '/calculations/all_info', function (data) {
+        for(var item in data) {
+            $('.phone_id_dropdown').append('<li><a href="#" data-id="'+ item +'">'+ item +'</a></li>');
+        }
 
+        $('body .phone_id_dropdown a').on('click', function(e){
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('.location_dropdown').html('');
+            $('.time_dropdown').html('');
+            data[id].locations.forEach(function(e, i){
+                $('.location_dropdown').append('<li><a href="#" data-location="'+ i +'">'+ e.location.latitude + ', ' + e.location.longitude +'</a></li>');
+            });
+
+            $('body .location_dropdown a').on('click', function(e){
+                e.preventDefault();
+                $('.time_dropdown').html('');
+                var location = $(this).data('location');
+                data[id].locations[location].arr_id.forEach(function(e, i){
+                    var arr_id = e;
+                    data[id].arr.forEach(function(e, i){
+                        if(arr_id === e.id) {
+                            $('.time_dropdown').append('<li><a href="#" data-time="'+ i +'">'+ e.time +'</a></li>');
+                        }
+                    });
+                });
+            });
+        });
+
+    });
 
 } );
