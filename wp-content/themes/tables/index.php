@@ -24,21 +24,7 @@ Template Name: Table template page
 
 <div class="row">
 
-    <div class="col-md-6">
-        <ul class="nav nav-tabs">
-            <li class=""><a href="#tab1" class="tab1" data-tab="1" data-toggle="tab">Data_1</a></li>
-            <li class=""><a href="#tab2" class="tab2" data-tab="2" data-toggle="tab">Data_2</a></li>
-            <li class=""><a href="#tab3" class="tab3" data-tab="3" data-toggle="tab">Data_3</a></li>
-
-            <li class=""><a href="#tab4" class="tab4" data-tab="4" data-toggle="tab">Tremor_1</a></li>
-            <li class=""><a href="#tab5" class="tab5" data-tab="5" data-toggle="tab">Tremor_2</a></li>
-            <li class=""><a href="#tab6" class="tab6" data-tab="6" data-toggle="tab">Tremor_3</a></li>
-
-            <li class=""><a href="#tab7" class="tab7" data-tab="7" data-toggle="tab">Tremor_Negentropic</a></li>
-        </ul>
-    </div>
-
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">Phone ID <span class="caret"></span></button>
@@ -57,6 +43,20 @@ Template Name: Table template page
             <ul class="dropdown-menu time_dropdown">
             </ul>
         </div>
+    </div>
+
+    <div class="col-md-12 tables-hav-holder" style="display: none">
+        <ul class="nav nav-tabs">
+            <li class=""><a href="#tab1" class="tab1" data-tab="1" data-toggle="tab">Data_1</a></li>
+            <li class=""><a href="#tab2" class="tab2" data-tab="2" data-toggle="tab">Data_2</a></li>
+            <li class=""><a href="#tab3" class="tab3" data-tab="3" data-toggle="tab">Data_3</a></li>
+
+            <li class=""><a href="#tab4" class="tab4" data-tab="4" data-toggle="tab">Tremor_1</a></li>
+            <li class=""><a href="#tab5" class="tab5" data-tab="5" data-toggle="tab">Tremor_2</a></li>
+            <li class=""><a href="#tab6" class="tab6" data-tab="6" data-toggle="tab">Tremor_3</a></li>
+
+            <li class=""><a href="#tab7" class="tab7" data-tab="7" data-toggle="tab">Tremor_Negentropic</a></li>
+        </ul>
     </div>
 
 </div>
@@ -217,11 +217,24 @@ Template Name: Table template page
                 <th>totalMusicRaw_Smth</th>
 
                 <tr class="tremDataNextNewNext"></tr>
-                <!--                <th>sumSmoothedStDev</th>-->
-                <!--                <th>sumNormalizedAvg</th>-->
-                <!--                <th>sumSmthNormedAvg</th>-->
-                <!--                <th>avgNotesMusic</th>-->
-                <tr class="tremNextRow"></tr>
+
+                <tr>
+                    <th>norm_avgPowerHigherOctaves</th>
+                    <th>norm_avgPowerOctNo</th>
+                    <th>norm_avgPowerDifScale</th>
+                    <th>norm_avgPowerDifDifNoMore_1</th>
+                    <th>norm_avgPowerDifDifNo</th>
+                    <th>norm_avgPowerDifAllScale</th>
+                </tr>
+                <tr class="norm"></tr>
+
+                <tr>
+                    <th>normScaled_avgPowerHigherOctaves</th>
+                    <th>normScaled_avgPowerOctNo</th>
+                    <th>normScaled_avgPowerDifScale</th>
+                    <th>normScaled_avgPowerDifDifNo</th>
+                </tr>
+                <tr class="normScaled"></tr>
 
             </table>
             <table class="table table2">

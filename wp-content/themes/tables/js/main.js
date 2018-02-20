@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     var datatable;
+    var infoId;
 
     $('.tab1[data-toggle="tab"], .tab2[data-toggle="tab"], .tab3[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
@@ -13,7 +14,7 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.get(apiUrl + '/calculations/last', function (data) {
+        $.get(apiUrl + '/calculations/' + infoId, function (data) {
             var sheet_data;
 
             if(tab === 1) {
@@ -91,7 +92,7 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.get(apiUrl + '/calculations/last', function (data) {
+        $.get(apiUrl + '/calculations/' + infoId, function (data) {
 
             var sheet_tremor;
 
@@ -103,160 +104,165 @@ $(document).ready(function() {
                 sheet_tremor = data.calcData.sheet_tremorSpectrum_3;
             }
 
-            var i, j;
+            var i, j, k, l;
 
             for (i = 0, j = 1; i < data.calcData.headers_sheet_tremorSpectrum.length; i++, j++) {
                 $('body #tab' + tab + ' .table2 thead tr').append("<th>" + data.calcData.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
             }
 
-            var tremor_rows_count = sheet_tremor.arrFftFreq.length;
+            var tremor_rows_count = sheet_tremor.arrFftComplex.length;
 
             for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody').append("<tr data-count=" + i + "><td>" + j + "</td><td>" + sheet_tremor.arrFftFreq[i] + "</td></tr>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftMag[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftComplex[i][0] + "</br>" + sheet_tremor.arrFftComplex[i][1] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstABS[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMag[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstABS_NO[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMag_NO[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstAbsNormal[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstAbsNormal_NO[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagNormal[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagNormal_NO[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiff[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiff_NO[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiffNormal[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiffNormal_NO[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftMagNormalized[i] + "</td>");
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                if(sheet_tremor.lowerAndHigherFreq_1[i] !== undefined) {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>freq=" + sheet_tremor.lowerAndHigherFreq_1[i].freq + "</br>power=" + sheet_tremor.lowerAndHigherFreq_1[i].power + "</td>");
-                } else {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
-                }
-            }
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                if(sheet_tremor.colSumRaw.arr[i] !== undefined) {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumRaw.arr[i] + "</td>");
-                } else if(sheet_tremor.colSumRaw.arr.length === i){
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>avgNotesMusic=" + sheet_tremor.colSumRaw.avgNotesMusic + "</td>");
-                } else if(sheet_tremor.colSumRaw.arr.length + 1 === i){
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>stDevNotesMusic=" + sheet_tremor.colSumRaw.stDevNotesMusic + "</td>");
-                } else {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
-                }
+                $('body #tab' + tab + ' .table2 tbody').append("<tr data-count=" + i + "><td>"+ j +"</td></tr>");
+                data.calcData.headers_sheet_tremorSpectrum.forEach(function(el, index){
+                    if(sheet_tremor[el.name] !== undefined) {
+                        $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append('<td>' + sheet_tremor[el.name][i] + '</td>');
+                    } else {
+                        $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append('<td>UNDEFINED</td>');
+                    }
+                });
             }
 
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                if(sheet_tremor.colSumNormalized.arr[i] !== undefined) {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumNormalized.arr[i] + "</td>");
-                } else if(sheet_tremor.colSumNormalized.arr.length === i){
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>avgNotesMusic=" + sheet_tremor.colSumNormalized.avgNotesMusic + "</td>");
-                } else if(sheet_tremor.colSumNormalized.arr.length + 1 === i){
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>stDevNotesMusic=" + sheet_tremor.colSumNormalized.stDevNotesMusic + "</td>");
-                } else {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
-                }
-            }
-
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td class='arrFftMagRawSmoothed'>" + sheet_tremor.arrFftMagRawSmoothed[i] + "</td>");
-            }
-
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td class='arrFftMagNormalizedSmoothed'>" + sheet_tremor.arrFftMagNormalizedSmoothed[i] + "</td>");
-            }
-
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                if(sheet_tremor.lowerAndHigherFreq_2[i] !== undefined) {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>freq=" + sheet_tremor.lowerAndHigherFreq_2[i].freq + "</br>power=" + sheet_tremor.lowerAndHigherFreq_2[i].power + "</td>");
-                } else {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
-                }
-            }
-
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                if(sheet_tremor.colSumSmoothed.arr[i] !== undefined) {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumSmoothed.arr[i] + "</td>");
-                } else if(sheet_tremor.colSumSmoothed.arr.length === i){
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>avgNotesMusic=" + sheet_tremor.colSumSmoothed.avgNotesMusic + "</td>");
-                } else if(sheet_tremor.colSumSmoothed.arr.length + 1 === i){
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>stDevNotesMusic=" + sheet_tremor.colSumSmoothed.stDevNotesMusic + "</td>");
-                } else {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
-                }
-            }
-
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                if(sheet_tremor.colSumSmthNormed.arr[i] !== undefined) {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumSmthNormed.arr[i] + "</td>");
-                } else if(sheet_tremor.colSumSmthNormed.arr.length === i){
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>avgNotesMusic=" + sheet_tremor.colSumSmthNormed.avgNotesMusic + "</td>");
-                } else if(sheet_tremor.colSumSmthNormed.arr.length + 1 === i){
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>stDevNotesMusic=" + sheet_tremor.colSumSmthNormed.stDevNotesMusic + "</td>");
-                } else {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
-                }
-            }
-
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                if(sheet_tremor.arrSumSmthNorm_1.arrResult[i] !== undefined) {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrSumSmthNorm_1.arrResult[i] + "</td>");
-                } else if(sheet_tremor.arrSumSmthNorm_1.arrResult.length === i){
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>avgNotesMusic=" + sheet_tremor.arrSumSmthNorm_1.avgNotesMusic + "</td>");
-                } else if(sheet_tremor.arrSumSmthNorm_1.arrResult.length + 1 === i){
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>stDevNotesMusic=" + sheet_tremor.arrSumSmthNorm_1.stDevNotesMusic + "</td>");
-                } else {
-                    $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
-                }
-            }
-
-            $('body #tab' + tab + ' .table1 tr.tremData').append('<td>' + sheet_tremor.maxConstAbs + '</td><td>' + sheet_tremor.maxConstAbs_NO + '</td><td>' + sheet_tremor.maxFreqMag + '</td><td>' + sheet_tremor.maxFreqMag_NO + '</td><td>' + sheet_tremor.averageConstAbs + '</td><td>' + sheet_tremor.averageConstAbs_NO + '</td><td>' + sheet_tremor.averageFreqMag + '</td><td>' + sheet_tremor.averageFreqMag_NO + '</td><td>' + sheet_tremor.averageD23_635 + '</td><td>' + sheet_tremor.stanDotClone + '</td>');
-
-            $('body #tab' + tab + ' .table1 tr.tremDataNext').append("<td>" + sheet_tremor.divisionAverageValuesFftMag_23_404_405_635 + "</td><td>" + sheet_tremor.divisionAverageValuesFftMag_23_329_329_635 + "</td><td>q3=" + sheet_tremor.quartileFftMag_23_635.q3 + "</br>max=" + sheet_tremor.quartileFftMag_23_635.max + "</td><td>" + sheet_tremor.divisionQuartOnMaxFftMag + "</td><td>" + sheet_tremor.division_q3_average + "</td>");
-
-            $('body #tab' + tab + ' .table1 tr.tremDataNext').append('<td>' + sheet_tremor.maxFreqMagDiff + '</td><td>' + sheet_tremor.maxFreqMagDiff_NO + '</td>');
-
-            $('body #tab' + tab + ' .table1 tr.tremDataNextNew').append('<td>' + sheet_tremor.objSolfg.sideralDay + '</td><td>' + sheet_tremor.objSolfg.liberating + '</td><td>' + sheet_tremor.objSolfg.breakemo + '</td><td>' + sheet_tremor.objSolfg.reprLove + '</td><td>' + sheet_tremor.objSolfg.connect + '</td><td>' + sheet_tremor.objSolfg.intuition + '</td><td>' + sheet_tremor.objSolfg.spirorder + '</td><td>' + sheet_tremor.objSolfg.mixSolft + '</td>');
-
-            $('body #tab' + tab + ' .table1 tr.tremDataNextNewNext').append('<td>' + sheet_tremor.powerOctaves + '</td><td>' + sheet_tremor.avgPowerOctaves + '</td><td>' + sheet_tremor.maxFftMagNormalized + '</td>');
-
-            $('body #tab' + tab + ' .table1 tr.tremDataNextNewNext').append('<td>' + sheet_tremor.totalMusicRaw + '</td><td>' + sheet_tremor.totalMusicRawStDev + '</td><td>' + sheet_tremor.totalMusicSmth + '</td><td>' + sheet_tremor.totalMusicSmthStDev + '</td><td>' + sheet_tremor.totalMusicRaw_Smth + '</td>');
-
-            // $('body #tab' + tab + ' .table1 tr.tremNextRow').append('<td>' + sheet_tremor.sumSmoothedStDev + '</td><td>' + sheet_tremor.sumNormalizedAvg + '</td><td>' + sheet_tremor.sumSmthNormedAvg + '</td>');
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody').append("<tr data-count=" + i + "><td>" + j + "</td><td>" + sheet_tremor.arrFftFreq[i] + "</td></tr>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftMag[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftComplex[i][0] + "</br>" + sheet_tremor.arrFftComplex[i][1] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstABS[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMag[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstABS_NO[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMag_NO[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstAbsNormal[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrConstAbsNormal_NO[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagNormal[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagNormal_NO[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiff[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiff_NO[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiffNormal[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFreqMagDiffNormal_NO[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrFftMagNormalized[i] + "</td>");
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     if(sheet_tremor.lowerAndHigherFreq_1[i] !== undefined) {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>freq=" + sheet_tremor.lowerAndHigherFreq_1[i].freq + "</br>power=" + sheet_tremor.lowerAndHigherFreq_1[i].power + "</td>");
+            //     } else {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
+            //     }
+            // }
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     if(sheet_tremor.colSumRaw.arr[i] !== undefined) {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumRaw.arr[i] + "</td>");
+            //     } else if(sheet_tremor.colSumRaw.arr.length === i){
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>avgNotesMusic=" + sheet_tremor.colSumRaw.avgNotesMusic + "</td>");
+            //     } else if(sheet_tremor.colSumRaw.arr.length + 1 === i){
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>stDevNotesMusic=" + sheet_tremor.colSumRaw.stDevNotesMusic + "</td>");
+            //     } else {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
+            //     }
+            // }
             //
-            // $('body #tab' + tab + ' .table1 tr.tremNextRow').append('<td>' + sheet_tremor.colSumSmthNorm_1Avg + '</td>');
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     if(sheet_tremor.colSumNormalized.arr[i] !== undefined) {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumNormalized.arr[i] + "</td>");
+            //     } else if(sheet_tremor.colSumNormalized.arr.length === i){
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>avgNotesMusic=" + sheet_tremor.colSumNormalized.avgNotesMusic + "</td>");
+            //     } else if(sheet_tremor.colSumNormalized.arr.length + 1 === i){
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>stDevNotesMusic=" + sheet_tremor.colSumNormalized.stDevNotesMusic + "</td>");
+            //     } else {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
+            //     }
+            // }
+            //
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td class='arrFftMagRawSmoothed'>" + sheet_tremor.arrFftMagRawSmoothed[i] + "</td>");
+            // }
+            //
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td class='arrFftMagNormalizedSmoothed'>" + sheet_tremor.arrFftMagNormalizedSmoothed[i] + "</td>");
+            // }
+            //
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     if(sheet_tremor.lowerAndHigherFreq_2[i] !== undefined) {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>freq=" + sheet_tremor.lowerAndHigherFreq_2[i].freq + "</br>power=" + sheet_tremor.lowerAndHigherFreq_2[i].power + "</td>");
+            //     } else {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
+            //     }
+            // }
+            //
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     if(sheet_tremor.colSumSmoothed.arr[i] !== undefined) {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumSmoothed.arr[i] + "</td>");
+            //     } else if(sheet_tremor.colSumSmoothed.arr.length === i){
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>avgNotesMusic=" + sheet_tremor.colSumSmoothed.avgNotesMusic + "</td>");
+            //     } else if(sheet_tremor.colSumSmoothed.arr.length + 1 === i){
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>stDevNotesMusic=" + sheet_tremor.colSumSmoothed.stDevNotesMusic + "</td>");
+            //     } else {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
+            //     }
+            // }
+            //
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     if(sheet_tremor.colSumSmthNormed.arr[i] !== undefined) {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.colSumSmthNormed.arr[i] + "</td>");
+            //     } else if(sheet_tremor.colSumSmthNormed.arr.length === i){
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>avgNotesMusic=" + sheet_tremor.colSumSmthNormed.avgNotesMusic + "</td>");
+            //     } else if(sheet_tremor.colSumSmthNormed.arr.length + 1 === i){
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>stDevNotesMusic=" + sheet_tremor.colSumSmthNormed.stDevNotesMusic + "</td>");
+            //     } else {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
+            //     }
+            // }
+            //
+            // for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
+            //     if(sheet_tremor.arrSumSmthNorm_1.arrResult[i] !== undefined) {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>" + sheet_tremor.arrSumSmthNorm_1.arrResult[i] + "</td>");
+            //     } else if(sheet_tremor.arrSumSmthNorm_1.arrResult.length === i){
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>avgNotesMusic=" + sheet_tremor.arrSumSmthNorm_1.avgNotesMusic + "</td>");
+            //     } else if(sheet_tremor.arrSumSmthNorm_1.arrResult.length + 1 === i){
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>stDevNotesMusic=" + sheet_tremor.arrSumSmthNorm_1.stDevNotesMusic + "</td>");
+            //     } else {
+            //         $('body #tab' + tab + ' .table2 tbody tr[data-count=' + i + ']').append("<td>_</td>");
+            //     }
+            // }
+
+            /* First Table */
+            $('body #tab' + tab + ' .table1 tr.tremData').append('<td>' + sheet_tremor.maxConstAbs + '</td><td>' + sheet_tremor.maxConstAbs_NO + '</td><td>' + sheet_tremor.maxFreqMag + '</td><td>' + sheet_tremor.maxFreqMag_NO + '</td><td>' + sheet_tremor.averageConstAbs + '</td><td>' + sheet_tremor.averageConstAbs_NO + '</td><td>' + sheet_tremor.averageFreqMag + '</td><td>' + sheet_tremor.averageFreqMag_NO + '</td><td>' + sheet_tremor.averageD23_635 + '</td><td>' + sheet_tremor.stanDotClone + '</td>');
+            $('body #tab' + tab + ' .table1 tr.tremDataNext').append("<td>" + sheet_tremor.divisionAverageValuesFftMag_23_404_405_635 + "</td><td>" + sheet_tremor.divisionAverageValuesFftMag_23_329_329_635 + "</td><td>q3=" + sheet_tremor.quartileFftMag_23_635.q3 + "</br>max=" + sheet_tremor.quartileFftMag_23_635.max + "</td><td>" + sheet_tremor.divisionQuartOnMaxFftMag + "</td><td>" + sheet_tremor.division_q3_average + "</td>");
+            $('body #tab' + tab + ' .table1 tr.tremDataNext').append('<td>' + sheet_tremor.maxFreqMagDiff + '</td><td>' + sheet_tremor.maxFreqMagDiff_NO + '</td>');
+            $('body #tab' + tab + ' .table1 tr.tremDataNextNew').append('<td>' + sheet_tremor.objSolfg.sideralDay + '</td><td>' + sheet_tremor.objSolfg.liberating + '</td><td>' + sheet_tremor.objSolfg.breakemo + '</td><td>' + sheet_tremor.objSolfg.reprLove + '</td><td>' + sheet_tremor.objSolfg.connect + '</td><td>' + sheet_tremor.objSolfg.intuition + '</td><td>' + sheet_tremor.objSolfg.spirorder + '</td><td>' + sheet_tremor.objSolfg.mixSolft + '</td>');
+            $('body #tab' + tab + ' .table1 tr.tremDataNextNewNext').append('<td>' + sheet_tremor.powerOctaves + '</td><td>' + sheet_tremor.avgPowerOctaves + '</td><td>' + sheet_tremor.maxFftMagNormalized + '</td>');
+            $('body #tab' + tab + ' .table1 tr.tremDataNextNewNext').append('<td>' + sheet_tremor.totalMusicRaw + '</td><td>' + sheet_tremor.totalMusicRawStDev + '</td><td>' + sheet_tremor.totalMusicSmth + '</td><td>' + sheet_tremor.totalMusicSmthStDev + '</td><td>' + sheet_tremor.totalMusicRaw_Smth + '</td>');
+            $('body #tab' + tab + ' .table1 tr.norm').append('<td>' + sheet_tremor.norm.avgPowerHigherOctaves + '</td><td>' + sheet_tremor.norm.avgPowerOctNo + '</td><td>' + sheet_tremor.norm.avgPowerDifScale + '</td><td>' + sheet_tremor.norm.avgPowerDifDifNoMore_1 + '</td><td>' + sheet_tremor.norm.avgPowerDifDifNo + '</td><td>' + sheet_tremor.norm.avgPowerDifAllScale + '</td>');
+            $('body #tab' + tab + ' .table1 tr.normScaled').append('<td>' + sheet_tremor.normScaled.avgPowerHigherOctaves + '</td><td>' + sheet_tremor.normScaled.avgPowerOctNo + '</td><td>' + sheet_tremor.normScaled.avgPowerDifScale + '</td><td>' + sheet_tremor.normScaled.avgPowerDifDifNo + '</td>');
 
             $('body #tab' + tab + '').show();
             $('body #tab' + tab + ' .table2 caption').text('Tremor ' + (tab - 3));
@@ -280,7 +286,7 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.get(apiUrl + '/calculations/last', function (data) {
+        $.get(apiUrl + '/calculations/' + infoId, function (data) {
 
             var tremorNegen = data.calcData.sheet_tremorNegentropicAlgorithm;
             var i, j, k, m;
@@ -323,26 +329,44 @@ $(document).ready(function() {
 
         $('body .phone_id_dropdown a').on('click', function(e){
             e.preventDefault();
+
             var id = $(this).data('id');
+
             $('.location_dropdown').html('');
             $('.time_dropdown').html('');
+            $('.tables-hav-holder').hide();
+            $('.tab-content .tab-pane').html('');
+
             data[id].locations.forEach(function(e, i){
                 $('.location_dropdown').append('<li><a href="#" data-location="'+ i +'">'+ e.location.latitude + ', ' + e.location.longitude +'</a></li>');
             });
 
             $('body .location_dropdown a').on('click', function(e){
                 e.preventDefault();
+
                 $('.time_dropdown').html('');
+                $('.tables-hav-holder').hide();
+                $('.tab-content .tab-pane').html('');
+
                 var location = $(this).data('location');
                 data[id].locations[location].arr_id.forEach(function(e, i){
                     var arr_id = e;
                     data[id].arr.forEach(function(e, i){
                         if(arr_id === e.id) {
-                            $('.time_dropdown').append('<li><a href="#" data-time="'+ i +'">'+ e.time +'</a></li>');
+                            $('.time_dropdown').append('<li><a href="#" data-time="'+ i +'" data-infoid="'+ e.id +'">'+ e.time +'</a></li>');
                         }
                     });
                 });
+
+                $('body .time_dropdown a').on('click', function(e){
+                    e.preventDefault();
+
+                    $('.tables-hav-holder').show().find('li a').removeAttr('aria-expanded').parent().removeClass('active');
+                    $('.tab-content .tab-pane').html('');
+                    infoId = $(this).data('infoid');
+                });
             });
+
         });
 
     });
