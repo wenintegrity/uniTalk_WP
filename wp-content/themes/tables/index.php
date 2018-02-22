@@ -27,19 +27,19 @@ Template Name: Table template page
     <div class="col-md-12">
         <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Phone ID <span class="caret"></span></button>
+                    aria-expanded="false">Phone ID <span id="phone-val"></span> <span class="caret"></span></button>
             <ul class="dropdown-menu phone_id_dropdown">
             </ul>
         </div>
         <div class="btn-group">
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Location <span class="caret"></span></button>
+                    aria-expanded="false">Location <span id="location-val"><span class="caret"></span></button>
             <ul class="dropdown-menu location_dropdown">
             </ul>
         </div>
         <div class="btn-group">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Time <span class="caret"></span></button>
+                    aria-expanded="false">Time <span id="time-val"><span class="caret"></span></button>
             <ul class="dropdown-menu time_dropdown">
             </ul>
         </div>
