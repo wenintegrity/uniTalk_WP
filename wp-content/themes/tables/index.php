@@ -173,71 +173,36 @@ Template Name: Table template page
         </div>
         <div class="tremor-snippet">
             <table class="table table1">
-
-                <th>maxConstAbs</th>
-                <th>maxConstAbs_NO</th>
-                <th>maxFreqMag</th>
-                <th>maxFreqMag_NO</th>
-                <th>averageConstAbs</th>
-                <th>averageConstAbs_NO</th>
-                <th>averageFreqMag</th>
-                <th>averageFreqMag_NO</th>
-                <th>averageD23_635</th>
-                <th>stanDotClone</th>
-                <tr class="tremData">
-
-                </tr>
-                <th>divisionAverageValues</br>FftMag_23_404_405_635</th>
-                <th>divisionAverageValues</br>FftMag_23_329_329_635</th>
-                <th>quartileFftMag_23_635</th>
-                <th>divisionQuartOnMaxFftMag</th>
-                <th>division_q3_average</th>
-                <th>maxFreqMagDiff</th>
-                <th>maxFreqMagDiff_NO</th>
-                <tr class="tremDataNext">
-
-                </tr>
-                <th>sideralDay</th>
-                <th>liberating</th>
-                <th>breakemo</th>
-                <th>reprLove</th>
-                <th>connect</th>
-                <th>intuition</th>
-                <th>spirorder</th>
-                <th>mixSolft</th>
-                <tr class="tremDataNextNew"></tr>
-
-                <th>powerOctaves</th>
-                <th>avgPowerOctaves</th>
-                <th>maxFftMagNormalized</th>
-                <th>totalMusicRaw</th>
-                <th>totalMusicRawStDev</th>
-                <th>totalMusicSmth</th>
-                <th>totalMusicSmthStDev</th>
-                <th>totalMusicRaw_Smth</th>
-
-                <tr class="tremDataNextNewNext"></tr>
-
-                <tr>
-                    <th>norm_avgPowerHigherOctaves</th>
-                    <th>norm_avgPowerOctNo</th>
-                    <th>norm_avgPowerDifScale</th>
-                    <th>norm_avgPowerDifDifNoMore_1</th>
-                    <th>norm_avgPowerDifDifNo</th>
-                    <th>norm_avgPowerDifAllScale</th>
-                </tr>
-                <tr class="norm"></tr>
-
-                <tr>
-                    <th>normScaled_avgPowerHigherOctaves</th>
-                    <th>normScaled_avgPowerOctNo</th>
-                    <th>normScaled_avgPowerDifScale</th>
-                    <th>normScaled_avgPowerDifDifNo</th>
-                </tr>
-                <tr class="normScaled"></tr>
-
+                <tr class="norm-headers"></tr>
+                <tr class="norm-values"></tr>
+                <tr class="normScaled-headers"></tr>
+                <tr class="normScaled-values"></tr>
+                <tr class="max-headers"></tr>
+                <tr class="max-values"></tr>
+                <tr class="average-headers"></tr>
+                <tr class="average-values"></tr>
             </table>
             <table class="table table2">
+                <caption>totalMusic</caption>
+                <thead><tr></tr></thead>
+                <tbody><tr></tr></tbody>
+            </table>
+            <table class="table table3">
+                <caption>musicalHarmonics</caption>
+                <thead><tr></tr></thead>
+                <tbody><tr></tr></tbody>
+            </table>
+            <table class="table table4">
+                <caption>allFftData</caption>
+                <thead><tr></tr></thead>
+                <tbody><tr></tr></tbody>
+            </table>
+            <table class="table table5">
+                <caption>colSum</caption>
+                <thead><tr></tr></thead>
+                <tbody></tbody>
+            </table>
+            <table class="table table6">
                 <caption>Tremor 1</caption>
                 <thead>
                 <tr>
