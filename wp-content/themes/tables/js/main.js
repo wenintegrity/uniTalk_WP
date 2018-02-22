@@ -92,7 +92,7 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.get(apiUrl + '/calculations/' + infoId, function (data) {
+        $.get(apiUrl + '/calculations/5a8ea7866a5df29df5715d70' /*+ infoId*/, function (data) {
 
             var sheet_tremor;
 
@@ -192,6 +192,24 @@ $(document).ready(function() {
                 data.calcData.headers_sheet_tremorSpectrum.forEach(function(el, index){
                     if(sheet_tremor[el.name] !== undefined) {
                         $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>' + sheet_tremor[el.name][i] + '</td>');
+                    } else if (el.name === 'lowerAndHigher.freq_1'){
+                        if(sheet_tremor.lowerAndHigher.freq_1.arr[i] !== undefined) {
+                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>freq=' + sheet_tremor.lowerAndHigher.freq_1.arr[i].freq + '<br>power=' + sheet_tremor.lowerAndHigher.freq_1.arr[i].power + '<br>note=' + sheet_tremor.lowerAndHigher.freq_1.arr[i].note + '</td>');
+                        } else {
+                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>N/A</td>');
+                        }
+                    } else if (el.name === 'lowerAndHigher.freq_2'){
+                        if(sheet_tremor.lowerAndHigher.freq_2.arr[i] !== undefined) {
+                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>freq=' + sheet_tremor.lowerAndHigher.freq_2.arr[i].freq + '<br>power=' + sheet_tremor.lowerAndHigher.freq_2.arr[i].power + '<br>note=' + sheet_tremor.lowerAndHigher.freq_2.arr[i].note + '</td>');
+                        } else {
+                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>N/A</td>');
+                        }
+                    } else if (el.name === 'lowerAndHigher.freq_3'){
+                        if(sheet_tremor.lowerAndHigher.freq_3.arr[i] !== undefined) {
+                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>freq=' + sheet_tremor.lowerAndHigher.freq_3.arr[i].freq + '<br>power=' + sheet_tremor.lowerAndHigher.freq_3.arr[i].power + '<br>note=' + sheet_tremor.lowerAndHigher.freq_3.arr[i].note + '</td>');
+                        } else {
+                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>N/A</td>');
+                        }
                     } else {
                         $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>UNDEFINED</td>');
                     }
