@@ -33,13 +33,13 @@ Template Name: Table template page
         </div>
         <div class="btn-group">
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Location <span id="location-val"><span class="caret"></span></button>
+                    aria-expanded="false">Location <span id="location-val"></span> <span class="caret"></span></button>
             <ul class="dropdown-menu location_dropdown">
             </ul>
         </div>
         <div class="btn-group">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Time <span id="time-val"><span class="caret"></span></button>
+                    aria-expanded="false">Time <span id="time-val"></span> <span class="caret"></span></button>
             <ul class="dropdown-menu time_dropdown">
             </ul>
         </div>
@@ -159,16 +159,17 @@ Template Name: Table template page
             <table class="table table2">
                 <caption>DATA 1</caption>
                 <thead>
-                <tr>
-                    <th>row</th>
-                    <th>time</th>
-                    <th>iPad</th>
-                    <th>outMic0ed</th>
-                    <th>outMicFiltered</th>
-                    <th>outMicNrmalz</th>
-                    <th>outMicM50</th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>time</th>
+                        <th>iPad</th>
+                        <th>outMic0ed</th>
+                        <th>outMicFiltered</th>
+                        <th>outMicNrmalz</th>
+                        <th>outMicM50</th>
+                    </tr>
                 </thead>
+                <tbody></tbody>
             </table>
         </div>
         <div class="tremor-snippet">
@@ -206,7 +207,7 @@ Template Name: Table template page
                 <caption>Tremor 1</caption>
                 <thead>
                 <tr>
-                    <th>Row</th>
+                    <th>ID</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

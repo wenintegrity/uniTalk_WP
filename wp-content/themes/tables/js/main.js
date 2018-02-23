@@ -32,12 +32,6 @@ $(document).ready(function() {
 
             $('body #tab' + tab + ' .download-data-btn').attr('href', makeTextFile(JSON.stringify(data.reqBody.data)));
 
-            var i, j;
-
-            for (i = 0, j = 1; i < sheet_data.arrElements.length; i++, j++) {
-                $('body #tab' + tab + ' .table2').append("<tr><td>" + j + "</td><td>" + sheet_data.arrElements[i].time + "</td><td>" + sheet_data.arrElements[i].iPad + "</td><td>" + sheet_data.arrElements[i].outMic0ed + "</td><td>" + sheet_data.arrElements[i].outMicFiltered + "</td><td>" + sheet_data.arrElements[i].outMicNrmalz + "</td><td>" + sheet_data.arrElements[i].outMicM50 + "</td></tr>");
-            }
-
             $('body #tab' + tab + ' .table1 .count.forIPad').append(sheet_data.quartileForIPad.num);
             $('body #tab' + tab + ' .table1 .median.forIPad').append(sheet_data.quartileForIPad.median);
             $('body #tab' + tab + ' .table1 .threequartile.forIPad').append(sheet_data.quartileForIPad.q3);
@@ -72,10 +66,26 @@ $(document).ready(function() {
 
             $('body #tab' + tab).show();
             $('body #tab' + tab + ' .table2 caption').text('DATA ' + tab);
-            datatable = $('body #tab' + tab + ' .table1, #tab' + tab + ' .table2').DataTable({
+            datatable = $('body #tab' + tab + ' .table1').DataTable({
                 fixedHeader: true,
                 "searching": true,
                 pageLength: 50
+            });
+            datatable = $('#tab' + tab + ' .table2').DataTable({
+                fixedHeader: true,
+                "searching": true,
+                pageLength: 50,
+                "processing": true,
+                data: sheet_data.arrElements,
+                "columns": [
+                    { "data": "id" },
+                    { "data": "time" },
+                    { "data": "iPad" },
+                    { "data": "outMic0ed" },
+                    { "data": "outMicFiltered" },
+                    { "data": "outMicNrmalz" },
+                    { "data": "outMicM50" }
+                ]
             });
 
         });
@@ -92,7 +102,7 @@ $(document).ready(function() {
             datatable.fixedHeader.disable();
         }
 
-        $.get(apiUrl + '/calculations/5a8ea7866a5df29df5715d70' /*+ infoId*/, function (data) {
+        $.get(apiUrl + '/calculations/' + infoId, function (data) {
 
             var sheet_tremor;
 
@@ -179,52 +189,48 @@ $(document).ready(function() {
             }
 
             /* Table 6 */
-            var i, j, k, l;
+            var i, j;
 
             for (i = 0, j = 1; i < data.calcData.headers_sheet_tremorSpectrum.length; i++, j++) {
                 $('body #tab' + tab + ' .table6 thead tr').append("<th>" + data.calcData.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
-            }
-
-            var tremor_rows_count = sheet_tremor.arrFftComplex.length;
-
-            for (i = 0, j = 1; i < tremor_rows_count; i++, j++) {
-                $('body #tab' + tab + ' .table6 tbody').append("<tr data-count=" + i + "><td>"+ j +"</td></tr>");
-                data.calcData.headers_sheet_tremorSpectrum.forEach(function(el, index){
-                    if(sheet_tremor[el.name] !== undefined) {
-                        $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>' + sheet_tremor[el.name][i] + '</td>');
-                    } else if (el.name === 'lowerAndHigher.freq_1'){
-                        if(sheet_tremor.lowerAndHigher.freq_1.arr[i] !== undefined) {
-                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>freq=' + sheet_tremor.lowerAndHigher.freq_1.arr[i].freq + '<br>power=' + sheet_tremor.lowerAndHigher.freq_1.arr[i].power + '<br>note=' + sheet_tremor.lowerAndHigher.freq_1.arr[i].note + '</td>');
-                        } else {
-                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>N/A</td>');
-                        }
-                    } else if (el.name === 'lowerAndHigher.freq_2'){
-                        if(sheet_tremor.lowerAndHigher.freq_2.arr[i] !== undefined) {
-                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>freq=' + sheet_tremor.lowerAndHigher.freq_2.arr[i].freq + '<br>power=' + sheet_tremor.lowerAndHigher.freq_2.arr[i].power + '<br>note=' + sheet_tremor.lowerAndHigher.freq_2.arr[i].note + '</td>');
-                        } else {
-                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>N/A</td>');
-                        }
-                    } else if (el.name === 'lowerAndHigher.freq_3'){
-                        if(sheet_tremor.lowerAndHigher.freq_3.arr[i] !== undefined) {
-                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>freq=' + sheet_tremor.lowerAndHigher.freq_3.arr[i].freq + '<br>power=' + sheet_tremor.lowerAndHigher.freq_3.arr[i].power + '<br>note=' + sheet_tremor.lowerAndHigher.freq_3.arr[i].note + '</td>');
-                        } else {
-                            $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>N/A</td>');
-                        }
-                    } else {
-                        $('body #tab' + tab + ' .table6 tbody tr[data-count=' + i + ']').append('<td>UNDEFINED</td>');
-                    }
-                });
             }
 
             /***********/
 
             $('body #tab' + tab).show();
             $('body #tab' + tab + ' .table6 caption').text('Tremor ' + (tab - 3));
+
             datatable = $('body #tab' + tab + ' .table6').DataTable({
                 fixedHeader: true,
-                "searching": false,
-                "scrollX": true,
-                pageLength: 50
+                "searching": true,
+                pageLength: 50,
+                "processing": true,
+                data: sheet_tremor.mainTable,
+                "columns": [
+                    { "data": "id" },
+                    { "data": "fftFreq" },
+                    { "data": "fftMag" },
+                    { "data": "fftComplex[, ]" },
+                    { "data": "constants" },
+                    { "data": "freqMagScaleNormalizedData" },
+                    { "data": "freqMagInDifLess_1" },
+                    { "data": "freqMagInDifMore_1" },
+                    { "data": "constABSDifHarmoniMore_1" },
+                    { "data": "freqMag_NO" },
+                    { "data": "constAbsDifHarmoniNormalLess_1" },
+                    { "data": "freqMagNormalMore_1" },
+                    { "data": "constAbsDifHarmoniNormalMore_1" },
+                    { "data": "freqMagNormalLess_1" },
+                    { "data": "freqMagInDifLess_12_More_8" },
+                    { "data": "freqMagDifDiffLess_1" },
+                    { "data": "freqMagDifDiff_NO" },
+                    { "data": "freqMagDifDiffNormal" },
+                    { "data": "freqMagDifDiffNormal_NO" },
+                    { "data": "fftMagNormalized" },
+                    { "data": "fftNote" },
+                    { "data": "fftMagRawSmoothed" },
+                    { "data": "fftMagNormalizedSmoothed" }
+                ]
             });
         });
     });
