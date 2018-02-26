@@ -208,6 +208,7 @@ $(document).ready(function() {
                 data: sheet_tremor.mainTable,
                 "columns": [
                     { "data": "id" },
+                    { "data": "outMicM50" },
                     { "data": "fftFreq" },
                     { "data": "fftMag" },
                     { "data": "fftComplex[, ]" },
@@ -228,8 +229,35 @@ $(document).ready(function() {
                     { "data": "freqMagDifDiffNormal_NO" },
                     { "data": "fftMagNormalized" },
                     { "data": "fftNote" },
+                    { "data": "lowerAndHigherFreq_1", render: function(data, type, full, meta){
+                        var res = null;
+                        if(data) {
+                            res = 'freq=' + data.freq + '<br>' +
+                                'power=' + data.power + '<br>' +
+                                'note=' + data.note;
+                        }
+                        return res;
+                    } },
+                    { "data": "lowerAndHigherFreq_2", render: function(data, type, full, meta){
+                        var res = null;
+                        if(data) {
+                            res = 'freq=' + data.freq + '<br>' +
+                                'power=' + data.power + '<br>' +
+                                'note=' + data.note;
+                        }
+                        return res;
+                    } },
                     { "data": "fftMagRawSmoothed" },
-                    { "data": "fftMagNormalizedSmoothed" }
+                    { "data": "fftMagNormalizedSmoothed" },
+                    { "data": "lowerAndHigherFreq_3", render: function(data, type, full, meta){
+                        var res = null;
+                        if(data) {
+                            res = 'freq=' + data.freq + '<br>' +
+                                'power=' + data.power + '<br>' +
+                                'note=' + data.note;
+                        }
+                        return res;
+                    } }
                 ]
             });
         });
@@ -285,31 +313,29 @@ $(document).ready(function() {
                 }
 
                 if(tremorNegen[k].result !== undefined) {
-                    // for (m = 0; m < tremorNegen[k].result.length; m++) {
-                        $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
-                            "<td>" + tremorNegen[k].result[0] + "</td>" +
-                            "<td>" + tremorNegen[k].result[1]+ "</td></tr>");
-                    // }
+                    $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
+                        "<td>" + tremorNegen[k].result[0] + "</td>" +
+                        "<td>" + tremorNegen[k].result[1]+ "</td></tr>");
                 }
                 if(tremorNegen[k].result_1 !== undefined) {
-                    // for (m = 0; m < tremorNegen[k].result_1.length; m++) {
-                        $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
-                            "<td>" + tremorNegen[k].result_1[0] + "</td>" +
-                            "<td>" + tremorNegen[k].result_1[1] + "</td></tr>");
-                    // }
+                    $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
+                        "<td>" + tremorNegen[k].result_1[0] + "</td>" +
+                        "<td>" + tremorNegen[k].result_1[1] + "</td></tr>");
                 }
                 if(tremorNegen[k].result_2 !== undefined) {
-                    // for (m = 0; m < tremorNegen[k].result_2.length; m++) {
-                        $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
-                            "<td>" + tremorNegen[k].result_2[0] + "</td>" +
-                            "<td>" + tremorNegen[k].result_2[1] + "</td></tr>");
-                    // }
+                    $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
+                        "<td>" + tremorNegen[k].result_2[0] + "</td>" +
+                        "<td>" + tremorNegen[k].result_2[1] + "</td></tr>");
                 }
 
             }
 
+            for(var res_item in data.calcData.result){
+                $('body #tab' + tab + ' .negentropic-result tbody tr').append('<td>'+ data.calcData.result[res_item] +'</td>');
+            }
+
             $('body #tab' + tab).show();
-            datatable = $('body #tab' + tab + ' .table').DataTable({
+            datatable = $('body #tab' + tab + ' .table.negentropic').DataTable({
                 fixedHeader: true,
                 "searching": false,
                 pageLength: 10

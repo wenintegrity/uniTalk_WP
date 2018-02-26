@@ -214,7 +214,7 @@ Template Name: Table template page
             </table>
         </div>
         <div class="negentropic-snippet">
-            <table class="table negentropic0 table-bordered">
+            <table class="table negentropic negentropic0 table-bordered">
                 <thead>
                 <tr>
                     <th>title</th>
@@ -224,7 +224,7 @@ Template Name: Table template page
                 </thead>
             </table>
 
-            <table class="table negentropic1 table-bordered">
+            <table class="table negentropic negentropic1 table-bordered">
                 <thead>
                 <tr>
                     <th>title</th>
@@ -233,7 +233,7 @@ Template Name: Table template page
                 </tr>
                 </thead>
             </table>
-            <table class="table negentropic2 table-bordered">
+            <table class="table negentropic negentropic2 table-bordered">
                 <thead>
                 <tr>
                     <th>title</th>
@@ -242,7 +242,7 @@ Template Name: Table template page
                 </tr>
                 </thead>
             </table>
-            <table class="table negentropic3 table-bordered">
+            <table class="table negentropic negentropic3 table-bordered">
                 <thead>
                 <tr>
                     <th>title</th>
@@ -252,7 +252,7 @@ Template Name: Table template page
                 </thead>
             </table>
 
-            <table class="table negentropic4 table-bordered">
+            <table class="table negentropic negentropic4 table-bordered">
                 <thead>
                 <tr>
                     <th>title</th>
@@ -261,7 +261,7 @@ Template Name: Table template page
                 </tr>
                 </thead>
             </table>
-            <table class="table negentropic5 table-bordered">
+            <table class="table negentropic negentropic5 table-bordered">
                 <thead>
                 <tr>
                     <th>title</th>
@@ -270,7 +270,7 @@ Template Name: Table template page
                 </tr>
                 </thead>
             </table>
-            <table class="table negentropic6 table-bordered">
+            <table class="table negentropic negentropic6 table-bordered">
                 <thead>
                 <tr>
                     <th>title</th>
@@ -279,6 +279,15 @@ Template Name: Table template page
                 </tr>
                 </thead>
             </table>
+            <div class="col-md-6">
+            <table class="table negentropic-result table-bordered">
+                <tbody>
+                <tr>
+                    <th>Result:</th>
+                </tr>
+                </tbody>
+            </table>
+            </div>
         </div>
     </div>
 
