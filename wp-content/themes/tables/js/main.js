@@ -206,6 +206,13 @@ $(document).ready(function() {
                 pageLength: 50,
                 "processing": true,
                 data: sheet_tremor.mainTable,
+                "columnDefs": [
+                    {
+                        "targets": '_all',
+                        "data": null,
+                        "defaultContent": ""
+                    }
+                ],
                 "columns": [
                     { "data": "id" },
                     { "data": "outMicM50" },
@@ -229,7 +236,7 @@ $(document).ready(function() {
                     { "data": "freqMagDifDiffNormal_NO" },
                     { "data": "fftMagNormalized" },
                     { "data": "fftNote" },
-                    { "data": "lowerAndHigherFreq_1", render: function(data, type, full, meta){
+                    { "data": "lowerAndHigherFreq_1", render: function(data){
                         var res = null;
                         if(data) {
                             res = 'freq=' + data.freq + '<br>' +
@@ -238,7 +245,7 @@ $(document).ready(function() {
                         }
                         return res;
                     } },
-                    { "data": "lowerAndHigherFreq_2", render: function(data, type, full, meta){
+                    { "data": "lowerAndHigherFreq_2", render: function(data){
                         var res = null;
                         if(data) {
                             res = 'freq=' + data.freq + '<br>' +
@@ -249,7 +256,7 @@ $(document).ready(function() {
                     } },
                     { "data": "fftMagRawSmoothed" },
                     { "data": "fftMagNormalizedSmoothed" },
-                    { "data": "lowerAndHigherFreq_3", render: function(data, type, full, meta){
+                    { "data": "lowerAndHigherFreq_3", render: function(data){
                         var res = null;
                         if(data) {
                             res = 'freq=' + data.freq + '<br>' +
