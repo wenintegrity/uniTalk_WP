@@ -25,12 +25,7 @@ $(document).ready(function() {
                 sheet_data = data.calcData.sheet_data_3;
             }
 
-            function makeTextFile(text) {
-                var data = new Blob([text], {type: 'text/plain'});
-                return window.URL.createObjectURL(data);
-            }
-
-            $('body #tab' + tab + ' .download-data-btn').attr('href', makeTextFile(JSON.stringify(data.reqBody.data)));
+            $('body #tab' + tab + ' .download-data-btn').attr('href', apiUrl + '/calculations/' + infoId + '/data/' + tab);
 
             $('body #tab' + tab + ' .table1 .count.forIPad').append(sheet_data.quartileForIPad.num);
             $('body #tab' + tab + ' .table1 .median.forIPad').append(sheet_data.quartileForIPad.median);
