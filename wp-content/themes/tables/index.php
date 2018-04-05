@@ -19,6 +19,20 @@ Template Name: Table template page
         .dataTables_wrapper:first-child {
             border: none;
         }
+
+        /*.dropdown-submenu{position:relative;}*/
+        /*.dropdown-submenu>.dropdown-menu{top:0;left: 100%;max-width:180px;margin-top:-6px;margin-right:-1px;-webkit-border-radius:6px 6px 6px 6px;-moz-border-radius:6px 6px 6px 6px;border-radius:6px 6px 6px 6px;}*/
+        /*.dropdown-submenu:hover>.dropdown-menu{display: inherit;!* right: inherit; *!}*/
+        /*!*.dropdown-submenu>a:after{display:block;content:" ";float:left;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 5px 5px 0;border-right-color:#999;margin-top:5px;margin-right:10px;}*!*/
+        /*.dropdown-submenu:hover>a:after{border-left-color:#ffffff;}*/
+        /*.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 6px 6px 6px;-moz-border-radius:6px 6px 6px 6px;border-radius:6px 6px 6px 6px;}*/
+        /*.dropdown-menu-right {margin-left:0;}*/
+
+        /*.dropdown-menu-right {*/
+            /*right:inherit !important;*/
+            /*left: auto;*/
+        /*}*/
+
     </style>
 
 <div class="row">
@@ -26,22 +40,55 @@ Template Name: Table template page
     <div class="col-md-12">
         <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Phone ID <span id="phone-val"></span> <span class="caret"></span></button>
-            <ul class="dropdown-menu phone_id_dropdown">
+                    aria-expanded="false">Username <span id="username-val"></span> <span class="caret"></span></button>
+            <ul class="dropdown-menu username_dropdown">
+<!--                <li><a href="#">Action</a></li>-->
+<!--                <li><a href="#">Another action</a></li>-->
+<!--                <li><a href="#">Something else here</a></li>-->
+<!--                <li class="dropdown-submenu dropdown-menu-right">-->
+<!--                    <a tabindex="-1" href="#">More options</a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a tabindex="-1" href="#">Second level</a></li>-->
+<!--                        <li class="dropdown-submenu">-->
+<!--                            <a href="#">More..</a>-->
+<!--                            <ul class="dropdown-menu">-->
+<!--                                <li><a href="#">3rd level</a></li>-->
+<!--                                <li><a href="#">3rd level</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                        <li><a href="#">Second level</a></li>-->
+<!--                        <li><a href="#">Second level</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
             </ul>
         </div>
         <div class="btn-group">
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Location <span id="location-val"></span> <span class="caret"></span></button>
-            <ul class="dropdown-menu location_dropdown">
+                    aria-expanded="false">Session <span id="session-val"></span> <span class="caret"></span></button>
+            <ul class="dropdown-menu session_dropdown">
             </ul>
         </div>
         <div class="btn-group">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Time <span id="time-val"></span> <span class="caret"></span></button>
-            <ul class="dropdown-menu time_dropdown">
+                    aria-expanded="false">Sample <span id="sample-val"></span> <span class="caret"></span></button>
+            <ul class="dropdown-menu sample_dropdown">
             </ul>
         </div>
+        <div class="btn-group btn-group-sm">
+            <button type="button" class="btn btn-default show-info-btn hidden" data-toggle="modal" data-target="#showInfo">Show info</button>
+        </div>
+
+        <div id="showInfo" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="col-md-12 tables-hav-holder" style="display: none">

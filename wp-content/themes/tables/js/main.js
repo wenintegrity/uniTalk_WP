@@ -18,11 +18,11 @@ $(document).ready(function() {
             var sheet_data;
 
             if(tab === 1) {
-                sheet_data = data.calcData.sheet_data_1;
+                sheet_data = data.res.sheet_data_1;
             } else if(tab === 2) {
-                sheet_data = data.calcData.sheet_data_2;
+                sheet_data = data.res.sheet_data_2;
             } else {
-                sheet_data = data.calcData.sheet_data_3;
+                sheet_data = data.res.sheet_data_3;
             }
 
             $('body #tab' + tab + ' .download-data-btn').attr('href', apiUrl + '/calculations/' + infoId + '/data/' + tab);
@@ -102,11 +102,11 @@ $(document).ready(function() {
             var sheet_tremor;
 
             if(tab === 4) {
-                sheet_tremor = data.calcData.sheet_tremorSpectrum_1;
+                sheet_tremor = data.res.sheet_tremorSpectrum_1;
             } else if(tab === 5) {
-                sheet_tremor = data.calcData.sheet_tremorSpectrum_2;
+                sheet_tremor = data.res.sheet_tremorSpectrum_2;
             } else {
-                sheet_tremor = data.calcData.sheet_tremorSpectrum_3;
+                sheet_tremor = data.res.sheet_tremorSpectrum_3;
             }
 
             /* Table 1 */
@@ -186,8 +186,8 @@ $(document).ready(function() {
             /* Table 6 */
             var i, j;
 
-            for (i = 0, j = 1; i < data.calcData.headers_sheet_tremorSpectrum.length; i++, j++) {
-                $('body #tab' + tab + ' .table6 thead tr').append("<th>" + data.calcData.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
+            for (i = 0, j = 1; i < data.res.headers_sheet_tremorSpectrum.length; i++, j++) {
+                $('body #tab' + tab + ' .table6 thead tr').append("<th>" + data.res.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
             }
 
             /***********/
@@ -279,7 +279,7 @@ $(document).ready(function() {
 
         $.get(apiUrl + '/calculations/' + infoId, function (data) {
 
-            var tremorNegen = data.calcData.sheet_tremorNegentropicAlgorithm;
+            var tremorNegen = data.res.sheet_tremorNegentropicAlgorithm;
             var i, j, k, m;
 
             for (k = 0; k < tremorNegen.length; k++) {
@@ -332,8 +332,8 @@ $(document).ready(function() {
 
             }
 
-            for(var res_item in data.calcData.result){
-                $('body #tab' + tab + ' .negentropic-result tbody tr').append('<td>'+ data.calcData.result[res_item] +'</td>');
+            for(var res_item in data.res.result){
+                $('body #tab' + tab + ' .negentropic-result tbody tr').append('<td>'+ data.res.result[res_item] +'</td>');
             }
 
             $('body #tab' + tab).show();
@@ -346,60 +346,72 @@ $(document).ready(function() {
 
     });
 
-    $.get(apiUrl + '/calculations/all_info', function (data) {
+    $.get(apiUrl + '/users/all', function (data) {
+
         for(var item in data) {
-            $('.phone_id_dropdown').append('<li><a href="#" data-id="'+ item +'">'+ item +'</a></li>');
+            $('.username_dropdown').append('<li><a href="#" data-id="'+ data[item]._id +'">'+ data[item].email +'</a></li>');
         }
 
-        $('body .phone_id_dropdown a').on('click', function(e){
+        $('body .username_dropdown a').on('click', function(e){
             e.preventDefault();
 
-            var id = $(this).data('id');
+            var user_id = $(this).data('id');
 
-            $('#phone-val').text(id);
-            $('#location-val').text('');
-            $('#time-val').text('');
-            $('.location_dropdown').html('');
-            $('.time_dropdown').html('');
+            $('#username-val').text($(this).text());
+            $('#session-val').text('');
+            $('#sample-val').text('');
+            $('.session_dropdown').html('');
+            $('.sample_dropdown').html('');
             $('.tables-hav-holder').hide();
             $('.tab-content .tab-pane').html('');
+            $('.show-info-btn').addClass('hidden');
+            $('#showInfo .modal-body').html('');
 
-            data[id].locations.forEach(function(e, i){
-                $('.location_dropdown').append('<li><a href="#" data-location="'+ i +'">'+ e.location.latitude + ', ' + e.location.longitude +'</a></li>');
-            });
+            $.get(apiUrl + '/users/' + user_id + '/sessions', function (data) {
+                for(var item in data) {
+                    $('.session_dropdown').append('<li><a href="#" data-id="'+ data[item]._id +'">'+ data[item]._id+'</a></li>');
+                }
 
-            $('body .location_dropdown a').on('click', function(e){
-                e.preventDefault();
-
-                $('#location-val').text($(this).text());
-                $('#time-val').text('');
-                $('.time_dropdown').html('');
-                $('.tables-hav-holder').hide();
-                $('.tab-content .tab-pane').html('');
-
-                var location = $(this).data('location');
-                data[id].locations[location].arr_id.forEach(function(e, i){
-                    var arr_id = e;
-                    data[id].arr.forEach(function(e, i){
-                        if(arr_id === e.id) {
-                            $('.time_dropdown').append('<li><a href="#" data-time="'+ i +'" data-infoid="'+ e.id +'">'+ e.time +'</a></li>');
-                        }
-                    });
-                });
-
-                $('body .time_dropdown a').on('click', function(e){
+                $('body .session_dropdown a').on('click', function(e){
                     e.preventDefault();
 
-                    $('#time-val').text($(this).text());
+                    var session_id = $(this).data('id');
 
-                    $('.tables-hav-holder').show().find('li a').removeAttr('aria-expanded').parent().removeClass('active');
+                    $('#session-val').text($(this).text());
+                    $('#sample-val').text('');
+                    $('.sample_dropdown').html('');
+                    $('.tables-hav-holder').hide();
                     $('.tab-content .tab-pane').html('');
-                    infoId = $(this).data('infoid');
+                    $('.show-info-btn').addClass('hidden');
+                    $('#showInfo .modal-body').html('');
+
+                    $.get(apiUrl + '/sessions/' + session_id, function (data) {
+                        for(var item in data) {
+                            $('body .sample_dropdown').append('<li><a href="#" data-time="'+ data[item].req.time +'" data-location="'+ data[item].req.location.latitude + ',' + data[item].req.location.longitude + '" data-id="'+ data[item]._id +'">'+ data[item].req.location.latitude + ',' + data[item].req.location.longitude + ', ' + data[item].req.time +'</a></li>');
+                        }
+
+                        $('body .sample_dropdown a').on('click', function(e){
+                            e.preventDefault();
+
+                            $('#sample-val').text($(this).text());
+
+                            $('.tables-hav-holder').show().find('li a').removeAttr('aria-expanded').parent().removeClass('active');
+                            $('.tab-content .tab-pane').html('');
+                            $('.show-info-btn').removeClass('hidden');
+
+                            $('#showInfo .modal-body').html('');
+                            $('#showInfo .modal-body')
+                                .append('<p>Location: ' + $(this).data('location') + '</p>')
+                                .append('<p>Time: ' + $(this).data('time') + '</p>');
+
+                            infoId = $(this).data('id');
+                        });
+                    });
                 });
             });
-
         });
-
     });
+
+
 
 } );
