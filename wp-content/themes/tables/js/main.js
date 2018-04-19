@@ -118,6 +118,7 @@ $(document).ready(function() {
                 '</tr>');
 
             function showSimpleTableByItems(arr) {
+                $('.simple-tables-container').html('');
                 arr.forEach(function (item) {
                     $('.simple-tables-container').append('<table class="table table-'+ item +'">' +
                         '                <caption>' + item + '</caption>' +
