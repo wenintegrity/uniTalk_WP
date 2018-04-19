@@ -229,6 +229,16 @@ Template Name: Table template page
                 <tr class="average-headers"></tr>
                 <tr class="average-values"></tr>
             </table>
+            <table class="table table-norm">
+                <caption>Norm</caption>
+                <thead><tr></tr></thead>
+                <tbody><tr></tr></tbody>
+            </table>
+            <table class="table table-normscaled">
+                <caption>Norm Scaled</caption>
+                <thead><tr></tr></thead>
+                <tbody><tr></tr></tbody>
+            </table>
             <table class="table table2">
                 <caption>totalMusic</caption>
                 <thead><tr></tr></thead>
@@ -241,8 +251,17 @@ Template Name: Table template page
             </table>
             <table class="table table4">
                 <caption>allFftData</caption>
-                <thead><tr></tr></thead>
-                <tbody><tr></tr></tbody>
+                <thead>
+                    <tr>
+                        <th>_</th>
+                        <th>maxFrequency</th>
+                        <th>maxPower</th>
+                        <th>averagePower</th>
+                        <th>maxNote</th>
+                        <th>minNote</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
             <table class="table table5">
                 <caption>colSum</caption>

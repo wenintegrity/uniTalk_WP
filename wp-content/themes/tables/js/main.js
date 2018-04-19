@@ -18,11 +18,11 @@ $(document).ready(function() {
             var sheet_data;
 
             if(tab === 1) {
-                sheet_data = data.res.sheet_data_1;
+                sheet_data = data.res.data_1;
             } else if(tab === 2) {
-                sheet_data = data.res.sheet_data_2;
+                sheet_data = data.res.data_2;
             } else {
-                sheet_data = data.res.sheet_data_3;
+                sheet_data = data.res.data_3;
             }
 
             $('body #tab' + tab + ' .download-data-btn').attr('href', apiUrl + '/calculations/' + infoId + '/data/' + tab);
@@ -102,11 +102,11 @@ $(document).ready(function() {
             var sheet_tremor;
 
             if(tab === 4) {
-                sheet_tremor = data.res.sheet_tremorSpectrum_1;
+                sheet_tremor = data.res.tremorSpectrum_1;
             } else if(tab === 5) {
-                sheet_tremor = data.res.sheet_tremorSpectrum_2;
+                sheet_tremor = data.res.tremorSpectrum_2;
             } else {
-                sheet_tremor = data.res.sheet_tremorSpectrum_3;
+                sheet_tremor = data.res.tremorSpectrum_3;
             }
 
             /* Table 1 */
@@ -116,15 +116,6 @@ $(document).ready(function() {
                 '<tr>' +
                 '<td>'+sheet_tremor.divisionAverageValuesFftMag_23_329_329_635+'</td><td>'+sheet_tremor.divisionAverageValuesFftMag_23_404_405_635+'</td><td>'+sheet_tremor.divisionQuartOnMaxFftMag+'</td><td>'+sheet_tremor.division_q3_average+'</td><td>'+sheet_tremor.stanDotClone+'</td>' +
                 '</tr>');
-
-            for(var norm_item in sheet_tremor.norm) {
-                $('body #tab' + tab + ' .table1 tr.norm-headers').append('<th>' + norm_item + '</th>');
-                $('body #tab' + tab + ' .table1 tr.norm-values').append('<td>' + sheet_tremor.norm[norm_item] + '</td>');
-            }
-            for(var normScaled_item in sheet_tremor.normScaled) {
-                $('body #tab' + tab + ' .table1 tr.normScaled-headers').append('<th>' + normScaled_item + '</th>');
-                $('body #tab' + tab + ' .table1 tr.normScaled-values').append('<td>' + sheet_tremor.normScaled[normScaled_item] + '</td>');
-            }
             for(var max_item in sheet_tremor.max) {
                 $('body #tab' + tab + ' .table1 tr.max-headers').append('<th>' + max_item + '</th>');
                 $('body #tab' + tab + ' .table1 tr.max-values').append('<td>' + sheet_tremor.max[max_item] + '</td>');
@@ -132,6 +123,18 @@ $(document).ready(function() {
             for(var average_item in sheet_tremor.average) {
                 $('body #tab' + tab + ' .table1 tr.average-headers').append('<th>' + average_item + '</th>');
                 $('body #tab' + tab + ' .table1 tr.average-values').append('<td>' + sheet_tremor.average[average_item] + '</td>');
+            }
+
+            /* Table Norm */
+            for(var norm_item in sheet_tremor.norm) {
+                $('body #tab' + tab + ' .table-norm thead tr').append('<th>' + norm_item + '</th>');
+                $('body #tab' + tab + ' .table-norm tbody tr').append('<td>' + sheet_tremor.norm[norm_item] + '</td>');
+            }
+
+            /* Table Norm Scaled */
+            for(var normScaled_item in sheet_tremor.normScaled) {
+                $('body #tab' + tab + ' .table-normscaled thead tr').append('<th>' + normScaled_item + '</th>');
+                $('body #tab' + tab + ' .table-normscaled tbody tr').append('<td>' + sheet_tremor.normScaled[normScaled_item] + '</td>');
             }
 
             /* Table 2 */
@@ -148,8 +151,14 @@ $(document).ready(function() {
 
             /* Table 4 */
             for(var allFftData_item in sheet_tremor.allFftData) {
-                $('body #tab' + tab + ' .table4 thead tr').append('<th>' + allFftData_item + '</th>');
-                $('body #tab' + tab + ' .table4 tbody tr').append('<td>' + sheet_tremor.allFftData[allFftData_item] + '</td>');
+                $('body #tab' + tab + ' .table4 tbody').append('<tr>' +
+                    '<th>' + allFftData_item + '</th>' +
+                    '<td>' + sheet_tremor.allFftData[allFftData_item].maxFrequency + '</td>' +
+                    '<td>' + sheet_tremor.allFftData[allFftData_item].maxPower + '</td>' +
+                    '<td>' + sheet_tremor.allFftData[allFftData_item].averagePower + '</td>' +
+                    '<td>' + sheet_tremor.allFftData[allFftData_item].maxNote + '</td>' +
+                    '<td>' + sheet_tremor.allFftData[allFftData_item].minNote + '</td>' +
+                    '</tr>');
             }
 
             /* Table 5 */
@@ -165,7 +174,7 @@ $(document).ready(function() {
                 for(colSum_item in sheet_tremor.colSum) {
                     if(colSum_item === 'raw') {
                         if(tremor_table_3_rows_count - i === 2){
-                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>avgNotesMusic</td><td>' + sheet_tremor.colSum[colSum_item].avgNotesMusic + '</td>');
+                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>sumNotesMusic</td><td>' + sheet_tremor.colSum[colSum_item].sumNotesMusic + '</td>');
                         } else if(tremor_table_3_rows_count - i === 1) {
                             $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>stDevNotesMusic</td><td>' + sheet_tremor.colSum[colSum_item].stDevNotesMusic + '</td>');
                         } else {
@@ -173,7 +182,7 @@ $(document).ready(function() {
                         }
                     } else {
                         if(tremor_table_3_rows_count - i === 2){
-                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>' + sheet_tremor.colSum[colSum_item].avgNotesMusic + '</td>');
+                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>' + sheet_tremor.colSum[colSum_item].sumNotesMusic + '</td>');
                         } else if(tremor_table_3_rows_count - i === 1) {
                             $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>' + sheet_tremor.colSum[colSum_item].stDevNotesMusic + '</td>');
                         } else {
@@ -186,8 +195,8 @@ $(document).ready(function() {
             /* Table 6 */
             var i, j;
 
-            for (i = 0, j = 1; i < data.res.headers_sheet_tremorSpectrum.length; i++, j++) {
-                $('body #tab' + tab + ' .table6 thead tr').append("<th>" + data.res.headers_sheet_tremorSpectrum[i].nameCol + "</th>");
+            for (i = 0, j = 1; i < data.res.headers_tremorSpectrum.length; i++, j++) {
+                $('body #tab' + tab + ' .table6 thead tr').append("<th>" + data.res.headers_tremorSpectrum[i].nameCol + "</th>");
             }
 
             /***********/
@@ -215,6 +224,7 @@ $(document).ready(function() {
                     { "data": "fftMag" },
                     { "data": "fftComplex[, ]" },
                     { "data": "constants" },
+                    { "data": "filteredFFTMag" },
                     { "data": "freqMagScaleNormalizedData" },
                     { "data": "freqMagInDifLess_1" },
                     { "data": "freqMagInDifMore_1" },
@@ -279,12 +289,12 @@ $(document).ready(function() {
 
         $.get(apiUrl + '/calculations/' + infoId, function (data) {
 
-            var tremorNegen = data.res.sheet_tremorNegentropicAlgorithm;
+            var tremorNegen = data.res.tremorNegentropicAlgorithm;
             var i, j, k, m;
 
             for (k = 0; k < tremorNegen.length; k++) {
 
-                $('body #tab' + tab + ' .negentropic' + k).append("<caption>Table_" + tremorNegen[k].tableName + "</caption>");
+                $('body #tab' + tab + ' .negentropic' + k).append("<caption>Table " + tremorNegen[k].table_name + "</caption>");
 
                 if(tremorNegen[k].cells !== undefined) {
                     for (j = 0; j < tremorNegen[k].cells.length; j++) {
