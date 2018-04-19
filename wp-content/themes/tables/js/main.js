@@ -116,38 +116,23 @@ $(document).ready(function() {
                 '<tr>' +
                 '<td>'+sheet_tremor.divisionAverageValuesFftMag_23_329_329_635+'</td><td>'+sheet_tremor.divisionAverageValuesFftMag_23_404_405_635+'</td><td>'+sheet_tremor.divisionQuartOnMaxFftMag+'</td><td>'+sheet_tremor.division_q3_average+'</td><td>'+sheet_tremor.stanDotClone+'</td>' +
                 '</tr>');
-            for(var max_item in sheet_tremor.max) {
-                $('body #tab' + tab + ' .table1 tr.max-headers').append('<th>' + max_item + '</th>');
-                $('body #tab' + tab + ' .table1 tr.max-values').append('<td>' + sheet_tremor.max[max_item] + '</td>');
-            }
-            for(var average_item in sheet_tremor.average) {
-                $('body #tab' + tab + ' .table1 tr.average-headers').append('<th>' + average_item + '</th>');
-                $('body #tab' + tab + ' .table1 tr.average-values').append('<td>' + sheet_tremor.average[average_item] + '</td>');
+
+            function showSimpleTableByItems(arr) {
+                arr.forEach(function (item) {
+                    $('.simple-tables-container').append('<table class="table table-'+ item +'">' +
+                        '                <caption>' + item + '</caption>' +
+                        '                <thead><tr></tr></thead>' +
+                        '                <tbody><tr></tr></tbody>' +
+                        '            </table>');
+
+                    for(var i in sheet_tremor[item]) {
+                        $('body #tab' + tab + ' .table-' + item + ' thead tr').append('<th>' + i + '</th>');
+                        $('body #tab' + tab + ' .table-' + item + ' tbody tr').append('<td>' + sheet_tremor[item][i] + '</td>');
+                    }
+                });
             }
 
-            /* Table Norm */
-            for(var norm_item in sheet_tremor.norm) {
-                $('body #tab' + tab + ' .table-norm thead tr').append('<th>' + norm_item + '</th>');
-                $('body #tab' + tab + ' .table-norm tbody tr').append('<td>' + sheet_tremor.norm[norm_item] + '</td>');
-            }
-
-            /* Table Norm Scaled */
-            for(var normScaled_item in sheet_tremor.normScaled) {
-                $('body #tab' + tab + ' .table-normscaled thead tr').append('<th>' + normScaled_item + '</th>');
-                $('body #tab' + tab + ' .table-normscaled tbody tr').append('<td>' + sheet_tremor.normScaled[normScaled_item] + '</td>');
-            }
-
-            /* Table 2 */
-            for(var totalMusic_item in sheet_tremor.totalMusic) {
-                $('body #tab' + tab + ' .table2 thead tr').append('<th>' + totalMusic_item + '</th>');
-                $('body #tab' + tab + ' .table2 tbody tr').append('<td>' + sheet_tremor.totalMusic[totalMusic_item] + '</td>');
-            }
-
-            /* Table 3 */
-            for(var musicalHarmonics_item in sheet_tremor.musicalHarmonics) {
-                $('body #tab' + tab + ' .table3 thead tr').append('<th>' + musicalHarmonics_item + '</th>');
-                $('body #tab' + tab + ' .table3 tbody tr').append('<td>' + sheet_tremor.musicalHarmonics[musicalHarmonics_item] + '</td>');
-            }
+            showSimpleTableByItems(['min', 'max', 'average', 'objSolfg', 'norm','normScaled', 'totalMusic', 'musicalHarmonics']);
 
             /* Table 4 */
             for(var allFftData_item in sheet_tremor.allFftData) {

@@ -219,36 +219,8 @@ Template Name: Table template page
             </table>
         </div>
         <div class="tremor-snippet">
-            <table class="table table1">
-                <tr class="norm-headers"></tr>
-                <tr class="norm-values"></tr>
-                <tr class="normScaled-headers"></tr>
-                <tr class="normScaled-values"></tr>
-                <tr class="max-headers"></tr>
-                <tr class="max-values"></tr>
-                <tr class="average-headers"></tr>
-                <tr class="average-values"></tr>
-            </table>
-            <table class="table table-norm">
-                <caption>Norm</caption>
-                <thead><tr></tr></thead>
-                <tbody><tr></tr></tbody>
-            </table>
-            <table class="table table-normscaled">
-                <caption>Norm Scaled</caption>
-                <thead><tr></tr></thead>
-                <tbody><tr></tr></tbody>
-            </table>
-            <table class="table table2">
-                <caption>totalMusic</caption>
-                <thead><tr></tr></thead>
-                <tbody><tr></tr></tbody>
-            </table>
-            <table class="table table3">
-                <caption>musicalHarmonics</caption>
-                <thead><tr></tr></thead>
-                <tbody><tr></tr></tbody>
-            </table>
+            <table class="table table1"></table>
+            <div class="simple-tables-container"></div>
             <table class="table table4">
                 <caption>allFftData</caption>
                 <thead>
