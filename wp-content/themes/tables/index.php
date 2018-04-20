@@ -102,6 +102,10 @@ Template Name: Table template page
             <li class=""><a href="#tab6" class="tab6" data-tab="6" data-toggle="tab">Tremor_3</a></li>
 
             <li class=""><a href="#tab7" class="tab7" data-tab="7" data-toggle="tab">Tremor_Negentropic</a></li>
+
+            <li class=""><a href="#tab8" class="tab8" data-tab="8" data-toggle="tab">Tremor_1 Part_2</a></li>
+            <li class=""><a href="#tab9" class="tab9" data-tab="9" data-toggle="tab">Tremor_2 Part_2</a></li>
+            <li class=""><a href="#tab10" class="tab10" data-tab="10" data-toggle="tab">Tremor_3 Part_2</a></li>
         </ul>
     </div>
 
@@ -117,6 +121,10 @@ Template Name: Table template page
         <div class="tab-pane" id="tab6" style="display: none"></div>
 
         <div class="tab-pane" id="tab7" style="display: none"></div>
+
+        <div class="tab-pane" id="tab8" style="display: none"></div>
+        <div class="tab-pane" id="tab9" style="display: none"></div>
+        <div class="tab-pane" id="tab10" style="display: none"></div>
     </div>
 
     <div class="snippets" style="display: none">
@@ -245,6 +253,29 @@ Template Name: Table template page
                 <thead>
                 <tr>
                     <th>ID</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="tremor-parts-snippet">
+            <table class="table table1">
+                <caption>arrDiferentialFftMag</caption>
+                <thead>
+                    <tr>
+                        <th>arrDiferentialFftMag</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="simple-tables-container"></div>
+            <table class="table table2">
+                <caption>Correlations</caption>
+                <thead>
+                <tr>
+                    <th>correlation</th>
+                    <th>minCorrelation</th>
+                    <th>rectifiedCorr</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

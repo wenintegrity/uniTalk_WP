@@ -3,6 +3,28 @@ $(document).ready(function() {
     var datatable;
     var infoId;
 
+    function showSimpleTableByItems(el, obj, tab, arr) {
+        el = 'body #tab' + tab + ' ' + el;
+        $(el).html('');
+        arr.forEach(function (item) {
+            $(el).append('<table class="table table-'+ item +'">' +
+                '                <caption>' + item + '</caption>' +
+                '                <thead><tr></tr></thead>' +
+                '                <tbody><tr></tr></tbody>' +
+                '            </table>');
+
+            if(typeof obj[item] === 'object') {
+                for (var i in obj[item]) {
+                    $('body #tab' + tab + ' .table-' + item + ' thead tr').append('<th>' + i + '</th>');
+                    $('body #tab' + tab + ' .table-' + item + ' tbody tr').append('<td>' + obj[item][i] + '</td>');
+                }
+            } else {
+                $('body #tab' + tab + ' .table-' + item + ' thead tr').append('<th>' + item + '</th>');
+                $('body #tab' + tab + ' .table-' + item + ' tbody tr').append('<td>' + obj[item] + '</td>');
+            }
+        });
+    }
+
     $('.tab1[data-toggle="tab"], .tab2[data-toggle="tab"], .tab3[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
         var tab = $(e.target).data('tab');
@@ -117,23 +139,7 @@ $(document).ready(function() {
                 '<td>'+sheet_tremor.divisionAverageValuesFftMag_23_329_329_635+'</td><td>'+sheet_tremor.divisionAverageValuesFftMag_23_404_405_635+'</td><td>'+sheet_tremor.divisionQuartOnMaxFftMag+'</td><td>'+sheet_tremor.division_q3_average+'</td><td>'+sheet_tremor.stanDotClone+'</td>' +
                 '</tr>');
 
-            function showSimpleTableByItems(arr) {
-                $('.simple-tables-container').html('');
-                arr.forEach(function (item) {
-                    $('.simple-tables-container').append('<table class="table table-'+ item +'">' +
-                        '                <caption>' + item + '</caption>' +
-                        '                <thead><tr></tr></thead>' +
-                        '                <tbody><tr></tr></tbody>' +
-                        '            </table>');
-
-                    for(var i in sheet_tremor[item]) {
-                        $('body #tab' + tab + ' .table-' + item + ' thead tr').append('<th>' + i + '</th>');
-                        $('body #tab' + tab + ' .table-' + item + ' tbody tr').append('<td>' + sheet_tremor[item][i] + '</td>');
-                    }
-                });
-            }
-
-            showSimpleTableByItems(['min', 'max', 'average', 'objSolfg', 'norm','normScaled', 'totalMusic', 'musicalHarmonics']);
+            showSimpleTableByItems('.simple-tables-container', sheet_tremor, tab, ['min', 'max', 'average', 'objSolfg', 'norm','normScaled', 'totalMusic', 'musicalHarmonics']);
 
             /* Table 4 */
             for(var allFftData_item in sheet_tremor.allFftData) {
@@ -340,6 +346,111 @@ $(document).ready(function() {
             });
         });
 
+    });
+
+    $('.tab8[data-toggle="tab"], .tab9[data-toggle="tab"], .tab10[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+        var tab = $(e.target).data('tab');
+
+        $('.tab-pane').html('').css('display', 'none');
+        $('#tab' + tab).html($('.tremor-parts-snippet').html());
+
+        if(datatable !== undefined) {
+            datatable.fixedHeader.disable();
+        }
+
+        $.get(apiUrl + '/calculations/' + infoId, function (data) {
+
+            var sheet_tremor;
+
+            if(tab === 8) {
+                sheet_tremor = data.res.tremorSpectrum_1_part_2;
+            } else if(tab === 9) {
+                sheet_tremor = data.res.tremorSpectrum_2_part_2;
+            } else {
+                sheet_tremor = data.res.tremorSpectrum_3_part_2;
+            }
+
+            /* Table 1 */
+            sheet_tremor.arrDiferentialFftMag.forEach(function (item) {
+                $('body #tab' + tab + ' .table1 tbody').append('<tr><td>' + item + '</td></tr>');
+            });
+            datatable = $('body #tab' + tab + ' .table1').DataTable({
+                fixedHeader: true,
+                "searching": true,
+                pageLength: 10
+            });
+
+            showSimpleTableByItems('.simple-tables-container', sheet_tremor, tab, ['row', 'formant', 'formDif', 'medianF']);
+
+            /* Table 2 */
+            datatable = $('body #tab' + tab + ' .table2').DataTable({
+                fixedHeader: true,
+                "searching": true,
+                pageLength: 50,
+                "processing": true,
+                data: sheet_tremor.tables,
+                "columnDefs": [
+                    {
+                        "targets": '_all',
+                        "data": null,
+                        "defaultContent": ""
+                    }
+                ],
+                "columns": [
+                    { "data": "correlation" },
+                    { "data": "minCorrelation" },
+                    { "data": "rectifiedCorr" }
+                ]
+            });
+
+            // sheet_tremor.tables.forEach(function (item, index) {
+            //     $('body #tab' + tab).append('<table class="table table-t-' + index + '">\n' +
+            //         '                <caption>Table '+ index +'</caption>\n' +
+            //         '                <thead>\n' +
+            //         '                <tr>\n' +
+            //         '                </tr>\n' +
+            //         '                </thead>\n' +
+            //         '                <tbody></tbody>\n' +
+            //         '            </table>');
+            //
+            //     var columns = [];
+            //
+            //     for (var i in item) {
+            //         if (typeof item[i] === 'object') {
+            //             $('body #tab' + tab + ' .table.table-t-' + index + ' thead tr').append('<th>' + i + '</th>');
+            //         }
+            //     }
+            //
+            //     datatable = $('body #tab' + tab + ' .table.table-t-' + index).DataTable({
+            //         fixedHeader: true,
+            //         "searching": true,
+            //         pageLength: 50,
+            //         "processing": true,
+            //         data: item,
+            //         "columnDefs": [
+            //             {
+            //                 "targets": '_all',
+            //                 "data": null,
+            //                 "defaultContent": ""
+            //             }
+            //         ],
+            //         // "columns": columns
+            //         "columns": [
+            //             { "data": "constants" },
+            //             { "data": "fftFreq.min" },
+            //             { "data": "minCorrelation" },
+            //             { "data": "rectified.arr" },
+            //             { "data": "normalized.arr" },
+            //             { "data": "ctnt_1_Normalized.arr" }
+            //         ]
+            //     });
+            // });
+
+            //
+            $('body #tab' + tab).show();
+
+        });
     });
 
     $.get(apiUrl + '/users/all', function (data) {
