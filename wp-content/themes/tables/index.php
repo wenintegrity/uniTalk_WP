@@ -259,15 +259,15 @@ Template Name: Table template page
             </table>
         </div>
         <div class="tremor-parts-snippet">
-            <table class="table table1">
-                <caption>arrDiferentialFftMag</caption>
-                <thead>
-                    <tr>
-                        <th>arrDiferentialFftMag</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+<!--            <table class="table table1">-->
+<!--                <caption>arrDiferentialFftMag</caption>-->
+<!--                <thead>-->
+<!--                    <tr>-->
+<!--                        <th>arrDiferentialFftMag</th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody></tbody>-->
+<!--            </table>-->
             <div class="simple-tables-container"></div>
             <table class="table table2">
                 <caption>Correlations</caption>
@@ -276,6 +276,15 @@ Template Name: Table template page
                     <th>correlation</th>
                     <th>minCorrelation</th>
                     <th>rectifiedCorr</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <table class="table table6">
+                <caption>Tremor Table</caption>
+                <thead>
+                <tr>
+<!--                    <th>ID</th>-->
                 </tr>
                 </thead>
                 <tbody></tbody>

@@ -371,15 +371,15 @@ $(document).ready(function() {
                 sheet_tremor = data.res.tremorSpectrum_3_part_2;
             }
 
-            /* Table 1 */
-            sheet_tremor.arrDiferentialFftMag.forEach(function (item) {
-                $('body #tab' + tab + ' .table1 tbody').append('<tr><td>' + item + '</td></tr>');
-            });
-            datatable = $('body #tab' + tab + ' .table1').DataTable({
-                fixedHeader: true,
-                "searching": true,
-                pageLength: 10
-            });
+            // /* Table 1 */
+            // sheet_tremor.arrDiferentialFftMag.forEach(function (item) {
+            //     $('body #tab' + tab + ' .table1 tbody').append('<tr><td>' + item + '</td></tr>');
+            // });
+            // datatable = $('body #tab' + tab + ' .table1').DataTable({
+            //     fixedHeader: true,
+            //     "searching": true,
+            //     pageLength: 10
+            // });
 
             showSimpleTableByItems('.simple-tables-container', sheet_tremor, tab, ['row', 'formant', 'formDif', 'medianF']);
 
@@ -446,6 +446,55 @@ $(document).ready(function() {
             //         ]
             //     });
             // });
+
+            /* Table 6 */
+            var i, j;
+
+            for (i = 0, j = 1; i < data.res.headers_tremorSpectrum_part_2.length; i++, j++) {
+                $('body #tab' + tab + ' .table6 thead tr').append("<th>" + data.res.headers_tremorSpectrum_part_2[i].nameCol + "</th>");
+            }
+
+            /***********/
+
+            $('body #tab' + tab).show();
+            $('body #tab' + tab + ' .table6 caption').text('Tremor ' + (tab - 3));
+
+            datatable = $('body #tab' + tab + ' .table6').DataTable({
+                fixedHeader: true,
+                "searching": true,
+                pageLength: 50,
+                "processing": true,
+                data: sheet_tremor.arrResult,
+                "columnDefs": [
+                    {
+                        "targets": '_all',
+                        "data": null,
+                        "defaultContent": ""
+                    }
+                ],
+                "columns": [
+                    // { "data": "id" },
+                    { "data": "arrDiferentialFftMag" },
+                    { "data": "constants_0" },
+                    { "data": "fftFreq_0" },
+                    { "data": "freqMagScaleNormalizedData_0" },
+                    { "data": "rectified_0" },
+                    { "data": "normalized_0" },
+                    { "data": "ctnt_1_Normalized_0" },
+                    { "data": "normSmooth_1" },
+                    { "data": "smoothNorm_1" },
+                    { "data": "dataSmoothed_1" },
+                    { "data": "dataSmoothNrm_1" },
+                    { "data": "normSmooth_2" },
+                    { "data": "smoothNorm_2" },
+                    { "data": "dataSmoothed_2" },
+                    { "data": "dataSmoothNrm_2" },
+                    { "data": "normSmooth_3" },
+                    { "data": "smoothNorm_3" },
+                    { "data": "dataSmoothed_3" },
+                    { "data": "dataSmoothNrm_3" }
+                ]
+            });
 
             //
             $('body #tab' + tab).show();
