@@ -404,49 +404,6 @@ $(document).ready(function() {
                 ]
             });
 
-            // sheet_tremor.tables.forEach(function (item, index) {
-            //     $('body #tab' + tab).append('<table class="table table-t-' + index + '">\n' +
-            //         '                <caption>Table '+ index +'</caption>\n' +
-            //         '                <thead>\n' +
-            //         '                <tr>\n' +
-            //         '                </tr>\n' +
-            //         '                </thead>\n' +
-            //         '                <tbody></tbody>\n' +
-            //         '            </table>');
-            //
-            //     var columns = [];
-            //
-            //     for (var i in item) {
-            //         if (typeof item[i] === 'object') {
-            //             $('body #tab' + tab + ' .table.table-t-' + index + ' thead tr').append('<th>' + i + '</th>');
-            //         }
-            //     }
-            //
-            //     datatable = $('body #tab' + tab + ' .table.table-t-' + index).DataTable({
-            //         fixedHeader: true,
-            //         "searching": true,
-            //         pageLength: 50,
-            //         "processing": true,
-            //         data: item,
-            //         "columnDefs": [
-            //             {
-            //                 "targets": '_all',
-            //                 "data": null,
-            //                 "defaultContent": ""
-            //             }
-            //         ],
-            //         // "columns": columns
-            //         "columns": [
-            //             { "data": "constants" },
-            //             { "data": "fftFreq.min" },
-            //             { "data": "minCorrelation" },
-            //             { "data": "rectified.arr" },
-            //             { "data": "normalized.arr" },
-            //             { "data": "ctnt_1_Normalized.arr" }
-            //         ]
-            //     });
-            // });
-
             /* Table 6 */
             var i, j, arr = [{'data': 'id'}];
 
@@ -523,7 +480,16 @@ $(document).ready(function() {
 
                     $.get(apiUrl + '/sessions/' + session_id, function (data) {
                         for(var item in data) {
-                            $('body .sample_dropdown').append('<li><a href="#" data-time="'+ data[item].req.time +'" data-location="'+ data[item].req.location.latitude + ',' + data[item].req.location.longitude + '" data-id="'+ data[item]._id +'">'+ data[item].req.location.latitude + ',' + data[item].req.location.longitude + ', ' + data[item].req.time +'</a></li>');
+                            $('body .sample_dropdown').append('<li>' +
+                                '<a href="#" ' +
+                                'data-time="'+ data[item].req.time +'" ' +
+                                'data-location="'+ data[item].req.location.latitude + ',' + data[item].req.location.longitude + '" ' +
+                                'data-pictures="'+ data[item].pictures + ',' + data[item].pictures + '" ' +
+                                'data-video="'+ data[item].video + ',' + data[item].video + '" ' +
+                                'data-id="'+ data[item]._id +'">' +
+                                data[item].req.location.latitude + ',' + data[item].req.location.longitude + ', ' + data[item].req.time +
+                                '</a>' +
+                                '</li>');
                         }
 
                         $('body .sample_dropdown a').on('click', function(e){
@@ -538,7 +504,9 @@ $(document).ready(function() {
                             $('#showInfo .modal-body').html('');
                             $('#showInfo .modal-body')
                                 .append('<p>Location: ' + $(this).data('location') + '</p>')
-                                .append('<p>Time: ' + $(this).data('time') + '</p>');
+                                .append('<p>Time: ' + $(this).data('time') + '</p>')
+                                .append('<p>Pictures: ' + $(this).data('pictures') + '</p>')
+                                .append('<p>Video: ' + $(this).data('video') + '</p>');
 
                             infoId = $(this).data('id');
                         });
