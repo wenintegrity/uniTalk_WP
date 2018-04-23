@@ -448,10 +448,11 @@ $(document).ready(function() {
             // });
 
             /* Table 6 */
-            var i, j;
+            var i, j, arr = [{'data': 'id'}];
 
             for (i = 0, j = 1; i < data.res.headers_tremorSpectrum_part_2.length; i++, j++) {
                 $('body #tab' + tab + ' .table6 thead tr').append("<th>" + data.res.headers_tremorSpectrum_part_2[i].nameCol + "</th>");
+                arr.push({'data': data.res.headers_tremorSpectrum_part_2[i].name});
             }
 
             /***********/
@@ -472,28 +473,7 @@ $(document).ready(function() {
                         "defaultContent": ""
                     }
                 ],
-                "columns": [
-                    { "data": "id" },
-                    { "data": "arrDiferentialFftMag" },
-                    { "data": "constants_0" },
-                    { "data": "fftFreq_0" },
-                    { "data": "freqMagScaleNormalizedData_0" },
-                    { "data": "rectified_0" },
-                    { "data": "normalized_0" },
-                    { "data": "ctnt_1_Normalized_0" },
-                    { "data": "normSmooth_1" },
-                    { "data": "smoothNorm_1" },
-                    { "data": "dataSmoothed_1" },
-                    { "data": "dataSmoothNrm_1" },
-                    { "data": "normSmooth_2" },
-                    { "data": "smoothNorm_2" },
-                    { "data": "dataSmoothed_2" },
-                    { "data": "dataSmoothNrm_2" },
-                    { "data": "normSmooth_3" },
-                    { "data": "smoothNorm_3" },
-                    { "data": "dataSmoothed_3" },
-                    { "data": "dataSmoothNrm_3" }
-                ]
+                "columns": arr
             });
 
             //
