@@ -484,8 +484,8 @@ $(document).ready(function() {
                                 '<a href="#" ' +
                                 'data-time="'+ data[item].req.time +'" ' +
                                 'data-location="'+ data[item].req.location.latitude + ',' + data[item].req.location.longitude + '" ' +
-                                'data-pictures="'+ data[item].pictures + ',' + data[item].pictures + '" ' +
-                                'data-video="'+ data[item].video + ',' + data[item].video + '" ' +
+                                'data-pictures="'+ data[item].pictures + '" ' +
+                                'data-video="'+ data[item].video + '" ' +
                                 'data-id="'+ data[item]._id +'">' +
                                 data[item].req.location.latitude + ',' + data[item].req.location.longitude + ', ' + data[item].req.time +
                                 '</a>' +
