@@ -473,7 +473,7 @@ $(document).ready(function() {
                     }
                 ],
                 "columns": [
-                    // { "data": "id" },
+                    { "data": "id" },
                     { "data": "arrDiferentialFftMag" },
                     { "data": "constants_0" },
                     { "data": "fftFreq_0" },

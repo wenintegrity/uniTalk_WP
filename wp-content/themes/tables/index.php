@@ -284,7 +284,7 @@ Template Name: Table template page
                 <caption>Tremor Table</caption>
                 <thead>
                 <tr>
-<!--                    <th>ID</th>-->
+                    <th>ID</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
