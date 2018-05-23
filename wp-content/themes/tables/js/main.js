@@ -330,6 +330,13 @@ $(document).ready(function() {
                         }
                     }
                 }
+
+                if(tremorNegen[k].result !== undefined) {
+                    $table.append("<tr><td>Result:</td>" +
+                        "<td>" + tremorNegen[k].result[0] + "</td>" +
+                        "<td>" + tremorNegen[k].result[1]+ "</td></tr>");
+                }
+
                 $negentropicTablesHolder.append($table);
 
 
