@@ -5,7 +5,7 @@ Template Name: Table template page
 ?>
 <?php get_header(); ?>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri() ?>/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri() ?>/css/bootstrap.min.css" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.3/css/fixedHeader.bootstrap.min.css"/>
@@ -234,6 +234,7 @@ Template Name: Table template page
                 <thead>
                     <tr>
                         <th>_</th>
+                        <th>minFrequency</th>
                         <th>maxFrequency</th>
                         <th>maxPower</th>
                         <th>averagePower</th>
@@ -291,79 +292,19 @@ Template Name: Table template page
             </table>
         </div>
         <div class="negentropic-snippet">
-            <table class="table negentropic negentropic0 table-bordered">
-                <thead>
-                <tr>
-                    <th>title</th>
-                    <th>line9</th>
-                    <th>line10</th>
-                </tr>
-                </thead>
-            </table>
+            <div class="row negentropic-datatables">
 
-            <table class="table negentropic negentropic1 table-bordered">
-                <thead>
-                <tr>
-                    <th>title</th>
-                    <th>line9</th>
-                    <th>line10</th>
-                </tr>
-                </thead>
-            </table>
-            <table class="table negentropic negentropic2 table-bordered">
-                <thead>
-                <tr>
-                    <th>title</th>
-                    <th>line9</th>
-                    <th>line10</th>
-                </tr>
-                </thead>
-            </table>
-            <table class="table negentropic negentropic3 table-bordered">
-                <thead>
-                <tr>
-                    <th>title</th>
-                    <th>line9</th>
-                    <th>line10</th>
-                </tr>
-                </thead>
-            </table>
-
-            <table class="table negentropic negentropic4 table-bordered">
-                <thead>
-                <tr>
-                    <th>title</th>
-                    <th>line9</th>
-                    <th>line10</th>
-                </tr>
-                </thead>
-            </table>
-            <table class="table negentropic negentropic5 table-bordered">
-                <thead>
-                <tr>
-                    <th>title</th>
-                    <th>line9</th>
-                    <th>line10</th>
-                </tr>
-                </thead>
-            </table>
-            <table class="table negentropic negentropic6 table-bordered">
-                <thead>
-                <tr>
-                    <th>title</th>
-                    <th>line9</th>
-                    <th>line10</th>
-                </tr>
-                </thead>
-            </table>
-            <div class="col-md-6">
-            <table class="table negentropic-result table-bordered">
-                <tbody>
-                <tr>
-                    <th>Result:</th>
-                </tr>
-                </tbody>
-            </table>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table negentropic-result table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>Result:</th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -133,10 +133,22 @@ $(document).ready(function() {
 
             /* Table 1 */
             $('body #tab' + tab + ' .table1').append('<tr>' +
-                '<th>divisionAverageValuesFftMag_23_329_329_635</th><th>divisionAverageValuesFftMag_23_404_405_635</th><th>divisionQuartOnMaxFftMag</th><th>division_q3_average</th><th>stanDotClone</th>' +
+                '<th>divisionAverageValuesFftMag_22_329_329_635</th>' +
+                '<th>divisionAverageValuesFftMag_22_404_405_635</th>' +
+                '<th>divisionQuartOnMaxFftMag</th>' +
+                '<th>division_q3_average</th>' +
+                '<th>stanDotClone</th>' +
+                '<th>mixVH_Hz_ofEnvir</th>' +
+                '<th>freqMagNormDivisionNOHz</th>' +
                 '</tr>' +
                 '<tr>' +
-                '<td>'+sheet_tremor.divisionAverageValuesFftMag_23_329_329_635+'</td><td>'+sheet_tremor.divisionAverageValuesFftMag_23_404_405_635+'</td><td>'+sheet_tremor.divisionQuartOnMaxFftMag+'</td><td>'+sheet_tremor.division_q3_average+'</td><td>'+sheet_tremor.stanDotClone+'</td>' +
+                '<td>'+sheet_tremor.divisionAverageValuesFftMag_22_329_329_635+'</td>' +
+                '<td>'+sheet_tremor.divisionAverageValuesFftMag_22_404_405_635+'</td>' +
+                '<td>'+sheet_tremor.divisionQuartOnMaxFftMag+'</td>' +
+                '<td>'+sheet_tremor.division_q3_average+'</td>' +
+                '<td>'+sheet_tremor.stanDotClone+'</td>' +
+                '<td>' + sheet_tremor.mixVH_Hz_ofEnvir + '</td>' +
+                '<td>' + sheet_tremor.freqMagNormDivisionNOHz  + '</td>' +
                 '</tr>');
 
             showSimpleTableByItems('.simple-tables-container', sheet_tremor, tab, ['min', 'max', 'average', 'objSolfg', 'norm','normScaled', 'totalMusic', 'musicalHarmonics']);
@@ -145,6 +157,7 @@ $(document).ready(function() {
             for(var allFftData_item in sheet_tremor.allFftData) {
                 $('body #tab' + tab + ' .table4 tbody').append('<tr>' +
                     '<th>' + allFftData_item + '</th>' +
+                    '<td>' + sheet_tremor.allFftData[allFftData_item].minFrequency + '</td>' +
                     '<td>' + sheet_tremor.allFftData[allFftData_item].maxFrequency + '</td>' +
                     '<td>' + sheet_tremor.allFftData[allFftData_item].maxPower + '</td>' +
                     '<td>' + sheet_tremor.allFftData[allFftData_item].averagePower + '</td>' +
@@ -166,19 +179,34 @@ $(document).ready(function() {
                 for(colSum_item in sheet_tremor.colSum) {
                     if(colSum_item === 'raw') {
                         if(tremor_table_3_rows_count - i === 2){
-                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>sumNotesMusic</td><td>' + sheet_tremor.colSum[colSum_item].sumNotesMusic + '</td>');
+                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']')
+                                .append(
+                                    '<td>sumNotesMusic</td>' +
+                                    '<td>' + sheet_tremor.colSum[colSum_item].sumNotesMusic + '</td>'
+                                );
                         } else if(tremor_table_3_rows_count - i === 1) {
-                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>stDevNotesMusic</td><td>' + sheet_tremor.colSum[colSum_item].stDevNotesMusic + '</td>');
+                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']')
+                                .append(
+                                    '<td>stDevNotesMusic</td>' +
+                                    '<td>' + sheet_tremor.colSum[colSum_item].stDevNotesMusic + '</td>'
+                                );
                         } else {
-                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>' + sheet_tremor.colSum[colSum_item].arr[i].name + '</td><td>' + sheet_tremor.colSum[colSum_item].arr[i].value + '</td>');
+                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']')
+                                .append(
+                                    '<td>' + sheet_tremor.colSum[colSum_item].arr[i].name + '</td>' +
+                                    '<td>' + sheet_tremor.colSum[colSum_item].arr[i].value + '</td>'
+                                );
                         }
                     } else {
                         if(tremor_table_3_rows_count - i === 2){
-                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>' + sheet_tremor.colSum[colSum_item].sumNotesMusic + '</td>');
+                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']')
+                                .append('<td>' + sheet_tremor.colSum[colSum_item].sumNotesMusic + '</td>');
                         } else if(tremor_table_3_rows_count - i === 1) {
-                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>' + sheet_tremor.colSum[colSum_item].stDevNotesMusic + '</td>');
+                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']')
+                                .append('<td>' + sheet_tremor.colSum[colSum_item].stDevNotesMusic + '</td>');
                         } else {
-                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']').append('<td>' + sheet_tremor.colSum[colSum_item].arr[i].value + '</td>');
+                            $('body #tab' + tab + ' .table5 tbody tr[data-count=' + i + ']')
+                                .append('<td>' + sheet_tremor.colSum[colSum_item].arr[i].value + '</td>');
                         }
                     }
                 }
@@ -188,7 +216,8 @@ $(document).ready(function() {
             var i, j;
 
             for (i = 0, j = 1; i < data.res.headers_tremorSpectrum.length; i++, j++) {
-                $('body #tab' + tab + ' .table6 thead tr').append("<th>" + data.res.headers_tremorSpectrum[i].nameCol + "</th>");
+                $('body #tab' + tab + ' .table6 thead tr')
+                    .append("<th>" + data.res.headers_tremorSpectrum[i].nameCol + "</th>");
             }
 
             /***********/
@@ -284,55 +313,75 @@ $(document).ready(function() {
             var tremorNegen = data.res.tremorNegentropicAlgorithm;
             var i, j, k, m;
 
+            var $negentropicTablesHolder = $('.col-md-12');
+
             for (k = 0; k < tremorNegen.length; k++) {
 
-                $('body #tab' + tab + ' .negentropic' + k).append("<caption>Table " + tremorNegen[k].table_name + "</caption>");
+                var $table = $('<table/>').addClass('table negentropic   negentropic'+k+' table-bordered')
+                    .append("<thead><tr><th>title</th><th>line9</th><th>line10</th></tr></thead>")
+                    .append("<caption>Table " + tremorNegen[k].table_name + "</caption>");
 
                 if(tremorNegen[k].cells !== undefined) {
                     for (j = 0; j < tremorNegen[k].cells.length; j++) {
                         for (i = 0; i < tremorNegen[k].cells[j].length; i++) {
-                            $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>" + tremorNegen[k].cells[j][i].title + "</td>" +
+                            $table.append("<tr><td>" + tremorNegen[k].cells[j][i].title + "</td>" +
                                 "<td>" + tremorNegen[k].cells[j][i].line9.value + "</td>" +
                                 "<td>" + tremorNegen[k].cells[j][i].line10.value + "</td></tr>");
                         }
                     }
                 }
-                if(tremorNegen[k].cells_1 !== undefined) {
-                    for (j = 0; j < tremorNegen[k].cells_1.length; j++) {
-                        for (i = 0; i < tremorNegen[k].cells_1[j].length; i++) {
-                            $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>" + tremorNegen[k].cells_1[j][i].title + "</td>" +
-                                "<td>" + tremorNegen[k].cells_1[j][i].line9.value + "</td>" +
-                                "<td>" + tremorNegen[k].cells_1[j][i].line10.value + "</td></tr>");
-                        }
-                    }
-                }
-                if(tremorNegen[k].cells_2 !== undefined) {
-                    for (j = 0; j < tremorNegen[k].cells_2.length; j++) {
-                        for (i = 0; i < tremorNegen[k].cells_2[j].length; i++) {
-                            $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>" + tremorNegen[k].cells_2[j][i].title + "</td>" +
-                                "<td>" + tremorNegen[k].cells_2[j][i].line9.value + "</td>" +
-                                "<td>" + tremorNegen[k].cells_2[j][i].line10.value + "</td></tr>");
-                        }
-                    }
-                }
+                $negentropicTablesHolder.append($table);
 
-                if(tremorNegen[k].result !== undefined) {
-                    $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
-                        "<td>" + tremorNegen[k].result[0] + "</td>" +
-                        "<td>" + tremorNegen[k].result[1]+ "</td></tr>");
-                }
-                if(tremorNegen[k].result_1 !== undefined) {
-                    $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
-                        "<td>" + tremorNegen[k].result_1[0] + "</td>" +
-                        "<td>" + tremorNegen[k].result_1[1] + "</td></tr>");
-                }
-                if(tremorNegen[k].result_2 !== undefined) {
-                    $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
-                        "<td>" + tremorNegen[k].result_2[0] + "</td>" +
-                        "<td>" + tremorNegen[k].result_2[1] + "</td></tr>");
-                }
+
+                // $('body #tab' + tab + ' .negentropic' + k).append("<caption>Table " + tremorNegen[k].table_name + "</caption>");
+                //
+                // if(tremorNegen[k].cells !== undefined) {
+                //     for (j = 0; j < tremorNegen[k].cells.length; j++) {
+                //         for (i = 0; i < tremorNegen[k].cells[j].length; i++) {
+                //             $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>" + tremorNegen[k].cells[j][i].title + "</td>" +
+                //                 "<td>" + tremorNegen[k].cells[j][i].line9.value + "</td>" +
+                //                 "<td>" + tremorNegen[k].cells[j][i].line10.value + "</td></tr>");
+                //         }
+                //     }
+                // }
+                // if(tremorNegen[k].cells_1 !== undefined) {
+                //     for (j = 0; j < tremorNegen[k].cells_1.length; j++) {
+                //         for (i = 0; i < tremorNegen[k].cells_1[j].length; i++) {
+                //             $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>" + tremorNegen[k].cells_1[j][i].title + "</td>" +
+                //                 "<td>" + tremorNegen[k].cells_1[j][i].line9.value + "</td>" +
+                //                 "<td>" + tremorNegen[k].cells_1[j][i].line10.value + "</td></tr>");
+                //         }
+                //     }
+                // }
+                // if(tremorNegen[k].cells_2 !== undefined) {
+                //     for (j = 0; j < tremorNegen[k].cells_2.length; j++) {
+                //         for (i = 0; i < tremorNegen[k].cells_2[j].length; i++) {
+                //             $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>" + tremorNegen[k].cells_2[j][i].title + "</td>" +
+                //                 "<td>" + tremorNegen[k].cells_2[j][i].line9.value + "</td>" +
+                //                 "<td>" + tremorNegen[k].cells_2[j][i].line10.value + "</td></tr>");
+                //         }
+                //     }
+                // }
+                //
+                // if(tremorNegen[k].result !== undefined) {
+                //     $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
+                //         "<td>" + tremorNegen[k].result[0] + "</td>" +
+                //         "<td>" + tremorNegen[k].result[1]+ "</td></tr>");
+                // }
+                // if(tremorNegen[k].result_1 !== undefined) {
+                //     $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
+                //         "<td>" + tremorNegen[k].result_1[0] + "</td>" +
+                //         "<td>" + tremorNegen[k].result_1[1] + "</td></tr>");
+                // }
+                // if(tremorNegen[k].result_2 !== undefined) {
+                //     $('body #tab' + tab + ' .negentropic' + k).append("<tr><td>Result:</td>" +
+                //         "<td>" + tremorNegen[k].result_2[0] + "</td>" +
+                //         "<td>" + tremorNegen[k].result_2[1] + "</td></tr>");
+                // }
 
             }
+
+            $('body #tab' + tab + ' .negentropic-datatables').append($negentropicTablesHolder);
 
             for(var res_item in data.res.result){
                 $('body #tab' + tab + ' .negentropic-result tbody tr').append('<td>'+ data.res.result[res_item] +'</td>');
