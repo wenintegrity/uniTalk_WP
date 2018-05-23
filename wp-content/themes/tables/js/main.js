@@ -313,7 +313,7 @@ $(document).ready(function() {
             var tremorNegen = data.res.tremorNegentropicAlgorithm;
             var i, j, k, m;
 
-            var $negentropicTablesHolder = $('.col-md-12');
+            var $negentropicTablesHolder = $('<div/>').addClass('col-md-12');
 
             for (k = 0; k < tremorNegen.length; k++) {
 
